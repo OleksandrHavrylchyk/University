@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './components/home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
@@ -30,6 +31,7 @@ import { FooterComponent } from './components/Layout/footer/footer.component'
     FormsModule,
     ApiAuthorizationModule,
     NzButtonModule,
+    NzIconModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
