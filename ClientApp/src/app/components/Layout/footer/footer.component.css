@@ -1,0 +1,28 @@
+.page-footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+.sing-up-footer {
+  background-color:transparent;
+}
+.links {
+  color: white;
+}
+.list-group-item {
+  background-color:transparent;
+  border: unset;
+}
+.footer-container {
+  display: flex;
+  justify-content: center;
+}
+#sing-up-footer {
+  width: 115px;
+  height: 40px;
+  border-width: 2px;
+}
+#sing-up-footer:hover, #sing-up-footer:hover span {
+  border-color: white;
+  font-weight: bold;
+}
