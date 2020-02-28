@@ -46,12 +46,21 @@
           </div>
         </div>
       </div>
+      <div nz-row>
+        <div nz-col nzOffset="6">
+          <div *ngIf="errorOnSubmit">
+            <div *ngFor="let error of errorOnSubmit" class="register-error">
+                {{error.description}}
+            </div>
+          </div>
+        </div>
+      </div>
       <div nz-row class="sign-up-button-container">
         <div nz-col class="d-flex justify-content-center">
           <button [disabled]="loading" type="submit" class="rounded-pill gray-button" nz-button nzSize=large>Sign Up</button>
         </div>
       </div>
-    </form>
+      </form>
+    </div>
   </div>
-</div>
 

@@ -18,6 +18,9 @@
 .sign-up-button-container {
   padding-top: 20px;
 }
+.register-error {
+  color: #dc3545;
+}
 @media screen and (max-width: 425px) {
   .form-control {
         width: 90%;

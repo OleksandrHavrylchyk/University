@@ -6,10 +6,10 @@ import { User } from '../models/user';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private baseUrl = environment.apiUrl + 'login/';
+  private baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
   register(user: User) {
-    return this.http.post(this.baseUrl, user);
+    return this.http.post(this.baseUrl + 'registration/', user);
   }
 }

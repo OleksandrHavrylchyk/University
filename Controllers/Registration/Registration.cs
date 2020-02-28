@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using AutoMapper;
 using University.Data;
 using University.Models;
+using University.PageViewModel;
 
 namespace University.Controllers
 {
@@ -29,14 +30,26 @@ namespace University.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var userIdentity = _mapper.Map<ApplicationUser>(model);
-            var result = await _userManager.CreateAsync(userIdentity, model.Password);
-            
-            if (!result.Succeeded) return new BadRequestObjectResult(result);
+            if (_userManager.FindByEmailAsync(model.Email).Exception == null)
+            {
+                var userIdentity = _mapper.Map<ApplicationUser>(model);
+                var result = await _userManager.CreateAsync(userIdentity, model.Password);
 
-            await _context.SaveChangesAsync();
+                if (!result.Succeeded) return new BadRequestObjectResult(result);
 
-            return CreatedAtAction("Registered", model);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("Registered", model);
+            }
+            else
+            {
+                RegisterError response = new RegisterError
+                {
+                    Code = "DuplicateEmail",
+                    Description = "Email " + model.Email + " is already taken"
+                };
+                return BadRequest(response);
+            }
         }
     }
 }
