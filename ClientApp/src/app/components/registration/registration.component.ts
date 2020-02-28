@@ -17,7 +17,7 @@ export class RegistrationComponent implements OnInit{
   loading = false;
   submitted = false;
   errorOnSubmit;
-
+  
   constructor(
     private authService: UserService,
     private formBuilder: FormBuilder,
@@ -27,7 +27,7 @@ export class RegistrationComponent implements OnInit{
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       userName: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });

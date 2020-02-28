@@ -16,6 +16,7 @@
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
               <div *ngIf="f.email.errors.required">Email is required</div>
+              <div *ngIf="f.email.errors.email">Please provide a valid email address</div>
             </div>
           </div>
         </div>
