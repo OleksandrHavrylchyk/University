@@ -1,0 +1,57 @@
+<div nz-row>
+  <div nz-col class="d-flex justify-content-center join-label">Join to the university community</div>
+</div>
+<div nz-row>
+  <div nz-col class="d-flex justify-content-center create-label">Create your account</div>
+</div>
+<div nz-row class="registration-form">
+  <div nz-col>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div nz-row>
+        <div nz-col nzOffset="6">
+          <div class="form-group">
+            <label for="inputEmail">Email address</label>
+            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email"
+                   [ngClass]="{ 'is-invalid': submitted && f.email.errors }" formControlName="email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Email is required</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div nz-row>
+        <div nz-col nzOffset="6">
+          <div class="form-group">
+            <label for="inputUserName">User name</label>
+            <input type="text" class="form-control" id="inputUserName" aria-describedby="userNameHelp" placeholder="Enter user name"
+                   [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" formControlName="userName">
+            <small id="userNameHelp" class="form-text text-muted">Choose name for your account  </small>
+            <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+              <div *ngIf="f.userName.errors.required">User name is required</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div nz-row>
+        <div nz-col nzOffset="6">
+          <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" class="form-control" id="inputPassword" placeholder="Password" formControlName="password"
+                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+              <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div nz-row class="sign-up-button-container">
+        <div nz-col class="d-flex justify-content-center">
+          <button [disabled]="loading" type="submit" class="rounded-pill gray-button" nz-button nzSize=large>Sign Up</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

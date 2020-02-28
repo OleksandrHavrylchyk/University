@@ -14,3 +14,13 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+.gray-button {
+  border-width: 2px;
+  font-weight: bold;
+  color: #6c757d !important;
+  border-color: #6c757d !important;
+}
+  .gray-button:active, .gray-button:focus {
+    border-color: #6c757d !important;
+    color: #6c757d !important;
+}

@@ -36,11 +36,21 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\components\Layout\footer\footer.component.ts" />
     <None Remove="ClientApp\src\app\components\Layout\header\header.component.ts" />
+    <None Remove="ClientApp\src\app\route.routing.ts" />
+    <None Remove="ClientApp\src\app\models\user.ts" />
+    <None Remove="ClientApp\src\app\services\authentification.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\components\Layout\footer\footer.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\Layout\header\header.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\route.routing.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\authentification.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\components\registration\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

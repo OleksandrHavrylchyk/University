@@ -1,0 +1,28 @@
+.create-label {
+  padding-top: 15px;
+  font-weight: bold;
+  font-size: 33px;
+}
+.join-label {
+  padding-top: 100px;
+}
+.registration-form {
+  padding-top: 25px;
+}
+.form-control {
+  width: 68%;
+}
+.ant-btn-lg {
+  width: 150px;
+}
+.sign-up-button-container {
+  padding-top: 20px;
+}
+@media screen and (max-width: 425px) {
+  .form-control {
+        width: 90%;
+    }
+    .ant-col-offset-6 {
+        margin-left: 10%;
+    }
+}

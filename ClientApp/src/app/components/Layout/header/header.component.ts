@@ -10,7 +10,7 @@ export class HeaderComponent {
 
   collapse() {
     this.isExpanded = false;
-  }
+  } 
 
   toggle() {
     this.isExpanded = !this.isExpanded;
