@@ -13,6 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/Layout/header/header.component'
 import { FooterComponent } from './components/Layout/footer/footer.component'
 import { RegistrationComponent } from './components/registration/registration.component'
+import { SendActivation } from './components/send-activation/send-activation.component';
 import { appRoutes } from './route.routing';
 
 @NgModule({
@@ -21,7 +22,8 @@ import { appRoutes } from './route.routing';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    SendActivation
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

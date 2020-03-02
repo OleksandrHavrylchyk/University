@@ -1,10 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace University.Models
+namespace University
 {
-    public class Course
+    public class CourseEntity
     {
         [Key]
         public int ID { get; set; }

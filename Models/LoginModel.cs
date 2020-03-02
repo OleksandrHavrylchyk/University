@@ -1,4 +1,4 @@
-﻿namespace University.Controllers.LoginLogout
+﻿namespace University.Models
 {
     public class LoginModel
     {

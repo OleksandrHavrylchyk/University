@@ -19,7 +19,7 @@
   padding-top: 20px;
 }
 .register-error {
-  color: #dc3545;
+  color: var(--main-red-color);
 }
 @media screen and (max-width: 425px) {
   .form-control {

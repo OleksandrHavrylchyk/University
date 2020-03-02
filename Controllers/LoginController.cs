@@ -9,12 +9,12 @@ namespace University.Controllers.LoginLogout
 {
     [Route("api/")]
     [ApiController]
-    public class LoginLogoutController : ControllerBase
+    public class LoginController : ControllerBase
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUserEntity> _signInManager;
+        private readonly UserManager<ApplicationUserEntity> _userManager;
 
-        public LoginLogoutController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public LoginController(SignInManager<ApplicationUserEntity> signInManager, UserManager<ApplicationUserEntity> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -22,7 +22,7 @@ namespace University.Controllers.LoginLogout
 
         // POST: api/login
         [HttpPost("login")]
-        public async Task<ActionResult<ApplicationUser>> LoginUser(LoginModel model)
+        public async Task<ActionResult<ApplicationUserEntity>> LoginUser(LoginModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -43,7 +43,7 @@ namespace University.Controllers.LoginLogout
         }
         // POST: api/logout
         [HttpPost("logout")]
-        public async Task<ActionResult<ApplicationUser>> LogoutUser(LoginModel model)
+        public async Task<ActionResult<ApplicationUserEntity>> LogoutUser(LoginModel model)
         {
             await _signInManager.SignOutAsync();
             return Ok();

@@ -1,20 +1,18 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using University.Models;
 
 
-namespace University.Models
+namespace University
 {
-    public class CourseSubscriber
+    public class CourseSubscribersEntity
     {
         [Key]
         public int ID { get; set; }
         public string UserId { get; set; }
         [ForeignKey("UserId")]
-        public ApplicationUser User { get; set; }
+        public ApplicationUserEntity User { get; set; }
         public int CourseID { get; set;}
         [ForeignKey("CourseID")]
-        public Course Course { get; set; }
+        public CourseEntity Course { get; set; }
     }
 }

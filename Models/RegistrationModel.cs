@@ -1,4 +1,4 @@
-﻿namespace University.Controllers
+﻿namespace University.Models
 {
     public class RegistrationModel
     {

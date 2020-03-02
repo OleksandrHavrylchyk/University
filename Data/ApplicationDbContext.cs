@@ -3,22 +3,20 @@ using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace University.Data
 {
-    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUserEntity>
     {
         public ApplicationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
-        public DbSet<Course> Courses { get; set; }
 
-        public DbSet<CourseSubscriber> CourseSubscribers { get; set; }
+        public DbSet<CourseEntity> Courses { get; set; }
+
+        public DbSet<CourseSubscribersEntity> CourseSubscribers { get; set; }
+
     }
 }

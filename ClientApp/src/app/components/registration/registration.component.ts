@@ -50,7 +50,8 @@ export class RegistrationComponent implements OnInit{
           this.router.navigate(['/']);
         },
         error => {
-          this.errorOnSubmit = error.error.errors;
+          this.errorOnSubmit = error.error;
+          console.log(this.errorOnSubmit);
           this.loading = false;
         });
   }
