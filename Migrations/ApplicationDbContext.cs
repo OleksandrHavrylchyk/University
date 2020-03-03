@@ -1,10 +1,9 @@
-﻿using University.Models;
-using IdentityServer4.EntityFramework.Options;
+﻿using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace University.Data
+namespace University.Migrations
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUserEntity>
     {

@@ -1,22 +1,25 @@
 ﻿using MimeKit;
 using MailKit.Net.Smtp;
 using System.Threading.Tasks;
-using University.Models;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
+
 
 namespace University.Services
 {
     public class EmailSenderService
     {
-        public IOptions<ApplicationEmailModel> applicationConfig;
+        public IConfiguration applicationConfiguration;
 
         private static string emailHost;
         private static string hostPassword;
 
-        public EmailSenderService()
+        public EmailSenderService(IConfiguration applicationConfiguration)
         {
-            emailHost = applicationConfig.Value.Email;
-            hostPassword = applicationConfig.Value.Password;
+            this.applicationConfiguration = applicationConfiguration;
+            emailHost = applicationConfiguration.GetValue<string>(
+                "ApplicationEmail:Email");
+            hostPassword = applicationConfiguration.GetValue<string>(
+                "ApplicationEmail:Password"); ;
         }
         public async Task SendEmailAsync(string email, string subject, string message)
         {

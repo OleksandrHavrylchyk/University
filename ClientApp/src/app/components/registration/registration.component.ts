@@ -47,7 +47,9 @@ export class RegistrationComponent implements OnInit{
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/send-activation'], {
+            state: { userRegisterData: this.registerForm.value }
+          });
         },
         error => {
           this.errorOnSubmit = error.error;

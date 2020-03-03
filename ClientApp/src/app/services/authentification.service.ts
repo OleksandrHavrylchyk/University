@@ -12,4 +12,7 @@ export class UserService {
   register(user: User) {
     return this.http.post(this.baseUrl + 'registration/', user);
   }
+  sendConfirmationEmail(user: User) {
+    return this.http.post(this.baseUrl + 'send-confirmation/', user);
+  }
 }

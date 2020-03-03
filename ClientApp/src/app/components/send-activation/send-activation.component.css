@@ -21,3 +21,7 @@
   font-size: 12px;
   padding-top: 20px;
 }
+.send-activate-col {
+  display: flex;
+  justify-content: center;
+}

@@ -1,33 +1,37 @@
 ﻿using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using AutoMapper;
-using University.Data;
+using University.Migrations;
 using University.Models;
 using University.Services;
-
+using Microsoft.Extensions.Configuration;
 
 namespace University.Controllers
 {
     [Route("api/")]
     [ApiController]
-    public class Registration : ControllerBase
+    public class RegistrationController : ControllerBase
     {
         public List<ResponseErrorModel> errorResponse;
-
-        public static string emailRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
         
         private readonly ApplicationDbContext context;
         private readonly UserManager<ApplicationUserEntity> userManager;
         private readonly IMapper mapper;
+        private readonly IConfiguration applicationConfiguration;
+        private readonly EmailValidatorService emailValidatorService;
 
-        public Registration(UserManager<ApplicationUserEntity> userManager, IMapper mapper, ApplicationDbContext context)
+        public RegistrationController(UserManager<ApplicationUserEntity> userManager,
+                            IMapper mapper,
+                            ApplicationDbContext context,
+                            IConfiguration applicationConfiguration)
         {
             this.context = context;
             this.userManager = userManager;
             this.mapper = mapper;
+            this.applicationConfiguration = applicationConfiguration;
+            this.emailValidatorService = new EmailValidatorService();
             errorResponse = new List<ResponseErrorModel>();
         }
 
@@ -38,9 +42,7 @@ namespace University.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            Regex regualarExpressionEmailValidator = new Regex(emailRegex);
-            if (!regualarExpressionEmailValidator.IsMatch(registerUserData.Email))
+            if (!emailValidatorService.ValidateEmail(registerUserData.Email))
             {
                 errorResponse.Add(new ResponseErrorModel
                 {
@@ -49,8 +51,7 @@ namespace University.Controllers
                 });
                 return BadRequest(errorResponse);
             }
-
-            if (userManager.FindByEmailAsync(registerUserData.Email).Exception == null)
+            if (userManager.FindByEmailAsync(registerUserData.Email).Result == null)
             {
                 var userIdentity = mapper.Map<ApplicationUserEntity>(registerUserData);
                 var result = await userManager.CreateAsync(userIdentity, registerUserData.Password);
@@ -60,8 +61,8 @@ namespace University.Controllers
                     return new BadRequestObjectResult(result.Errors);
                 }
 
-                await SendConfirmEmailAsync(userIdentity);
                 await context.SaveChangesAsync();
+                await SendConfirmEmailAsync(registerUserData);
 
                 return CreatedAtAction("Registered", registerUserData);
             }
@@ -74,17 +75,20 @@ namespace University.Controllers
 
              return BadRequest(errorResponse);           
         }
-        public async Task SendConfirmEmailAsync(ApplicationUserEntity userIdentity)
+        [HttpPost("send-confirmation")]
+        public async Task SendConfirmEmailAsync(RegistrationModel registerUserData)
         {
-            var confirmationToken = await userManager.GenerateEmailConfirmationTokenAsync(userIdentity);
+            var userForConfirmation = userManager.FindByEmailAsync(registerUserData.Email).Result;
+            var confirmationToken = await userManager.GenerateEmailConfirmationTokenAsync(userForConfirmation);
             var callbackUrl = Url.Action(
                     "ConfirmEmail",
-                    "Account",
-                    new { userId = userIdentity.Id, code = confirmationToken },
+                    "EmailConfirmation",
+                    new { userId = userForConfirmation.Id, code = confirmationToken },
                     protocol: HttpContext.Request.Scheme);
-            EmailSenderService emailService = new EmailSenderService();
-            await emailService.SendEmailAsync(userIdentity.Email, "Confirm your account",
+            EmailSenderService emailService = new EmailSenderService(applicationConfiguration);
+            await emailService.SendEmailAsync(userForConfirmation.Email, "Confirm your account",
                         $"Confirm registration by clicking on the link: <a href='{callbackUrl}'>link</a>");
         }
     }
 }
+    

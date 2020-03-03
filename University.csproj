@@ -36,15 +36,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\20200302083041_UniqueEmail.cs" />
-    <Compile Remove="Data\Migrations\20200302083041_UniqueEmail.Designer.cs" />
-    <Compile Remove="Data\Migrations\20200302084326_EmailValidatin.cs" />
-    <Compile Remove="Data\Migrations\20200302084326_EmailValidatin.Designer.cs" />
+    <Compile Remove="Migrations\Migrations\20200302083041_UniqueEmail.cs" />
+    <Compile Remove="Migrations\Migrations\20200302083041_UniqueEmail.Designer.cs" />
+    <Compile Remove="Migrations\Migrations\20200302084326_EmailValidatin.cs" />
+    <Compile Remove="Migrations\Migrations\20200302084326_EmailValidatin.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\components\Layout\footer\footer.component.ts" />
     <None Remove="ClientApp\src\app\components\Layout\header\header.component.ts" />
+    <None Remove="ClientApp\src\app\components\login\login.component.ts" />
     <None Remove="ClientApp\src\app\components\send-activation\send-activation.component.ts" />
     <None Remove="ClientApp\src\app\route.routing.ts" />
     <None Remove="ClientApp\src\app\models\user.ts" />
@@ -52,6 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\components\login\login.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\Layout\footer\footer.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\Layout\header\header.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\send-activation\send-activation.component.ts" />

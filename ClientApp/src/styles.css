@@ -23,7 +23,7 @@ code {
   color: var(--main-gray-color);
   border-color: var(--main-gray-color);
 }
-  .gray-button:active, .gray-button:focus {
+  .gray-button:active, .gray-button:focus, .gray-button:hover {
     border-color: var(--main-gray-color);
     color: var(--main-gray-color);
   }

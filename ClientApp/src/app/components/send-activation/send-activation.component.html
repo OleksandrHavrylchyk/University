@@ -1,7 +1,7 @@
 <div nz-row>
   <div nz-col nzXs="0" nzSm="4" nzMd="6">
   </div>
-  <div nz-col nzXs="24" nzSm="16" nzMd="12">
+  <div nz-col nzXs="24" nzSm="16" nzMd="12" class="send-activate-col">
     <div class="send-activate-box">
       <div class="activate-message">
         <p class="message-text">
@@ -10,7 +10,7 @@
         <p class="message-text">
           If you didnt receive the email, check spam or
         </p>
-        <button class="rounded-pill gray-button" nz-button nzSize=large>Send activation email</button>
+        <button class="rounded-pill gray-button" nz-button nzSize=large (click)="sendActivation()">Send activation email</button>
         <p class="warning-text">Warning: Without confirmation you will not to be able to login in your accout, so check your email now!</p>
       </div>
     </div>
