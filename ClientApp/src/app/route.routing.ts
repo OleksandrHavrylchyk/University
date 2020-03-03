@@ -15,7 +15,7 @@ export const appRoutes: Routes = [
   //{ path: 'sign-in', component: LoginComponent },
   { path: 'sign-up', component: RegistrationComponent },
   { path: 'send-activation', component: SendActivation },
-  { path: 'sing-in', component: LoginComponent },
+  { path: 'sign-in', component: LoginComponent },
   /*{
     path: '',
     runGuardsAndResolvers: 'always',

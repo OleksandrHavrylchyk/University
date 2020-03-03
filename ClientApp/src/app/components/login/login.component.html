@@ -1,10 +1,55 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-  zxcvxzcv
-</body>
-</html>
+<div nz-row>
+  <div nz-col nzXs="0" nzSm="4" nzMd="6" nzLg="8" nzXl="9">
+  </div>
+  <div nz-col nzXs="24" nzSm="16" nzMd="12" nzLg="8" nzXl="6" class="login-box">
+    <div nz-row>
+      <div nz-col class="d-flex justify-content-center">UNIVERSITY</div>
+    </div>
+    <div nz-row>
+      <div nz-col class="d-flex justify-content-center">Sign in</div>
+    </div>
+    <div nz-row>
+      <div nz-col>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div nz-row>
+            <div nz-col nzOffset="6">
+              <div class="form-group">
+                <label for="inputEmail">Email address</label>
+                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
+                       placeholder="Enter email" formControlName="email">
+              </div>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col nzOffset="6">
+              <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input type="password" class="form-control" id="inputPassword"
+                       placeholder="Password" formControlName="password">
+              </div>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col nzOffset="6">
+              <div *ngIf="errorOnSubmit">
+                <div *ngFor="let error of errorOnSubmit" class="register-error">
+                  {{error.description}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div nz-row>
+            <div nz-col class="d-flex justify-content-center">
+              <button [disabled]="loading" type="submit" class="rounded-pill gray-button"
+                      nz-button nzSize=large>
+                Sign In
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzXs="0" nzSm="4" nzMd="6" nzLg="8" nzXl="9">
+  </div>
+</div>

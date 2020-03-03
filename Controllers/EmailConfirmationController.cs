@@ -22,7 +22,7 @@ namespace University.Controllers
             }
             var result = await userManager.ConfirmEmailAsync(user, code);
             if (result.Succeeded)
-                return RedirectToAction("/");
+                return RedirectToAction("/sign-up");
             else
                 return BadRequest();
         }

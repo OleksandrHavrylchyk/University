@@ -12,7 +12,7 @@ exports.appRoutes = [
     //{ path: 'sign-in', component: LoginComponent },
     { path: 'sign-up', component: registration_component_1.RegistrationComponent },
     { path: 'send-activation', component: send_activation_component_1.SendActivation },
-    { path: 'sing-in', component: login_component_1.LoginComponent },
+    { path: 'sign-in', component: login_component_1.LoginComponent },
     /*{
       path: '',
       runGuardsAndResolvers: 'always',

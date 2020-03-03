@@ -1,2 +1,10 @@
-body {
+.login-box {
+  display: table-cell;
+  vertical-align: middle;
+  border-style: solid;
+  border-radius: 50px;
+  border-color: var(--main-gray-color);
+  border-width: 2px;
+  height: 500px;
+  text-align: center;
 }
