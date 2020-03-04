@@ -27,6 +27,13 @@ export class LoginComponent implements OnInit {
     });
   }
   onLoginSubmit() {
-    console.log(this.loginForm.value);
+    this.authService.login(this.loginForm.value)
+      .subscribe(
+        data => {
+          this.router.navigate(['/']);
+        },
+        error => {
+          console.log(error);
+        });
   }
 }

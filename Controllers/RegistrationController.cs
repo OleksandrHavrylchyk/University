@@ -42,6 +42,7 @@ namespace University.Controllers
             {
                 return BadRequest(ModelState);
             }
+
             if (!emailValidatorService.ValidateEmail(registerUserData.Email))
             {
                 errorResponse.Add(new ResponseErrorModel
@@ -51,29 +52,21 @@ namespace University.Controllers
                 });
                 return BadRequest(errorResponse);
             }
-            if (userManager.FindByEmailAsync(registerUserData.Email).Result == null)
+
+            var userIdentity = mapper.Map<ApplicationUserEntity>(registerUserData);
+            var result = await userManager.CreateAsync(userIdentity, registerUserData.Password);
+
+            if (!result.Succeeded)
             {
-                var userIdentity = mapper.Map<ApplicationUserEntity>(registerUserData);
-                var result = await userManager.CreateAsync(userIdentity, registerUserData.Password);
-
-                if (!result.Succeeded)
-                {
-                    return new BadRequestObjectResult(result.Errors);
-                }
-
-                await context.SaveChangesAsync();
-                await SendConfirmEmailAsync(registerUserData);
-
-                return CreatedAtAction("Registered", registerUserData);
+                return new BadRequestObjectResult(result.Errors);
             }
-           
-             errorResponse.Add(new ResponseErrorModel
-             {
-                 Code = (int)ErrorCodes.DuplicateEmail,
-                 Description = $"Email {registerUserData.Email} is already taken"
-             });
 
-             return BadRequest(errorResponse);           
+            await userManager.AddToRoleAsync(userIdentity, "User");
+            await context.SaveChangesAsync();
+
+            await SendConfirmEmailAsync(registerUserData);
+
+            return CreatedAtAction("Registered", registerUserData);           
         }
         [HttpPost("send-confirmation")]
         public async Task SendConfirmEmailAsync(RegistrationModel registerUserData)

@@ -20,11 +20,14 @@ namespace University.Controllers
             {
                 return BadRequest();
             }
+
             var result = await userManager.ConfirmEmailAsync(user, code);
             if (result.Succeeded)
-                return RedirectToAction("/sign-in");
-            else
-                return BadRequest();
+            {
+                return RedirectToAction("/");
+            }
+
+            return BadRequest();
         }
     }
 }

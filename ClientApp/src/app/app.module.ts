@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
 import { NzGridModule } from 'ng-zorro-antd/grid'
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -42,6 +43,7 @@ import { appRoutes } from './route.routing';
     NzAlertModule,
     BrowserAnimationsModule,
     NzNotificationModule,
+    JwtModule,
     RouterModule.forRoot(appRoutes)
   ],
   /*providers: [

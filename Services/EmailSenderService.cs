@@ -19,7 +19,7 @@ namespace University.Services
             emailHost = applicationConfiguration.GetValue<string>(
                 "ApplicationEmail:Email");
             hostPassword = applicationConfiguration.GetValue<string>(
-                "ApplicationEmail:Password"); ;
+                "ApplicationEmail:Password");
         }
         public async Task SendEmailAsync(string email, string subject, string message)
         {

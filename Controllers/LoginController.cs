@@ -2,48 +2,45 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using University.Models;
+using University.Interfaces;
+using University.Migrations;
+using System.Linq;
 
-
-namespace University.Controllers.LoginLogout
+namespace University.Controllers
 {
     [Route("api/")]
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly SignInManager<ApplicationUserEntity> _signInManager;
-        private readonly UserManager<ApplicationUserEntity> _userManager;
+        private readonly UserManager<ApplicationUserEntity> userManager;
+        private readonly IAuthentificationService authentificationService;
+        private readonly ApplicationDbContext entityContext;
+        private bool isSubscribedOncourses;
 
-        public LoginController(SignInManager<ApplicationUserEntity> signInManager, UserManager<ApplicationUserEntity> userManager)
+
+        public LoginController(UserManager<ApplicationUserEntity> userManager, IAuthentificationService authentificationService,
+                                ApplicationDbContext entityContext)
         {
-            _signInManager = signInManager;
-            _userManager = userManager;
+            this.userManager = userManager;
+            this.authentificationService = authentificationService;
+            this.entityContext = entityContext;
+            this.isSubscribedOncourses = false;
         }
         [HttpPost("login")]
-        public async Task<ActionResult<ApplicationUserEntity>> LoginUser(LoginModel model)
+        public async Task<ActionResult> LoginUser(LoginModel loginUser)
         {
-            if (!ModelState.IsValid)
+            if (!await authentificationService.ValidateUser(loginUser))
             {
-                return BadRequest(ModelState);
+                return Unauthorized();
             }
-            var result = await _signInManager.PasswordSignInAsync(model.UserName,
-                                   model.Password, isPersistent:false, lockoutOnFailure: true);
-            if (result.Succeeded)
+
+            var user = await userManager.FindByNameAsync(loginUser.UserName);
+            if(entityContext.CourseSubscribers.Where(user => user.UserId.Contains(user.UserId)).ToList().Count > 0)
             {
-                var user = await _userManager.FindByNameAsync(model.UserName);
-                return CreatedAtAction("Logged into the system", user);
+                isSubscribedOncourses = true;
             }
-            else
-            {
-                ModelState.AddModelError("error", "Invalid login attempt.");
-                return BadRequest(ModelState);
-            }
-        }
-        // POST: api/logout
-        [HttpPost("logout")]
-        public async Task<ActionResult<ApplicationUserEntity>> LogoutUser(LoginModel model)
-        {
-            await _signInManager.SignOutAsync();
-            return Ok();
+            
+            return Ok(new { Token = await authentificationService.GenerateToken(loginUser), NoCourses = isSubscribedOncourses });
         }
     }
 }

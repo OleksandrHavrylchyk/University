@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
+using University.Interfaces;
+using University.Services;
 
 namespace University
 {
@@ -35,11 +37,23 @@ namespace University
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IAuthentificationService, AuthentificationService>();
 
             var mappingConfig = new MapperConfiguration(mapping =>
             {
                 mapping.AddProfile(new Mapping());
             });
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.User.RequireUniqueEmail = true;
+            });
+
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
@@ -47,6 +61,7 @@ namespace University
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<ApplicationUserEntity>(options => options.SignIn.RequireConfirmedAccount = true)
+                    .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()
@@ -67,21 +82,26 @@ namespace University
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddAuthentication(x =>
+            var jwtSettings = Configuration.GetSection("JwtSettings");
+
+            services.AddAuthentication(options =>
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-           .AddJwtBearer(x =>
+           .AddJwtBearer(options =>
            {
-               x.RequireHttpsMetadata = false;
-               x.SaveToken = true;
-               x.TokenValidationParameters = new TokenValidationParameters
+               options.RequireHttpsMetadata = false;
+               options.SaveToken = true;
+               options.TokenValidationParameters = new TokenValidationParameters
                {
                    ValidateIssuerSigningKey = true,
+                   ValidIssuer = jwtSettings.GetSection("validIssuer").Value,
+                   ValidAudience = jwtSettings.GetSection("validAudience").Value,
                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["Jwt:Key"])),
-                   ValidateIssuer = false,
-                   ValidateAudience = false,
+                   ValidateIssuer = true,
+                   ValidateAudience = true,
+                   ValidateLifetime = true,
                };
            });
         }
