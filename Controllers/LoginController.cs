@@ -18,8 +18,6 @@ namespace University.Controllers.LoginLogout
             _signInManager = signInManager;
             _userManager = userManager;
         }
-
-        // POST: api/login
         [HttpPost("login")]
         public async Task<ActionResult<ApplicationUserEntity>> LoginUser(LoginModel model)
         {

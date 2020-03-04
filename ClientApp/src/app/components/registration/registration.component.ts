@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { UserService } from '../../services/authentification.service'
+import { AuthentificationService } from '../../services/authentification.service'
 
 
 @Component({
@@ -19,7 +19,7 @@ export class RegistrationComponent implements OnInit{
   errorOnSubmit;
   
   constructor(
-    private authService: UserService,
+    private authService: AuthentificationService,
     private formBuilder: FormBuilder,
     private router: Router,
   ) {

@@ -10,8 +10,8 @@
       <div nz-row>
         <div nz-col nzOffset="6">
           <div class="form-group">
-            <label for="inputEmail">Email address</label>
-            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email"
+            <label for="inputRegistrationEmail">Email address</label>
+            <input type="email" class="form-control" id="inputRegistrationEmail" aria-describedby="emailHelp" placeholder="Enter email"
                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" formControlName="email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
@@ -24,8 +24,8 @@
       <div nz-row>
         <div nz-col nzOffset="6">
           <div class="form-group">
-            <label for="inputUserName">User name</label>
-            <input type="text" class="form-control" id="inputUserName" aria-describedby="userNameHelp" placeholder="Enter user name"
+            <label for="inputRegistrationUserName">User name</label>
+            <input type="text" class="form-control" id="inputRegistrationUserName" aria-describedby="userNameHelp" placeholder="Enter user name"
                    [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" formControlName="userName">
             <small id="userNameHelp" class="form-text text-muted">Choose name for your account  </small>
             <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
@@ -37,8 +37,8 @@
       <div nz-row>
         <div nz-col nzOffset="6">
           <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password" formControlName="password"
+            <label for="inputRegistrationPassword">Password</label>
+            <input type="password" class="form-control" id="inputRegistrationPassword" placeholder="Password" formControlName="password"
                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
               <div *ngIf="f.password.errors.required">Password is required</div>
@@ -49,9 +49,11 @@
       </div>
       <div nz-row>
         <div nz-col nzOffset="6">
-          <div *ngIf="errorOnSubmit">
-            <div *ngFor="let error of errorOnSubmit" class="register-error">
-                {{error.description}}
+          <div class="error-messages">
+            <div *ngIf="errorOnSubmit">
+              <div *ngFor="let error of errorOnSubmit">
+                <nz-alert class="mt-1" nzType="error" nzMessage="{{error.description}}" nzShowIcon></nz-alert>
+              </div>
             </div>
           </div>
         </div>

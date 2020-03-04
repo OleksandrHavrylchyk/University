@@ -12,20 +12,23 @@
 .form-control {
   width: 68%;
 }
+.error-messages {
+  width: 68%; 
+}
 .ant-btn-lg {
   width: 150px;
 }
 .sign-up-button-container {
   padding-top: 20px;
 }
-.register-error {
-  color: var(--main-red-color);
-}
 @media screen and (max-width: 425px) {
   .form-control {
-        width: 90%;
-    }
-    .ant-col-offset-6 {
-        margin-left: 10%;
-    }
+    width: 90%;
+  }
+  .error-messages {
+    width: 90%;
+  }
+  .ant-col-offset-6 {
+    margin-left: 10%;
+  }
 }

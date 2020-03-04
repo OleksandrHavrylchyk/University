@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { User } from '../models/user';
 
 @Injectable({ providedIn: 'root' })
-export class UserService {
+export class AuthentificationService {
   private baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 

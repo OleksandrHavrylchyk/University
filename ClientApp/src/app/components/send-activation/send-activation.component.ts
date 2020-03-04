@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
-import { UserService } from '../../services/authentification.service'
+import { AuthentificationService } from '../../services/authentification.service';
 
 @Component({
   selector: 'send-activation',
@@ -12,7 +12,7 @@ import { UserService } from '../../services/authentification.service'
 export class SendActivation {
 
   constructor(
-    private authService: UserService,
+    private authService: AuthentificationService,
   ) {
   }
   sendActivation() {
