@@ -15,9 +15,11 @@ export class AuthentificationService {
   register(user: User) {
     return this.http.post(this.baseUrl + 'registration/', user);
   }
+
   sendConfirmationEmail(user: User) {
     return this.http.post(this.baseUrl + 'send-confirmation/', user);
   }
+
   login(user: User) {
     return this.http.post(this.baseUrl + 'login/', user).pipe(
       map((response: any) => {
@@ -28,11 +30,33 @@ export class AuthentificationService {
       }
       ))
   }
+
   isAuthentificated() {
     const token = sessionStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
   }
+
   logout() {
     sessionStorage.removeItem('token');
+  }
+
+  isAdmin() {
+    if (this.getUserRole() === "Administrator") {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  private getUserRole(): string {
+    if (localStorage.getItem('token')) {
+      const tokenPayload = this.getTokenPayload();
+      return tokenPayload['role'];
+    }
+  }
+
+  private getTokenPayload(): string {
+    return this.jwtHelper.decodeToken(localStorage.getItem('token'));
   }
 }
