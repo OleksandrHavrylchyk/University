@@ -8,8 +8,6 @@ namespace University.Models
         {
             CreateMap<RegistrationModel, ApplicationUserEntity>();
             CreateMap<ApplicationUserEntity, RegistrationModel>();
-            CreateMap<LoginModel, ApplicationUserEntity>();
-            CreateMap<ApplicationUserEntity, LoginModel>();
         }
     }
 }

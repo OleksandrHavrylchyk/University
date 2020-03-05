@@ -17,17 +17,20 @@ namespace University.Services
         private readonly UserManager<ApplicationUserEntity> userManager;
         private readonly IConfiguration configuration;
         private ApplicationUserEntity user;
+
         public AuthentificationService(UserManager<ApplicationUserEntity> userManager, IConfiguration configuration)
         {
             this.userManager = userManager;
             this.configuration = configuration;
         }
+
         public async Task<bool> ValidateUser(LoginModel userForAuth)
         {
             user = await userManager.FindByNameAsync(userForAuth.UserName);
-            return (user != null && await userManager.CheckPasswordAsync(user,
-           userForAuth.Password));
+
+            return (user != null && await userManager.CheckPasswordAsync(user, userForAuth.Password));
         }
+
         public async Task<string> GenerateToken(LoginModel userForAuth)
         {
             var user = await userManager.FindByNameAsync(userForAuth.UserName); 
@@ -37,6 +40,7 @@ namespace University.Services
 
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }
+
         private SigningCredentials GetSigningCredentials()
         {
             var key = Encoding.UTF8.GetBytes(configuration["Jwt:Key"]);
@@ -44,6 +48,7 @@ namespace University.Services
 
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
+
         private async Task<List<Claim>> GetClaims(ApplicationUserEntity user)
         {
             var claims = new List<Claim>{
@@ -56,6 +61,7 @@ namespace University.Services
             }
             return claims;
         }
+
         private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
         {
             var jwtSettings = configuration.GetSection("JwtSettings");
@@ -71,5 +77,4 @@ namespace University.Services
             return tokenOptions;
         }
     }
-
 }

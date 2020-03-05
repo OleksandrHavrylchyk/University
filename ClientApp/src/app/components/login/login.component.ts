@@ -12,11 +12,13 @@ import { AuthentificationService } from '../../services/authentification.service
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  errorOnLogin = false;
+  messageOnLoginError: string
 
   constructor(
     private authService: AuthentificationService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
   ) {
   }
 
@@ -30,10 +32,20 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value)
       .subscribe(
         data => {
-          this.router.navigate(['/']);
+          if (!data.isSubscribedOnCourses) {
+            this.router.navigate(['/courses'], {
+              state: { isSubscribedOnCourses: data.isSubscribedOnCourses}
+            });
+          }
+          else {
+            this.router.navigate(['/'], {
+              state: { isLoggedIn: true }
+            });
+          }
         },
         error => {
-          console.log(error);
+          this.errorOnLogin = true;
+          this.messageOnLoginError = "Invalid email or user name";
         });
   }
 }

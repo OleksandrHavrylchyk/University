@@ -73,12 +73,15 @@ namespace University.Controllers
         {
             var userForConfirmation = userManager.FindByEmailAsync(registerUserData.Email).Result;
             var confirmationToken = await userManager.GenerateEmailConfirmationTokenAsync(userForConfirmation);
+
             var callbackUrl = Url.Action(
                     "ConfirmEmail",
                     "EmailConfirmation",
                     new { userId = userForConfirmation.Id, code = confirmationToken },
                     protocol: HttpContext.Request.Scheme);
+
             EmailSenderService emailService = new EmailSenderService(applicationConfiguration);
+
             await emailService.SendEmailAsync(userForConfirmation.Email, "Confirm your account",
                         $"Confirm registration by clicking on the link: <a href='{callbackUrl}'>link</a>");
         }

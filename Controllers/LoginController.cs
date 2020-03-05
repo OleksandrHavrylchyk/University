@@ -31,7 +31,7 @@ namespace University.Controllers
         {
             if (!await authentificationService.ValidateUser(loginUser))
             {
-                return Unauthorized("Invalid user name or password");
+                return Unauthorized();
             }
 
             var user = await userManager.FindByNameAsync(loginUser.UserName);

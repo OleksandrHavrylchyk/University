@@ -4,13 +4,14 @@ var home_component_1 = require("./components/home/home.component");
 var registration_component_1 = require("./components/registration/registration.component");
 var send_activation_component_1 = require("./components/send-activation/send-activation.component");
 var login_component_1 = require("./components/login/login.component");
+var search_courses_component_1 = require("./components/search-courses/search-courses.component");
 exports.appRoutes = [
     {
         path: '', component: home_component_1.HomeComponent,
         children: []
     },
-    //{ path: 'sign-in', component: LoginComponent },
     { path: 'sign-up', component: registration_component_1.RegistrationComponent },
+    { path: 'courses', component: search_courses_component_1.SearchCoursesComponent },
     { path: 'send-activation', component: send_activation_component_1.SendActivation },
     { path: 'sign-in', component: login_component_1.LoginComponent },
     /*{

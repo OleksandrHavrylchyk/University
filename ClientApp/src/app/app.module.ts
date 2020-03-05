@@ -21,7 +21,8 @@ import { FooterComponent } from './components/Layout/footer/footer.component'
 import { RegistrationComponent } from './components/registration/registration.component'
 import { SendActivation } from './components/send-activation/send-activation.component';
 import { CourseCardComponent } from './components/course-card/course-card.component';
-import { LoginComponent } from './components/login/login.component';  
+import { LoginComponent } from './components/login/login.component';
+import { SearchCoursesComponent } from './components/search-courses/search-courses.component';
 import { appRoutes } from './route.routing';
 import { environment } from '../environments/environment';
 
@@ -38,7 +39,8 @@ export function tokenGetter() {
     RegistrationComponent,
     SendActivation,
     LoginComponent,
-    CourseCardComponent
+    CourseCardComponent,
+    SearchCoursesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

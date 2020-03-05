@@ -26,6 +26,7 @@ export class AuthentificationService {
         const res = response;
         if (user) {
           sessionStorage.setItem('token', res.token);
+          return res;
         }
       }
       ))

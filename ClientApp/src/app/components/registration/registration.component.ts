@@ -13,6 +13,7 @@ import { AuthentificationService } from '../../services/authentification.service
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit{
+
   registerForm: FormGroup;
   loading = false;
   submitted = false;

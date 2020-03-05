@@ -34,3 +34,7 @@
   height: 40px;
   font-size: 16px;
 }
+.login-error {
+  width: 90%;
+  margin-left: 5%;
+}

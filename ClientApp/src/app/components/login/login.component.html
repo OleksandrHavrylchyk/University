@@ -37,14 +37,9 @@
                 </div>
               </div>
             </div>
-            <!--<div nz-row>
-    <div nz-col nzOffset="6">
-      <div *ngIf="errorOnSubmit">
-        <div *ngFor="let error of errorOnSubmit" class="register-error">
-        </div>
-      </div>
-    </div>
-  </div>-->
+            <div *ngIf="errorOnLogin" class="login-error">
+              <nz-alert class="mt-1" nzType="error" nzMessage="{{messageOnLoginError}}" nzShowIcon></nz-alert>
+            </div>
             <div nz-row>
               <div nz-col class="d-flex justify-content-center pt-5">
                 <button type="submit" class="rounded-pill gray-button sing-in-button-form"

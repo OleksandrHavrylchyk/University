@@ -7,6 +7,5 @@ namespace University.Interfaces
     {
         Task<bool> ValidateUser(LoginModel userForLogin);
         Task<string> GenerateToken(LoginModel userForLogin);
-
     }
 }
