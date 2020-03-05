@@ -9,6 +9,7 @@ code {
   color: #e01a76;
 }*/
 :root {
+  --background-gray-color: #F8F8FF;
   --main-gray-color: #6c757d !important;
   --main-red-color: #dc3545;
 }

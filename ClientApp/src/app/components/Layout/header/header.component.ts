@@ -9,12 +9,14 @@ import { AuthentificationService } from '../../../services/authentification.serv
 })
 export class HeaderComponent implements OnInit{
   isExpanded = false;
-  isAuthentificated = false;
-  isAdmin = false;
 
   constructor(
     private authService: AuthentificationService,
   ) {
+  }
+
+  logout() {
+    sessionStorage.removeItem("token");
   }
 
   collapse() {
@@ -25,7 +27,11 @@ export class HeaderComponent implements OnInit{
     this.isExpanded = !this.isExpanded;
   }
   ngOnInit() {
-    this.isAuthentificated = this.authService.isAuthentificated();
-    this.isAdmin = this.authService.isAdmin();
+  }
+  isAuthentificated() {
+    return this.authService.isAuthentificated();
+  }
+  isAdmin() {
+    return this.authService.isAdmin();
   }
 }

@@ -31,7 +31,7 @@ namespace University.Controllers
         {
             if (!await authentificationService.ValidateUser(loginUser))
             {
-                return Unauthorized();
+                return Unauthorized("Invalid user name or password");
             }
 
             var user = await userManager.FindByNameAsync(loginUser.UserName);
@@ -40,7 +40,7 @@ namespace University.Controllers
                 isSubscribedOncourses = true;
             }
             
-            return Ok(new { Token = await authentificationService.GenerateToken(loginUser), NoCourses = isSubscribedOncourses });
+            return Ok(new { Token = await authentificationService.GenerateToken(loginUser), isSubscribedOnCourses = isSubscribedOncourses });
         }
     }
 }

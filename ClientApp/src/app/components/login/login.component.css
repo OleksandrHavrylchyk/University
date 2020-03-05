@@ -1,5 +1,5 @@
 .login-container {
-  background-color: #F8F8FF;
+  background-color: var(--background-gray-color);
   height: 100%;
 }
 .login-bordered-box {

@@ -64,7 +64,7 @@ namespace University.Services
             issuer: jwtSettings.GetSection("validIssuer").Value,
             audience: jwtSettings.GetSection("validAudience").Value,
             claims: claims.ToArray(),
-            expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(Convert.ToDouble(jwtSettings.GetSection("expires").Value))),
+            expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(jwtSettings.GetSection("expires").Value)),
             signingCredentials: signingCredentials
             );
 

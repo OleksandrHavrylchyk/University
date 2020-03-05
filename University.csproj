@@ -43,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\components\course-card\course-card.component.ts" />
     <None Remove="ClientApp\src\app\components\Layout\footer\footer.component.ts" />
     <None Remove="ClientApp\src\app\components\Layout\header\header.component.ts" />
     <None Remove="ClientApp\src\app\components\login\login.component.ts" />
@@ -53,6 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\components\course-card\course-card.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\login\login.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\Layout\footer\footer.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\Layout\header\header.component.ts" />
@@ -64,6 +66,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\components\registration\" />
+    <Folder Include="ClientApp\src\app\components\search-courses\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
