@@ -9,8 +9,14 @@
     <div nz-row>
       <div class="home-sections-title">Courses about to begin</div>
       <div *ngFor="let course of homeCourses">
-        <div class="d-flex justify-content-center" nz-col nzLg="8">
-          <course-card [courseInfo]="course"></course-card>
+        <div nz-col nzLg="8">
+          <div>
+            <course-card [courseInfo]="course"></course-card>
+          </div>
+          <button class="rounded-pill gray-button"
+                  nz-button nzSize=large (click)="subscribeCourse(course.id)">
+            Subscribe
+          </button>
         </div>
       </div>
       </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -35,6 +35,10 @@ export class AuthentificationService {
   isAuthentificated() {
     const token = sessionStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
+  }
+
+  getAuthorizationHeader() {
+    return new HttpHeaders().set("Authorization", "Bearer " + sessionStorage.getItem('token'));
   }
 
   logout() {

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 import { CoursesService } from '../../services/courses.service';
+import { CoursesSubscribersService } from '../../services/courses-subscribers.service';
+import { NotificationService } from '../../services/notification.service';
 import { CoursesList } from '../../interfaces/courseListInterfaces';
 
 @Component({
@@ -11,18 +12,20 @@ import { CoursesList } from '../../interfaces/courseListInterfaces';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
   homeCourses: CoursesList;
 
   constructor(
     private router: Router,
-    private notification: NzNotificationService,
     private courseService: CoursesService,
+    private coursesSubscribersService: CoursesSubscribersService,
+    private notificationService: NotificationService,
   ) { }
 
   ngOnInit() {
     this.getHomeCourses();
-    if (!history.state.isLoggedIn && history.state.isLoggedIn !== undefined) {
-      this.createNotification();
+    if (history.state.isLoggedIn) {
+      this.notificationService.createNotification(2, 'You successfully authorized');
     }
   }
 
@@ -37,19 +40,18 @@ export class HomeComponent implements OnInit {
         });
   }
 
-  createNotification(): void {
-    this.notification.config({
-      nzPlacement: 'bottomRight'
-    });
-    this.notification.create(
-      'success',
-      'Success',
-      'You successfully authorized',
-      { nzDuration: 2 },
-    );
-  }
-
   routeCourses() {
     this.router.navigate(['/courses']);
+  }
+
+  subscribeCourse(id: number) {
+    this.coursesSubscribersService.postCourseSubscriber(id)
+      .subscribe(
+        data => {
+          this.notificationService.createNotification(2,'You registered on course');
+        },
+        error => {
+          console.log(error);
+        });
   }
 }

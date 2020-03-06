@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+  <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -61,7 +61,9 @@
     <None Remove="ClientApp\src\app\route.routing.ts" />
     <None Remove="ClientApp\src\app\models\user.ts" />
     <None Remove="ClientApp\src\app\services\authentification.service.ts" />
+    <None Remove="ClientApp\src\app\services\courses-subscribers.service.ts" />
     <None Remove="ClientApp\src\app\services\courses.service.ts" />
+    <None Remove="ClientApp\src\app\services\notification.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,7 +77,9 @@
     <TypeScriptCompile Include="ClientApp\src\app\route.routing.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\authentification.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\courses-subscribers.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\courses.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\notification.service.ts" />
   </ItemGroup>
 
   <ItemGroup>

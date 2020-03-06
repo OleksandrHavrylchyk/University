@@ -12,4 +12,8 @@ export class CoursesService {
   getCoursesAboutBegin() {
     return this.http.get<any>(this.baseUrl + 'begin-courses/')
   }
+
+  getAllCourses() {
+    return this.http.get<any>(this.baseUrl + 'courses/')
+  }
 }

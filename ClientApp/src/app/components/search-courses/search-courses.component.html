@@ -1,24 +1,12 @@
 <div class="container search-courses-container">
-    <div nz-row>
-      <div class="d-flex justify-content-center" nz-col nzLg="8">
-        <course-card></course-card>
-      </div>
-      <div class="d-flex justify-content-center" nz-col nzLg="8">
-        <course-card></course-card>
-      </div>
-      <div class="d-flex justify-content-center" nz-col nzLg="8">
-        <course-card></course-card>
-      </div>
+  <div nz-row>
+    <div class="d-flex justify-content-center" nz-col nzLg="8" *ngFor="let course of allCourses.slice(0, 3)">
+      <course-card [courseInfo]="course"></course-card>
     </div>
-    <div nz-row>
-      <div class="d-flex justify-content-center" nz-col nzLg="8">
-        <course-card></course-card>
-      </div>
-      <div class="d-flex justify-content-center" nz-col nzLg="8">
-        <course-card></course-card>
-      </div>
-      <div class="d-flex justify-content-center" nz-col nzLg="8">
-        <course-card></course-card>
-      </div>
+  </div>
+  <div nz-row>
+    <div class="d-flex justify-content-center" nz-col nzLg="8" *ngFor="let course of allCourses.slice(3, 6)">
+      <course-card [courseInfo]="course"></course-card>
     </div>
+  </div>
 </div>

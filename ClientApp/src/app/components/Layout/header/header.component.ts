@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthentificationService } from '../../../services/authentification.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-header',
@@ -12,9 +13,11 @@ export class HeaderComponent implements OnInit{
 
   constructor(
     private authService: AuthentificationService,
+    private notificationService: NotificationService,
   ) {}
 
   logout() {
+    this.notificationService.createNotification(2, "Good Bye")
     sessionStorage.removeItem("token");
   }
 

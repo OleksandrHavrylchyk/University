@@ -1,4 +1,4 @@
-<nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[courseDuration]">
+<nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[subscribeCourse]">
   <nz-card-meta nzTitle="{{courseInfo.courseName}}"
                 [nzDescription]="descriptionTemplate"
                 [nzAvatar]="avatarTemplate"></nz-card-meta>
@@ -7,7 +7,7 @@
   <nz-avatar nzSrc="{{courseInfo.coverUrl}}"></nz-avatar>
 </ng-template>
 <ng-template #coverTemplate>
-  <img alt="example" src="{{courseInfo.coverUrl}}" />
+  <img class="card-image" alt="example" src="{{courseInfo.coverUrl}}" />
 </ng-template>
 <ng-template #descriptionTemplate>
   <div>
@@ -15,4 +15,6 @@
     Duration: {{courseInfo.duration}} <br />
     Start Date: {{courseInfo.startDate | date}} <br />
   </div>
+</ng-template>  
+<ng-template #subscribeCourse>
 </ng-template>
