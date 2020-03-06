@@ -8,4 +8,8 @@ import { environment } from '../../environments/environment';
 export class CoursesService {
   private baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
+
+  getCoursesAboutBegin() {
+    return this.http.get<any>(this.baseUrl + 'begin-courses/')
+  }
 }

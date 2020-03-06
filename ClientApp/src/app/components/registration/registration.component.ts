@@ -23,8 +23,7 @@ export class RegistrationComponent implements OnInit{
     private authService: AuthentificationService,
     private formBuilder: FormBuilder,
     private router: Router,
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({

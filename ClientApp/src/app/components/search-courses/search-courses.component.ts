@@ -9,7 +9,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 export class SearchCoursesComponent implements OnInit {
   constructor(
     private notification: NzNotificationService
-  ) { }
+  ) {}
 
   ngOnInit() {
     if (!history.state.isSubscribedOnCourses && history.state.isSubscribedOnCourses !== undefined) {

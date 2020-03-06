@@ -57,6 +57,7 @@
     <None Remove="ClientApp\src\app\components\login\login.component.ts" />
     <None Remove="ClientApp\src\app\components\search-courses\search-courses.component.ts" />
     <None Remove="ClientApp\src\app\components\send-activation\send-activation.component.ts" />
+    <None Remove="ClientApp\src\app\interfaces\courseListInterfaces.ts" />
     <None Remove="ClientApp\src\app\route.routing.ts" />
     <None Remove="ClientApp\src\app\models\user.ts" />
     <None Remove="ClientApp\src\app\services\authentification.service.ts" />
@@ -70,6 +71,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\components\Layout\header\header.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\search-courses\search-courses.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\send-activation\send-activation.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\courseListInterfaces.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\route.routing.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\authentification.service.ts" />

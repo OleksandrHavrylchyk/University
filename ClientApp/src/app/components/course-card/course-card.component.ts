@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 
 @Component({
@@ -6,9 +6,11 @@ import { Component } from '@angular/core';
   templateUrl: './course-card.component.html',
   styleUrls: ['./course-card.component.css']
 })
-export class CourseCardComponent {
 
-  constructor(
-  ) {
-  }
-  }
+export class CourseCardComponent  {
+
+  @Input() courseInfo: any;
+
+  constructor() { }
+}
+

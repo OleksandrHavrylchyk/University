@@ -13,8 +13,7 @@ export class SendActivation {
 
   constructor(
     private authService: AuthentificationService,
-  ) {
-  }
+  ) {}
 
   sendActivation() {
       this.authService.sendConfirmationEmail(history.state.userRegisterData)

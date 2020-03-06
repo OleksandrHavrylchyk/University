@@ -12,8 +12,7 @@ export class HeaderComponent implements OnInit{
 
   constructor(
     private authService: AuthentificationService,
-  ) {
-  }
+  ) {}
 
   logout() {
     sessionStorage.removeItem("token");
