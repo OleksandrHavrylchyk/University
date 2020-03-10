@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -19,7 +20,6 @@ using University.Interfaces;
 using University.Services;
 using Hangfire;
 using Hangfire.SqlServer;
-using System;
 
 namespace University
 {

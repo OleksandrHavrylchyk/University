@@ -232,3 +232,6 @@ _Pvt_Extensions
 
 # Email Settings
 emailsettings.json
+
+# Logs
+logs/
