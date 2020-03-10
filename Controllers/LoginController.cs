@@ -24,7 +24,7 @@ namespace University.Controllers
             this.userManager = userManager;
             this.authentificationService = authentificationService;
             this.entityContext = entityContext;
-            this.isSubscribedOncourses = false;
+            isSubscribedOncourses = false;
         }
         [HttpPost("login")]
         public async Task<ActionResult> LoginUser(LoginModel loginUser)

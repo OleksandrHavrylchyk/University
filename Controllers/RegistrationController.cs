@@ -83,7 +83,7 @@ namespace University.Controllers
             EmailSenderService emailService = new EmailSenderService(applicationConfiguration);
 
             await emailService.SendEmailAsync(userForConfirmation.Email, "Confirm your account",
-                        $"Confirm registration by clicking on the link: <a href='{callbackUrl}'>link</a>");
+                        $"Confirm registration by clicking on the link: <a href='{callbackUrl}'>{callbackUrl}</a>");
         }
     }
 }

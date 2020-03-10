@@ -13,7 +13,10 @@ namespace University.Services
         public bool ValidateEmail(string emailForValidation)
         {
             if (regualarExpressionEmailValidator.IsMatch(emailForValidation))
+            {
                 return true;
+            }
+
             return false;
         }
     }

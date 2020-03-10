@@ -2,7 +2,8 @@
 {
     public class SubscribeUserModel
     {
-        public string UserId { get; set; }
         public int CourseID { get; set; }
+        public string UserId { get; set; }
+        public CourseEntity Course { get; set; }
     }
 }

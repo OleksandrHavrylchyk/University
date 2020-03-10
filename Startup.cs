@@ -17,6 +17,9 @@ using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
 using University.Interfaces;
 using University.Services;
+using Hangfire;
+using Hangfire.SqlServer;
+using System;
 
 namespace University
 {
@@ -34,9 +37,25 @@ namespace University
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHangfire(configuration => configuration
+            .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+            .UseSimpleAssemblyNameTypeSerializer()
+            .UseRecommendedSerializerSettings()
+            .UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection"), new SqlServerStorageOptions
+            {
+                CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                QueuePollInterval = TimeSpan.Zero,
+                UseRecommendedIsolationLevel = true,
+                UsePageLocksOnDequeue = true,
+                DisableGlobalLocks = true
+            }));
+
+
+            services.AddHangfireServer();
+
             services.AddScoped<IAuthentificationService, AuthentificationService>();
             services.AddScoped<ICoursesService, CoursesService>();
 
@@ -77,7 +96,7 @@ namespace University
             services.Configure<PasswordHasherOptions>(options => options.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV2
             );
 
-            // In production, the Angular files will be served from this directory
+
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
@@ -107,7 +126,7 @@ namespace University
            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -118,9 +137,10 @@ namespace University
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseHangfireDashboard();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -144,8 +164,6 @@ namespace University
 
             app.UseSpa(spa =>
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "ClientApp";
 
