@@ -21,7 +21,7 @@ namespace University.Services
         {
             var totalUsers = await applicationDbContext.Users.CountAsync();
             var pagedUsers = await applicationDbContext.Users.OrderBy(order => order.Id).Skip((pagingUsersParametrs.PageNumber - 1) * pagingUsersParametrs.PageSize).Take(pagingUsersParametrs.PageSize).ToListAsync();
-            pagingModel = new PagingModel(totalUsers, pagingUsersParametrs.PageNumber, pagingUsersParametrs.PageSize);
+            pagingModel = new PagingModel(totalUsers, pagingUsersParametrs.PageNumber);
 
             return (new PagingUsersModel { PagesModel = pagingModel, Users = pagedUsers });
         }

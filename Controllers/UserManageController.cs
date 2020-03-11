@@ -26,7 +26,12 @@ namespace University.Controllers
         {
             var getPaginatedUsers = await userManageService.GetUsersAsync(userParameters);
 
-            return Ok(getPaginatedUsers);
+            if(getPaginatedUsers.Users.Any())
+            {
+                return Ok(getPaginatedUsers);
+            }
+
+            return NoContent();
         }
     }
 }

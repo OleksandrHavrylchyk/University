@@ -67,12 +67,14 @@
     <None Remove="ClientApp\src\app\guards\admin.guard.ts" />
     <None Remove="ClientApp\src\app\guards\authentification.guard.ts" />
     <None Remove="ClientApp\src\app\interfaces\courseListInterfaces.ts" />
+    <None Remove="ClientApp\src\app\interfaces\userListInterfaces.ts" />
     <None Remove="ClientApp\src\app\route.routing.ts" />
     <None Remove="ClientApp\src\app\models\user.ts" />
     <None Remove="ClientApp\src\app\services\authentification.service.ts" />
     <None Remove="ClientApp\src\app\services\courses-subscribers.service.ts" />
     <None Remove="ClientApp\src\app\services\courses.service.ts" />
     <None Remove="ClientApp\src\app\services\notification.service.ts" />
+    <None Remove="ClientApp\src\app\services\user-list.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -90,12 +92,14 @@
     <TypeScriptCompile Include="ClientApp\src\app\guards\admin.guard.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\guards\authentification.guard.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\courseListInterfaces.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\userListInterfaces.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\route.routing.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\authentification.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\courses-subscribers.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\courses.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\notification.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\user-list.service.ts" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,9 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
+
 export class CoursesService {
   private baseUrl = environment.apiUrl;
+
   constructor(private http: HttpClient) { }
 
   getCoursesAboutBegin() {

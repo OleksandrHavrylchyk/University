@@ -6,10 +6,14 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
+
 export class AuthentificationService {
   private baseUrl = environment.apiUrl;
   private jwtHelper = new JwtHelperService();
+
   constructor(private http: HttpClient) { }
 
   register(user: User) {

@@ -1,0 +1,14 @@
+.admin-dashboard-container {
+    height: 100%;
+}
+.dashboard-pagination {
+    text-align: center;
+    padding-top: 40px;
+}
+#page-size-select {
+    width: 150px;
+}
+.page-size-container {
+    padding-top: 40px;
+    padding-left: 10px;
+}

@@ -9,7 +9,7 @@ import { AuthentificationService } from './authentification.service';
   providedIn: 'root'
 })
 
-export class CoursesSubscribersService {
+export class UserListService {
   private baseUrl = environment.apiUrl;
 
   constructor(
@@ -17,8 +17,7 @@ export class CoursesSubscribersService {
     private authentificationService: AuthentificationService,
   ) { }
 
-  postCourseSubscriber(courseId: number) {
-    var requestHeader = this.authentificationService.getAuthorizationHeader();
-    return this.http.post<any>(this.baseUrl + 'subscribe-course?courseId=' + courseId, null, { headers: requestHeader })
+  getPageOfUsers(pageNumber: string, pageSize: string) {
+    return this.http.get<any>(this.baseUrl + 'get-users/', { params: { pageNumber: pageNumber, pageSize: pageSize }})
   }
 }

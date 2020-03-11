@@ -6,12 +6,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid'
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 import { AppComponent } from './app.component';
@@ -58,6 +61,9 @@ export function tokenGetter() {
     NzNotificationModule,
     NzCardModule,
     NzAvatarModule,
+    NzTableModule,
+    NzPaginationModule,
+    NzSelectModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

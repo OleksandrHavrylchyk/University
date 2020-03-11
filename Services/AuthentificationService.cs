@@ -27,10 +27,21 @@ namespace University.Services
             this.configuration = configuration;
         }
 
+        /*public Task<bool> RegisterUser(RegistrationModel registrationModel)
+        {
+            return true;
+        }*/
+
         public async Task<bool> ValidateUser(LoginModel userForAuth)
         {
-            //logger.Info($"The user with id {user.Id} and name {user.UserName} is authorized");
-            user = await userManager.FindByNameAsync(userForAuth.UserName);
+            try
+            {
+                user = await userManager.FindByNameAsync(userForAuth.UserName);
+            }
+            catch (Exception exception)
+            {
+                logger.Error(exception);
+            }
 
             return (user != null && await userManager.CheckPasswordAsync(user, userForAuth.Password));
         }
