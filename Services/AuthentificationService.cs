@@ -9,11 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using University.Models;
 using University.Interfaces;
+using NLog;
 
 namespace University.Services
 {
     public class AuthentificationService : IAuthentificationService
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         private readonly UserManager<ApplicationUserEntity> userManager;
         private readonly IConfiguration configuration;
         private ApplicationUserEntity user;
@@ -26,6 +29,7 @@ namespace University.Services
 
         public async Task<bool> ValidateUser(LoginModel userForAuth)
         {
+            //logger.Info($"The user with id {user.Id} and name {user.UserName} is authorized");
             user = await userManager.FindByNameAsync(userForAuth.UserName);
 
             return (user != null && await userManager.CheckPasswordAsync(user, userForAuth.Password));

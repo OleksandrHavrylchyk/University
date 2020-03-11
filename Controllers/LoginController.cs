@@ -5,7 +5,6 @@ using University.Models;
 using University.Interfaces;
 using University.Migrations;
 using System.Linq;
-using NLog;
 
 namespace University.Controllers
 {
@@ -13,8 +12,6 @@ namespace University.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
-
         private readonly UserManager<ApplicationUserEntity> userManager;
         private readonly IAuthentificationService authentificationService;
         private readonly ApplicationDbContext entityContext;
@@ -43,7 +40,6 @@ namespace University.Controllers
                 isSubscribedOncourses = true;
             }
 
-            logger.Info($"The user with id {user.Id} and name {user.UserName} is authorized");
             return Ok(new { Token = await authentificationService.GenerateToken(loginUser), isSubscribedOnCourses = isSubscribedOncourses });
         }
     }
