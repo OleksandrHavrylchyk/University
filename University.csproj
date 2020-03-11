@@ -52,15 +52,20 @@
     <Compile Remove="Migrations\Migrations\20200305140914_SeedingCourses.Designer.cs" />
     <Compile Remove="Migrations\Migrations\20200305141123_SeedingCourses.cs" />
     <Compile Remove="Migrations\Migrations\20200305141123_SeedingCourses.Designer.cs" />
+    <Compile Remove="Migrations\Migrations\20200311080027_AdminSeeding.cs" />
+    <Compile Remove="Migrations\Migrations\20200311080027_AdminSeeding.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\components\admin-dashboard\admin-dashboard.component.ts" />
     <None Remove="ClientApp\src\app\components\course-card\course-card.component.ts" />
     <None Remove="ClientApp\src\app\components\Layout\footer\footer.component.ts" />
     <None Remove="ClientApp\src\app\components\Layout\header\header.component.ts" />
     <None Remove="ClientApp\src\app\components\login\login.component.ts" />
     <None Remove="ClientApp\src\app\components\search-courses\search-courses.component.ts" />
     <None Remove="ClientApp\src\app\components\send-activation\send-activation.component.ts" />
+    <None Remove="ClientApp\src\app\guards\admin.guard.ts" />
+    <None Remove="ClientApp\src\app\guards\authentification.guard.ts" />
     <None Remove="ClientApp\src\app\interfaces\courseListInterfaces.ts" />
     <None Remove="ClientApp\src\app\route.routing.ts" />
     <None Remove="ClientApp\src\app\models\user.ts" />
@@ -75,12 +80,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\components\admin-dashboard\admin-dashboard.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\course-card\course-card.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\login\login.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\Layout\footer\footer.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\Layout\header\header.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\search-courses\search-courses.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\send-activation\send-activation.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\guards\admin.guard.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\guards\authentification.guard.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\courseListInterfaces.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\route.routing.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />

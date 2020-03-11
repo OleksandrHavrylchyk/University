@@ -55,13 +55,13 @@ export class AuthentificationService {
   }
 
   private getUserRole(): string {
-    if (localStorage.getItem('token')) {
+    if (sessionStorage.getItem('token')) {
       const tokenPayload = this.getTokenPayload();
-      return tokenPayload['role'];
+      return tokenPayload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
     }
   }
 
   private getTokenPayload(): string {
-    return this.jwtHelper.decodeToken(localStorage.getItem('token'));
+    return this.jwtHelper.decodeToken(sessionStorage.getItem('token'));
   }
 }

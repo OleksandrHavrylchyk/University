@@ -23,6 +23,7 @@ import { SendActivation } from './components/send-activation/send-activation.com
 import { CourseCardComponent } from './components/course-card/course-card.component';
 import { LoginComponent } from './components/login/login.component';
 import { SearchCoursesComponent } from './components/search-courses/search-courses.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { appRoutes } from './route.routing';
 import { environment } from '../environments/environment';
 
@@ -40,7 +41,8 @@ export function tokenGetter() {
     SendActivation,
     LoginComponent,
     CourseCardComponent,
-    SearchCoursesComponent
+    SearchCoursesComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

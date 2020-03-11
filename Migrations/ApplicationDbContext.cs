@@ -22,6 +22,7 @@ namespace University.Migrations
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new CoursesConfiguration());
+            modelBuilder.ApplyConfiguration(new UsersConfiguration());
         }
     }
 }

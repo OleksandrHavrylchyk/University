@@ -21,7 +21,7 @@
                 <a class="nav-link py-3 px-0 px-lg-3 rounded links" [routerLink]="['/sign-in']" (click)="collapse()">Sign In</a>
               </li>
               <li *ngIf="isAdmin() && isAuthentificated()" class="nav-item mx-0 mx-lg-1">
-                <a class="nav-link py-3 px-0 px-lg-3 rounded links" [routerLink]="['/']" (click)="collapse()">Dashboard</a>
+                <a class="nav-link py-3 px-0 px-lg-3 rounded links" [routerLink]="['/admin-dashboard']" (click)="collapse()">Dashboard</a>
               </li>
               <li *ngIf="isAuthentificated()" class="nav-item mx-0 mx-lg-1">
                 <a class="nav-link py-3 px-0 px-lg-3 rounded links" [routerLink]="['/']" (click)="[collapse(), logout()]">Logout</a>
