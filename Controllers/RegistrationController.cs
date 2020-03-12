@@ -68,6 +68,7 @@ namespace University.Controllers
 
             return CreatedAtAction("Registered", registerUserData);           
         }
+
         [HttpPost("send-confirmation")]
         public async Task SendConfirmEmailAsync(RegistrationModel registerUserData)
         {

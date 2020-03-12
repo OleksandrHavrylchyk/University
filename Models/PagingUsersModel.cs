@@ -5,7 +5,7 @@ namespace University.Models
 {
     public class PagingUsersModel
     {
-        public IEnumerable<ApplicationUserEntity> Users { get; set; }
+        public IEnumerable<UserDtoModel> Users { get; set; }
         public PagingModel PagesModel { get; set; }
     }
 }

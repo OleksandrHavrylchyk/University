@@ -22,6 +22,7 @@ export const appRoutes: Routes = [
   { path: 'send-activation', component: SendActivation },
   { path: 'sign-in', component: LoginComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent/*, canActivate: [AdminGuard]*/ },
+  { path: 'admin-dashboard/:pageNumber:pageSize', component: AdminDashboardComponent/*, canActivate: [AdminGuard]*/ },
   /*{
     path: '',
     runGuardsAndResolvers: 'always',

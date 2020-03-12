@@ -27,11 +27,6 @@ namespace University.Services
             this.configuration = configuration;
         }
 
-        /*public Task<bool> RegisterUser(RegistrationModel registrationModel)
-        {
-            return true;
-        }*/
-
         public async Task<bool> ValidateUser(LoginModel userForAuth)
         {
             try

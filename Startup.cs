@@ -59,6 +59,7 @@ namespace University
             services.AddScoped<IAuthentificationService, AuthentificationService>();
             services.AddScoped<ICoursesService, CoursesService>();
             services.AddScoped<IUserManageService, UserManageService>();
+            services.AddScoped<ICourseSubscribersService, CourseSubscribersService>();
 
             var mappingConfig = new MapperConfiguration(mapping =>
             {

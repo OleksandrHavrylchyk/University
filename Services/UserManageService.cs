@@ -20,7 +20,18 @@ namespace University.Services
         public async Task<PagingUsersModel> GetUsersAsync(PagingUsersParameters pagingUsersParametrs)
         {
             var totalUsers = await applicationDbContext.Users.CountAsync();
-            var pagedUsers = await applicationDbContext.Users.OrderBy(order => order.Id).Skip((pagingUsersParametrs.PageNumber - 1) * pagingUsersParametrs.PageSize).Take(pagingUsersParametrs.PageSize).ToListAsync();
+            var pagedUsers = await applicationDbContext.Users.Select(user => new UserDtoModel() { Id = user.Id,
+                                                                                                  Name = user.Name,
+                                                                                                  LastName = user.LastName,
+                                                                                                  Age = user.Age,
+                                                                                                  Email = user.Email,
+                                                                                                  RegisteredDate = user.RegisteredDate,
+                                                                                                  StudyDate = user.StudyDate })
+                                                             .OrderBy(order => order.RegisteredDate)
+                                                             .Skip((pagingUsersParametrs.PageNumber - 1) * pagingUsersParametrs.PageSize)
+                                                             .Take(pagingUsersParametrs.PageSize)
+                                                             .ToListAsync();
+
             pagingModel = new PagingModel(totalUsers, pagingUsersParametrs.PageNumber);
 
             return (new PagingUsersModel { PagesModel = pagingModel, Users = pagedUsers });

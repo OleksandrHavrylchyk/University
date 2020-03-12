@@ -12,3 +12,11 @@
     padding-top: 40px;
     padding-left: 10px;
 }
+.dashboard-title-container {
+  font-size: 28px;
+  font-weight: bold;
+  height: 80px;
+}
+.dashboard-title {
+  margin-top: 20px;
+}

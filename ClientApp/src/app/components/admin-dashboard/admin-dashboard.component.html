@@ -1,27 +1,35 @@
+<div nz-row>
+  <div nz-col class="d-flex justify-content-center">
+    <div class="dashboard-title-container">
+      <div class="dashboard-title">University Students</div>
+    </div>
+  </div>
+</div>
 <div class="container admin-dashboard-container">
   <div nz-row>
     <div nz-col>
-      <nz-table #tableOfUsers [nzData]="pageOfUsers" [nzFrontPagination]="false" [nzScroll]="{ y: '600px' }">
+      <nz-table #tableOfUsers [nzData]="pageOfUsers" [nzFrontPagination]="false"
+                              [nzScroll]="{ x: '1300px', y: '600px' }" [nzNoResult]="'No results'" [nzBordered]="true">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Last Name</th>
-            <th>Age</th>
-            <th>Email</th>
-            <th>Registered Date</th>
-            <th>Study Date</th>
+            <th [nzAlign]="'center'" nzWidth="10%">Id</th>
+            <th [nzAlign]="'center'" nzWidth="15%">Name</th>
+            <th [nzAlign]="'center'" nzWidth="15%">Last Name</th>
+            <th [nzAlign]="'center'" nzWidth="5%">Age</th>
+            <th [nzAlign]="'center'" nzWidth="25%">Email</th>
+            <th [nzAlign]="'center'" nzWidth="15%">Registered Date</th>
+            <th [nzAlign]="'center'" nzWidth="15%">Study Date</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let userData of tableOfUsers.data">
-            <td>{{ userData.id }}</td>
-            <td>{{ userData.userName }}</td>
-            <td>{{ userData.address }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td [nzAlign]="'center'" nzWidth="10%">{{ userData.id }}</td>
+            <td [nzAlign]="'center'" nzWidth="15%">{{ userData.name }}</td>
+            <td [nzAlign]="'center'" nzWidth="15%">{{ userData.lastName }}</td>
+            <td [nzAlign]="'center'" nzWidth="5%">{{ userData.age }}</td>
+            <td [nzAlign]="'center'" nzWidth="25%">{{ userData.email }}</td>
+            <td [nzAlign]="'center'" nzWidth="15%">{{ userData.registeredDate | date}}</td>
+            <td [nzAlign]="'center'" nzWidth="15%">{{ userData.studyDate | date}}</td>
           </tr>
         </tbody>
       </nz-table>
@@ -31,12 +39,12 @@
     <div nz-col class="d-flex justify-content-center">
       <div class="dashboard-pagination">
         <nz-pagination id="dashboard-pagination" [nzPageIndex]="pageNumber"
-                       [nzTotal]="totalUsers" [nzPageSize]="pageSize" (nzPageIndexChange)="setNumberPage($event)"></nz-pagination>
+                       [nzTotal]="totalUsers" [nzPageSize]="pageSize" (nzPageIndexChange)="changeNumberPage($event)"></nz-pagination>
       </div>
       <div class="page-size-container">
         <nz-select id="page-size-select" nzShowSearch nzAllowClear
-                   nzPlaceHolder="Select a page size" [ngModel]="'5'"
-                   (ngModelChange)="setPageSize($event)">
+                   nzPlaceHolder="Select a page size" [ngModel]="pageSize"
+                   (ngModelChange)="changePageSize($event)">
           <nz-option nzLabel="5/page" nzValue="5"></nz-option>
           <nz-option nzLabel="10/page" nzValue="10"></nz-option>
           <nz-option nzLabel="15/page" nzValue="15"></nz-option>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { UserListService } from '../../services/user-list.service';
 import { UserList } from '../../interfaces/userListInterfaces';
@@ -19,6 +20,8 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(
     private userListService: UserListService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   getPageOfUsers() {
@@ -33,18 +36,23 @@ export class AdminDashboardComponent implements OnInit {
         });
   }
 
-  setPageSize(pageSize: string) {
-    this.pageSize = pageSize;
+  changePageSize(pageSize: string) {
     this.pageNumber = "1";
-    this.getPageOfUsers();
+    this.router.navigate(['admin-dashboard'], { queryParams: { pageNumber: this.pageNumber, pageSize: pageSize } });
   }
 
-  setNumberPage(pageNumber: string) {
-    this.pageNumber = pageNumber;
-    this.getPageOfUsers();
+  changeNumberPage(pageNumber: string) {
+    this.router.navigate(['admin-dashboard'], { queryParams: { pageNumber: pageNumber, pageSize: this.pageSize } });
   }
 
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (Object.keys(params).length) {
+        this.pageNumber = params['pageNumber'];
+        this.pageSize = params['pageSize'];
+        this.getPageOfUsers();
+      }
+    })
     this.getPageOfUsers();
   }
 }
