@@ -9,7 +9,7 @@ namespace University.Services
 {
     public class EmailSenderService
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static Logger logger;
         public IConfiguration applicationConfiguration;
 
         private static string emailHost;
@@ -17,6 +17,7 @@ namespace University.Services
 
         public EmailSenderService(IConfiguration applicationConfiguration)
         {
+            logger = LogManager.GetCurrentClassLogger();
             this.applicationConfiguration = applicationConfiguration;
             emailHost = applicationConfiguration.GetValue<string>(
                 "ApplicationEmail:Email");
@@ -49,6 +50,7 @@ namespace University.Services
             catch (Exception exception)
             {
                 logger.Error(exception);
+                throw;
             }
         }
     }

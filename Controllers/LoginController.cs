@@ -5,6 +5,7 @@ using University.Models;
 using University.Interfaces;
 using University.Migrations;
 using System.Linq;
+using System;
 
 namespace University.Controllers
 {
@@ -40,7 +41,9 @@ namespace University.Controllers
                 isSubscribedOncourses = true;
             }
 
-            return Ok(new { Token = await authentificationService.GenerateToken(loginUser), isSubscribedOnCourses = isSubscribedOncourses });
+            var token = await authentificationService.GenerateToken(loginUser);
+
+            return Ok(new { Token = token, isSubscribedOnCourses = isSubscribedOncourses });
         }
     }
 }

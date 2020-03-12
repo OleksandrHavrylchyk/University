@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using University.Interfaces;
 using University.Migrations;
 
-
 namespace University.Services
 {
     public class CoursesService : ICoursesService

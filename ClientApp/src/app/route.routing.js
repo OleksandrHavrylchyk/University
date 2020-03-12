@@ -17,6 +17,7 @@ exports.appRoutes = [
     { path: 'sign-in', component: login_component_1.LoginComponent },
     { path: 'admin-dashboard', component: admin_dashboard_component_1.AdminDashboardComponent /*, canActivate: [AdminGuard]*/ },
     { path: 'admin-dashboard/:pageNumber:pageSize', component: admin_dashboard_component_1.AdminDashboardComponent /*, canActivate: [AdminGuard]*/ },
+    { path: 'admin-dashboard/:pageNumber:pageSize:search', component: admin_dashboard_component_1.AdminDashboardComponent /*, canActivate: [AdminGuard]*/ },
     /*{
       path: '',
       runGuardsAndResolvers: 'always',

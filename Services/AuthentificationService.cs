@@ -15,7 +15,7 @@ namespace University.Services
 {
     public class AuthentificationService : IAuthentificationService
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static Logger logger;
 
         private readonly UserManager<ApplicationUserEntity> userManager;
         private readonly IConfiguration configuration;
@@ -32,23 +32,31 @@ namespace University.Services
             try
             {
                 user = await userManager.FindByNameAsync(userForAuth.UserName);
+                return (user != null && await userManager.CheckPasswordAsync(user, userForAuth.Password));
             }
             catch (Exception exception)
             {
                 logger.Error(exception);
+                throw;
             }
-
-            return (user != null && await userManager.CheckPasswordAsync(user, userForAuth.Password));
         }
 
         public async Task<string> GenerateToken(LoginModel userForAuth)
         {
-            var user = await userManager.FindByNameAsync(userForAuth.UserName); 
-            var signingCredentials = GetSigningCredentials();
-            var claims = await GetClaims(user);
-            var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
+            try
+            {
+                var user = await userManager.FindByNameAsync(userForAuth.UserName);
+                var signingCredentials = GetSigningCredentials();
+                var claims = await GetClaims(user);
+                var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
 
-            return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+                return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+            }
+            catch (Exception exception)
+            {
+                logger.Error(exception);
+                throw;
+            }
         }
 
         private SigningCredentials GetSigningCredentials()

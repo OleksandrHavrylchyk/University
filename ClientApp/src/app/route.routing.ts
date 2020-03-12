@@ -23,6 +23,7 @@ export const appRoutes: Routes = [
   { path: 'sign-in', component: LoginComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent/*, canActivate: [AdminGuard]*/ },
   { path: 'admin-dashboard/:pageNumber:pageSize', component: AdminDashboardComponent/*, canActivate: [AdminGuard]*/ },
+  { path: 'admin-dashboard/:pageNumber:pageSize:search', component: AdminDashboardComponent/*, canActivate: [AdminGuard]*/ },
   /*{
     path: '',
     runGuardsAndResolvers: 'always',

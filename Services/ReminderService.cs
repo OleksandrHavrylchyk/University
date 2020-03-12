@@ -6,7 +6,12 @@ namespace University.Services
 {
     public class ReminderService
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static Logger logger;
+
+        public ReminderService()
+        {
+            logger = LogManager.GetCurrentClassLogger();
+        }
         public void ScheduleRemindEmails(ApplicationUserEntity user, CourseEntity course)
         {
             try
@@ -26,12 +31,13 @@ namespace University.Services
                 if (DateTime.Compare(DateTime.Now, (course.StartDate.AddDays(-1) + new TimeSpan(8, 0, 0))) <= 0)
                 {
                     BackgroundJob.Schedule<EmailSenderService>(service => service.SendEmailAsync(user.Email, "Reminder",
-                        $"Dear {user.UserName}, we inform you that the course '{course.CourseName}' will start in the day, {course.StartDate.Date}"), course.StartDate.AddDays(-1) + new TimeSpan(8, 0, 0));
+                        $"Dear {user.UserName}, we inform you that the course '{course.CourseName}' will start in the day, {course.StartDate.Date}"), course.StartDate.AddDays(-1).Date + new TimeSpan(8, 0, 0));
                 }
             }
             catch (Exception exception)
             {
                 logger.Error(exception);
+                throw;
             }
         }
     }

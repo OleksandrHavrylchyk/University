@@ -24,5 +24,6 @@ namespace University.Models
     }
     public class PagingUsersParameters : PagingUserParametrsModel
     {
+        public string SearchExpression { get; set; }
     }
 }

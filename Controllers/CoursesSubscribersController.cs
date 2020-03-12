@@ -38,6 +38,10 @@ namespace University.Controllers
             }
 
             var coursesSubscribersEntity = await courseSubscribersService.SubscribeOnCourse(userEntity, courseId);
+            if(coursesSubscribersEntity == null)
+            {
+                return BadRequest();
+            }
 
             return CreatedAtAction("Subscribed", coursesSubscribersEntity);
         }

@@ -17,6 +17,7 @@ export class AdminDashboardComponent implements OnInit {
   totalUsers: string;
   pageSize: string = "5";
   pageNumber: string = "1";
+  searchField: string;
 
   constructor(
     private userListService: UserListService,
@@ -25,7 +26,7 @@ export class AdminDashboardComponent implements OnInit {
   ) { }
 
   getPageOfUsers() {
-    this.userListService.getPageOfUsers(this.pageNumber, this.pageSize) 
+    this.userListService.getPageOfUsers(this.pageNumber, this.pageSize, this.searchField) 
       .subscribe(
         requestData => {
           this.totalUsers = requestData.pagesModel.totalUsers;
@@ -36,20 +37,41 @@ export class AdminDashboardComponent implements OnInit {
         });
   }
 
+  searchByField() {
+    if (this.searchField) {
+      this.pageNumber = "1";
+      this.router.navigate(['admin-dashboard'], { queryParams: { pageNumber: this.pageNumber, pageSize: this.pageSize, search: this.searchField } });
+    }
+    else {
+      this.router.navigate(['admin-dashboard'], { queryParams: { pageNumber: this.pageNumber, pageSize: this.pageSize } });
+    }
+  }
+
   changePageSize(pageSize: string) {
     this.pageNumber = "1";
-    this.router.navigate(['admin-dashboard'], { queryParams: { pageNumber: this.pageNumber, pageSize: pageSize } });
+    if (this.searchField) {
+      this.router.navigate(['admin-dashboard'], { queryParams: { pageNumber: this.pageNumber, pageSize: pageSize, search: this.searchField } });
+    }
+    else {
+      this.router.navigate(['admin-dashboard'], { queryParams: { pageNumber: this.pageNumber, pageSize: pageSize } });
+    }
   }
 
   changeNumberPage(pageNumber: string) {
-    this.router.navigate(['admin-dashboard'], { queryParams: { pageNumber: pageNumber, pageSize: this.pageSize } });
+    if (this.searchField) {
+      this.router.navigate(['admin-dashboard'], { queryParams: { pageNumber: pageNumber, pageSize: this.pageSize, search: this.searchField } });
+    }
+    else {
+      this.router.navigate(['admin-dashboard'], { queryParams: { pageNumber: pageNumber, pageSize: this.pageSize } });
+    }
   }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
       if (Object.keys(params).length) {
-        this.pageNumber = params['pageNumber'];
-        this.pageSize = params['pageSize'];
+        this.pageNumber = params['pageNumber'] ? params['pageNumber'] : this.pageNumber;
+        this.pageSize = params['pageSize'] ? params['pageSize'] : this.pageSize;
+        this.searchField = params['search'] ? params['search'] : this.searchField;
         this.getPageOfUsers();
       }
     })

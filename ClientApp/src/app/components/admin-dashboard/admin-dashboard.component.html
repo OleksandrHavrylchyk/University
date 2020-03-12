@@ -1,15 +1,27 @@
-<div nz-row>
-  <div nz-col class="d-flex justify-content-center">
-    <div class="dashboard-title-container">
-      <div class="dashboard-title">University Students</div>
+<div class="container admin-dashboard-container">
+  <div nz-row>
+    <div nz-col class="d-flex justify-content-center">
+      <div class="dashboard-title-container">
+        <div class="dashboard-title">University Students</div>
+      </div>
     </div>
   </div>
-</div>
-<div class="container admin-dashboard-container">
+  <div nz-row>
+    <div nz-col>
+      <div id="search-input">
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+          <input id="searchDashboardInput" [(ngModel)]="searchField" type="text" nz-input placeholder="Search student" />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <button id="searchDashboardButton" class="search-button" nz-button (click)="searchByField()" nzSearch><i nz-icon nzType="search"></i></button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
   <div nz-row>
     <div nz-col>
       <nz-table #tableOfUsers [nzData]="pageOfUsers" [nzFrontPagination]="false"
-                              [nzScroll]="{ x: '1300px', y: '600px' }" [nzNoResult]="'No results'" [nzBordered]="true">
+                [nzScroll]="{ x: '1300px', y: '600px' }" [nzNoResult]="'No results'" [nzBordered]="true">
         <thead>
           <tr>
             <th [nzAlign]="'center'" nzWidth="10%">Id</th>
@@ -38,11 +50,11 @@
   <div nz-row>
     <div nz-col class="d-flex justify-content-center">
       <div class="dashboard-pagination">
-        <nz-pagination id="dashboard-pagination" [nzPageIndex]="pageNumber"
+        <nz-pagination id="dashboardPagination" [nzPageIndex]="pageNumber"
                        [nzTotal]="totalUsers" [nzPageSize]="pageSize" (nzPageIndexChange)="changeNumberPage($event)"></nz-pagination>
       </div>
       <div class="page-size-container">
-        <nz-select id="page-size-select" nzShowSearch nzAllowClear
+        <nz-select id="pageSizeSelect" nzShowSearch nzAllowClear
                    nzPlaceHolder="Select a page size" [ngModel]="pageSize"
                    (ngModelChange)="changePageSize($event)">
           <nz-option nzLabel="5/page" nzValue="5"></nz-option>

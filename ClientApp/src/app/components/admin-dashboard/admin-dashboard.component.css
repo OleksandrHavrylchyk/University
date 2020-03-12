@@ -18,5 +18,14 @@
   height: 80px;
 }
 .dashboard-title {
-  margin-top: 20px;
+  margin-top: 20px; 
+}
+#search-input {
+  margin-bottom: 20px;
+}
+.search-button i{
+  margin-bottom: 5px;
+}
+.search-button {
+  margin-right: -12px;
 }

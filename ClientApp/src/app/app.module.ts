@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -64,6 +65,7 @@ export function tokenGetter() {
     NzTableModule,
     NzPaginationModule,
     NzSelectModule,
+    NzInputModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
