@@ -16,10 +16,14 @@ export class UserListService {
     private http: HttpClient,
   ) { }
 
-  getPageOfUsers(pageNumber: string, pageSize: string, searchExpression: string) {
+  getPageOfUsers(pageNumber: string, pageSize: string, searchExpression: string, sortName: string, sortOrder: string) {
     this.params = {
       'pageNumber': pageNumber,
       'pageSize': pageSize
+    }
+
+    if (sortName && sortOrder) {
+      this.params['orderBy'] = `${sortName},${sortOrder}`;
     }
 
     if (searchExpression) {

@@ -1,9 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var User = /** @class */ (function () {
-    function User() {
+var AuthentificationUser = /** @class */ (function () {
+    function AuthentificationUser() {
     }
-    return User;
+    return AuthentificationUser;
 }());
-exports.User = User;
+exports.AuthentificationUser = AuthentificationUser;
+var EditUserDto = /** @class */ (function () {
+    function EditUserDto() {
+        this.id = "";
+        this.name = "";
+        this.lastName = "";
+        this.age = 0;
+        this.email = "";
+    }
+    return EditUserDto;
+}());
+exports.EditUserDto = EditUserDto;
 //# sourceMappingURL=user.js.map

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { UserManageService } from '../../services/user-manage.service';
 import { UserListService } from '../../services/user-list.service';
-import { UserList } from '../../interfaces/userListInterfaces';
+import { IUserList } from '../../interfaces/userListInterfaces';
+import { EditUserDto } from '../../models/user';
 
 
 @Component({
@@ -13,20 +15,38 @@ import { UserList } from '../../interfaces/userListInterfaces';
 
 export class AdminDashboardComponent implements OnInit {
 
-  pageOfUsers: UserList;
+  pageOfUsers: IUserList;
+  editId: string;
+  editName: string = "";
+  editLastName: string = "";
+  editAge: number = 0;
+  editEmail: string = "";
   totalUsers: string;
-  pageSize: string = "5";
+  pageSize: string = "10";
   pageNumber: string = "1";
   searchField: string;
+  sortName: string;
+  sortOrder: string;
+  isModalVisible = false;
+
+  mapOfSort: { [key: string]: string | null } = {
+    name: null,
+    lastName: null,
+    age: null,
+    email: null,
+    registeredDate: null,
+    studyDate: null
+  };
 
   constructor(
     private userListService: UserListService,
+    private userManageService: UserManageService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) { }
 
   getPageOfUsers() {
-    this.userListService.getPageOfUsers(this.pageNumber, this.pageSize, this.searchField) 
+    this.userListService.getPageOfUsers(this.pageNumber, this.pageSize, this.searchField, this.sortName, this.sortOrder)
       .subscribe(
         requestData => {
           this.totalUsers = requestData.pagesModel.totalUsers;
@@ -35,6 +55,41 @@ export class AdminDashboardComponent implements OnInit {
         error => {
           console.log(error);
         });
+  }
+
+  showModal(userEditData: any): void {
+    this.editId = userEditData.Id;
+    this.editName = userEditData.name;
+    this.editLastName = userEditData.lastName;
+    this.editAge = userEditData.age;
+    this.editEmail = userEditData.email;
+    this.isModalVisible = true;
+  }
+
+  handleOk() {
+    this.userManageService.putUserData({ name: this.editName, lastName: this.editLastName, age: this.editAge, email: this.editEmail })
+      .subscribe(
+        requestData => {
+          this.totalUsers = requestData.pagesModel.totalUsers;
+          this.pageOfUsers = requestData.users;
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  hideModal(): void {
+    this.isModalVisible = false;
+  }
+
+  sort(sortName: string, sortOrder: string): void {
+    this.sortName = sortName;
+    this.sortOrder = sortOrder;
+
+    for (const key in this.mapOfSort) {
+      this.mapOfSort[key] = key === sortName ? sortOrder : null;
+    }
+    this.getPageOfUsers();
   }
 
   searchByField() {

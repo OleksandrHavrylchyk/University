@@ -1,9 +1,11 @@
-export interface UserList {
-  userList: Users[];
+export interface IUserList {
+  userList: IUserDto[];
 }
 
-export interface Users {
+export interface IUserDto {
   id: string;
-  userName: string;
+  name: string;
+  lastName: string;
+  age: number;
   email: string;
 }

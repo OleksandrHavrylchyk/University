@@ -4,7 +4,6 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using University.Interfaces;
-using University.Migrations;
 using University.Models;
 
 namespace University.Controllers
@@ -22,7 +21,7 @@ namespace University.Controllers
 
         [HttpGet("get-users")]
         //[Authorize(Roles = "Administrator")]
-        public async Task<ActionResult> SubscribeOnCourse([FromQuery]PagingUsersParameters userParameters)
+        public async Task<ActionResult> GetUsersAsync([FromQuery]PagingUsersParameters userParameters)
         {
             var getPaginatedUsers = await userManageService.GetUsersAsync(userParameters);
 
@@ -32,6 +31,15 @@ namespace University.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpPut("update-user")]
+        //[Authorize(Roles = "Administrator")]
+        public async Task<ActionResult> UpdateUser(UserDtoModel editedUser)
+        {
+            var updatedUser = await userManageService.EditUserAsync(editedUser);
+
+            return CreatedAtAction("Updated", updatedUser);
         }
     }
 }

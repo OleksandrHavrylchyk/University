@@ -17,6 +17,7 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -66,6 +67,7 @@ export function tokenGetter() {
     NzPaginationModule,
     NzSelectModule,
     NzInputModule,
+    NzModalModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { environment } from '../../environments/environment';
-import { User } from '../models/user';
+import { AuthentificationUser } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +16,15 @@ export class AuthentificationService {
 
   constructor(private http: HttpClient) { }
 
-  register(user: User) {
+  register(user: AuthentificationUser) {
     return this.http.post(this.baseUrl + 'registration/', user);
   }
 
-  sendConfirmationEmail(user: User) {
+  sendConfirmationEmail(user: AuthentificationUser) {
     return this.http.post(this.baseUrl + 'send-confirmation/', user);
   }
 
-  login(user: User) {
+  login(user: AuthentificationUser) {
     return this.http.post(this.baseUrl + 'login/', user).pipe(
       map((response: any) => {
         const res = response;

@@ -10,6 +10,7 @@ namespace University.Models
             CreateMap<RegistrationModel, ApplicationUserEntity>();
             CreateMap<ApplicationUserEntity, RegistrationModel>();
             CreateMap<SubscribeUserModel, CourseSubscribersEntity>();
+            CreateMap<UserDtoModel, ApplicationUserEntity>();
         }
     }
 }

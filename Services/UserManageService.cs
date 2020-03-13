@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using NLog;
 using System;
 using System.Linq;
@@ -14,10 +15,14 @@ namespace University.Services
         private static Logger logger;
         private readonly ApplicationDbContext applicationDbContext;
         private PagingModel pagingModel;
+        private readonly IMapper mapper;
+        private SortingService sortingService;
 
-        public UserManageService(ApplicationDbContext applicationDbContext)
+        public UserManageService(ApplicationDbContext applicationDbContext, IMapper mapper)
         {
+            this.sortingService = new SortingService();
             this.applicationDbContext = applicationDbContext;
+            this.mapper = mapper;
             logger = LogManager.GetCurrentClassLogger();
         }
         public async Task<PagingUsersModel> GetUsersAsync(PagingUsersParameters pagingUsersParametrs)
@@ -26,7 +31,12 @@ namespace University.Services
             {
                 IQueryable<ApplicationUserEntity> usersDto = applicationDbContext.Users.OrderBy(order => order.RegisteredDate);
 
-                if (!String.IsNullOrEmpty(pagingUsersParametrs.SearchExpression))
+                if (!String.IsNullOrWhiteSpace(pagingUsersParametrs.OrderBy))
+                {
+                    usersDto = sortingService.Sort(usersDto, pagingUsersParametrs.OrderBy);
+                }
+
+                if (!String.IsNullOrWhiteSpace(pagingUsersParametrs.SearchExpression))
                 {
                     usersDto = usersDto.Where(user => user.Name.Contains(pagingUsersParametrs.SearchExpression));
                 };
@@ -35,7 +45,6 @@ namespace University.Services
 
                 var pagedUsers = usersDto.Select(user => new UserDtoModel()
                 {
-                    Id = user.Id,
                     Name = user.Name,
                     LastName = user.LastName,
                     Age = user.Age,
@@ -53,6 +62,15 @@ namespace University.Services
                 logger.Error(exception);
                 throw;
             }
+        }
+
+        public async Task<UserDtoModel> EditUserAsync(UserDtoModel userForChange)
+        {
+            var changedUserEntity = applicationDbContext.Entry(userForChange).State = EntityState.Modified;
+
+            await applicationDbContext.SaveChangesAsync();
+
+            return userForChange;
         }
     }
 }

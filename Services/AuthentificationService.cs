@@ -25,6 +25,7 @@ namespace University.Services
         {
             this.userManager = userManager;
             this.configuration = configuration;
+            logger = LogManager.GetCurrentClassLogger();
         }
 
         public async Task<bool> ValidateUser(LoginModel userForAuth)

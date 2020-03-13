@@ -30,6 +30,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
     <PackageReference Include="NLog" Version="4.6.8" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.21" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,7 +58,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\components\admin-dashboard\admin-dashboard.component.ts" />
     <None Remove="ClientApp\src\app\components\course-card\course-card.component.ts" />
     <None Remove="ClientApp\src\app\components\Layout\footer\footer.component.ts" />
     <None Remove="ClientApp\src\app\components\Layout\header\header.component.ts" />
@@ -75,6 +75,7 @@
     <None Remove="ClientApp\src\app\services\courses.service.ts" />
     <None Remove="ClientApp\src\app\services\notification.service.ts" />
     <None Remove="ClientApp\src\app\services\user-list.service.ts" />
+    <None Remove="ClientApp\src\app\services\user-manage.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -100,6 +101,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\services\courses.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\notification.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\user-list.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\user-manage.service.ts" />
   </ItemGroup>
 
   <ItemGroup>

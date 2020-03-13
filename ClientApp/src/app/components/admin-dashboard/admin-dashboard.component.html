@@ -20,28 +20,46 @@
   </div>
   <div nz-row>
     <div nz-col>
-      <nz-table #tableOfUsers [nzData]="pageOfUsers" [nzFrontPagination]="false"
-                [nzScroll]="{ x: '1300px', y: '600px' }" [nzNoResult]="'No results'" [nzBordered]="true">
+      <nz-table #tableOfUsers [nzData]="pageOfUsers" [nzFrontPagination]="false" [nzBordered]="true"
+                [nzScroll]="{ x: '1300px', y: '600px' }" [nzNoResult]="'No results'">
         <thead>
           <tr>
-            <th [nzAlign]="'center'" nzWidth="10%">Id</th>
-            <th [nzAlign]="'center'" nzWidth="15%">Name</th>
-            <th [nzAlign]="'center'" nzWidth="15%">Last Name</th>
-            <th [nzAlign]="'center'" nzWidth="5%">Age</th>
-            <th [nzAlign]="'center'" nzWidth="25%">Email</th>
-            <th [nzAlign]="'center'" nzWidth="15%">Registered Date</th>
-            <th [nzAlign]="'center'" nzWidth="15%">Study Date</th>
+            <th [nzAlign]="'center'">Actions</th>
+            <th [nzAlign]="'center'" nzWidth="15%"
+                nzShowSort
+                [(nzSort)]="mapOfSort.name"
+                (nzSortChange)="sort('name', $event)">Name</th>
+            <th [nzAlign]="'center'" nzWidth="15%"
+                nzShowSort
+                [(nzSort)]="mapOfSort.lastName"
+                (nzSortChange)="sort('lastName', $event)">Last Name</th>
+            <th [nzAlign]="'center'" nzWidth="10%"
+                nzShowSort
+                [(nzSort)]="mapOfSort.age"
+                (nzSortChange)="sort('age', $event)">Age</th>
+            <th [nzAlign]="'center'" nzWidth="25%"
+                nzShowSort
+                [(nzSort)]="mapOfSort.email"
+                (nzSortChange)="sort('email', $event)">Email</th>
+            <th [nzAlign]="'center'" nzWidth="15%"
+                nzShowSort
+                [(nzSort)]="mapOfSort.registeredDate"
+                (nzSortChange)="sort('registeredDate', $event)">Registered Date</th>
+            <th [nzAlign]="'center'" nzWidth="15%"
+                nzShowSort
+                [(nzSort)]="mapOfSort.studyDate"
+                (nzSortChange)="sort('studyDate', $event)">Study Date</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let userData of tableOfUsers.data">
-            <td [nzAlign]="'center'" nzWidth="10%">{{ userData.id }}</td>
-            <td [nzAlign]="'center'" nzWidth="15%">{{ userData.name }}</td>
-            <td [nzAlign]="'center'" nzWidth="15%">{{ userData.lastName }}</td>
-            <td [nzAlign]="'center'" nzWidth="5%">{{ userData.age }}</td>
-            <td [nzAlign]="'center'" nzWidth="25%">{{ userData.email }}</td>
-            <td [nzAlign]="'center'" nzWidth="15%">{{ userData.registeredDate | date}}</td>
-            <td [nzAlign]="'center'" nzWidth="15%">{{ userData.studyDate | date}}</td>
+            <td [nzAlign]="'center'"><i id="edit-action" (click)="showModal(userData)" nz-icon nzType="edit" nzTheme="outline"></i></td>
+            <td [nzAlign]="'center'">{{ userData.name }}</td>
+            <td [nzAlign]="'center'">{{ userData.lastName }}</td>
+            <td [nzAlign]="'center'">{{ userData.age }}</td>
+            <td [nzAlign]="'center'">{{ userData.email }}</td>
+            <td [nzAlign]="'center'">{{ userData.registeredDate | date}}</td>
+            <td [nzAlign]="'center'">{{ userData.studyDate | date}}</td>
           </tr>
         </tbody>
       </nz-table>
@@ -64,4 +82,33 @@
       </div>
     </div>
   </div>
+  <nz-modal [(nzVisible)]="isModalVisible" nzTitle="Edit User" (nzOnCancel)="hideModal()"
+            (nzOnOk)="handleOk()" nzOkText="Edit" nzOkType="default" nzCancelText="Cancel">
+    <form nz-form>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">Name</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input [(ngModel)]="editName" [ngModelOptions]="{standalone: true}"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">LastName</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input [(ngModel)]="editLastName" [ngModelOptions]="{standalone: true}"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">Age</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input [(ngModel)]="editAge" [ngModelOptions]="{standalone: true}"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">Email</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input [(ngModel)]="editEmail" [ngModelOptions]="{standalone: true}"/>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-modal>
 </div>
