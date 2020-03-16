@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit{
   ) {}
 
   logout() {
-    this.notificationService.createNotification(2, "Good Bye")
+    this.notificationService.createNotification(2, "Good Bye", 'success', 'Success')
     sessionStorage.removeItem("token");
   }
 

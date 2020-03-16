@@ -72,7 +72,7 @@ export class AdminDashboardComponent implements OnInit {
     this.userManageService.putUserData({ id: this.editId, name: this.editName, lastName: this.editLastName, age: this.editAge, email: this.editEmail })
       .subscribe(
         requestData => {
-          this.notificationService.createNotification(2, 'Saved');
+          this.notificationService.createNotification(2, 'Saved', 'success', 'Success');
           this.getPageOfUsers();
           this.hideModal();
         },
