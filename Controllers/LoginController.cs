@@ -31,7 +31,7 @@ namespace University.Controllers
         {
             if (!await authentificationService.ValidateUser(loginUser))
             {
-                return Unauthorized("User is not authorized");
+                return Unauthorized("Invalid user data");
             }
 
             var user = await userManager.FindByNameAsync(loginUser.UserName);

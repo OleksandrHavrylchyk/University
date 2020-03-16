@@ -22,6 +22,7 @@ export class SearchCoursesComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCourses();
+    console.log(history.state.isSubscribedOnCourses);
     if (!history.state.isSubscribedOnCourses && history.state.isSubscribedOnCourses !== undefined) {
       this.createNotification();
     }

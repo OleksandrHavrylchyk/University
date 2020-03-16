@@ -53,7 +53,6 @@ export class RegistrationComponent implements OnInit{
         },
         error => {
           this.errorOnSubmit = error.error;
-          console.log(this.errorOnSubmit);
           this.loading = false;
         });
   }

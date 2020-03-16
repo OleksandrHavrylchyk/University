@@ -37,7 +37,11 @@ namespace University.Controllers
                 return BadRequest("You are already enrolled in the course");
             }
 
-            var coursesSubscribersEntity = await courseSubscribersService.SubscribeOnCourseAsync(userEntity, subscribeOnCourse.CourseId, subscribeOnCourse.Studydate);
+            var coursesSubscribersEntity = await courseSubscribersService.SubscribeOnCourseAsync(
+                userEntity,
+                subscribeOnCourse.CourseId,
+                subscribeOnCourse.StudyDate);
+
             if(coursesSubscribersEntity == null)
             {
                 return BadRequest("Failed to enroll in the course");

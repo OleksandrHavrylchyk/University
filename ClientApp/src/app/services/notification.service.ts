@@ -12,13 +12,13 @@ export class NotificationService {
     private notification: NzNotificationService,
   ) { }
 
-  createNotification(secondDuration: number ,message: string): void {
+  createNotification(secondDuration: number ,message: string, notificationType: string, titleMessage: string): void {
     this.notification.config({
       nzPlacement: 'bottomRight'
     });
     this.notification.create(
-      'success',
-      'Success',
+      notificationType,
+      titleMessage,
       message,
       { nzDuration: secondDuration*1000 },
     );

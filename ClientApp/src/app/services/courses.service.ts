@@ -13,8 +13,8 @@ export class CoursesService {
 
   constructor(private http: HttpClient) { }
 
-  getCoursesAboutBegin() {
-    return this.http.get<any>(this.baseUrl + 'begin-courses/')
+  getNewCourses() {
+    return this.http.get<any>(this.baseUrl + 'new-courses/')
   }
 
   getAllCourses() {

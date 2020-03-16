@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         data => {
           if (!data.isSubscribedOnCourses) {
             this.router.navigate(['/courses'], {
-              state: { isSubscribedOnCourses: data.isSubscribedOnCourses}
+              state: { isSubscribedOnCourses: false}
             });
           }
           else {
