@@ -9,9 +9,8 @@ namespace University
         public int ID { get; set; }
         public string CourseName { get; set; }
         public string Description { get; set; }
-        public float Duration { get; set; }
-        public DateTime StartDate { get; set; }
-        
+        public float Duration { get; set; } 
+        public DateTime DateAdded { get; set; }
         public string CoverUrl { get; set; }
     }
 }

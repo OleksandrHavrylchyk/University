@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
@@ -14,5 +15,6 @@ namespace University
         public int CourseID { get; set;}
         [ForeignKey("CourseID")]
         public CourseEntity Course { get; set; }
+        public DateTime StudyDate { get; set; }
     }
 }

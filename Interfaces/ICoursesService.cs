@@ -6,7 +6,7 @@ namespace University.Interfaces
 {
     public interface ICoursesService
     {
-        Task<List<CourseEntity>> GetCourseAboutBegin();
+        Task<List<CourseEntity>> GetNewCoursesAsync();
 
         Task<List<CourseEntity>> GetCourses();
     }

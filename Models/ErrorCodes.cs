@@ -2,6 +2,12 @@
 {
     public enum ErrorCodes
     {
-        InvalidEmail = 421
+        Unauthorized = 401,
+        InvalidEmail = 421,
+        NoNewCourses = 422,
+        NoCourses = 423,
+        NotFoundCourses = 424,
+        UserNotFound = 425,
+        EmailConfirmError,
     }
 }

@@ -18,7 +18,12 @@ namespace University.Controllers
             var user = await userManager.FindByIdAsync(userId);
             if (user == null)
             {
-                return BadRequest();
+                return BadRequest("User does not exist");
+            }
+
+            if(user.EmailConfirmed)
+            {
+                return BadRequest("Email is already confirmed");
             }
 
             var result = await userManager.ConfirmEmailAsync(user, code);
@@ -27,7 +32,7 @@ namespace University.Controllers
                 return RedirectToAction("/");
             }
 
-            return BadRequest();
+            return BadRequest("Failed to confirm email");
         }
     }
 }

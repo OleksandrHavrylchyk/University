@@ -22,17 +22,21 @@ namespace University.Services
             reminderService = new ReminderService();
             logger = LogManager.GetCurrentClassLogger();
         }
-        public async Task<CourseSubscribersEntity> SubscribeOnCourse(ApplicationUserEntity userEntity, int courseId)
+        public async Task<CourseSubscribersEntity> SubscribeOnCourseAsync(ApplicationUserEntity userEntity, int courseId, DateTime studyDate)
         {
             try
             {
                 var courseEntity = await databaseContext.Courses.FindAsync(courseId);
 
-                var coursesSubscribersEntity = mapper.Map<CourseSubscribersEntity>(new SubscribeUserModel { CourseID = courseId, UserId = userEntity.Id, Course = courseEntity });
+                var coursesSubscribersEntity = mapper.Map<CourseSubscribersEntity>(
+                    new SubscribeUserModel { CourseID = courseId,
+                                             UserId = userEntity.Id,
+                                             Course = courseEntity,
+                                             StudyDate = studyDate});
                 databaseContext.CourseSubscribers.Add(coursesSubscribersEntity);
                 await databaseContext.SaveChangesAsync();
 
-                reminderService.ScheduleRemindEmails(coursesSubscribersEntity.User, coursesSubscribersEntity.Course);
+                reminderService.ScheduleRemindEmails(coursesSubscribersEntity.User, coursesSubscribersEntity);
 
                 return coursesSubscribersEntity;
             }

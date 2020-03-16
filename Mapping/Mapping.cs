@@ -10,7 +10,22 @@ namespace University.Models
             CreateMap<RegistrationModel, ApplicationUserEntity>();
             CreateMap<ApplicationUserEntity, RegistrationModel>();
             CreateMap<SubscribeUserModel, CourseSubscribersEntity>();
-            CreateMap<UserDtoModel, ApplicationUserEntity>();
+            CreateMap<UserDtoModel, ApplicationUserEntity>().BeforeMap((from, to) =>
+            {
+                to.UserName = to.UserName;
+                to.TwoFactorEnabled = to.TwoFactorEnabled;
+                to.SecurityStamp = to.SecurityStamp;
+                to.PhoneNumberConfirmed = to.PhoneNumberConfirmed;
+                to.PhoneNumber = to.PhoneNumber;
+                to.PasswordHash = to.PasswordHash;
+                to.NormalizedUserName = to.NormalizedUserName;
+                to.NormalizedEmail = from.Email.ToUpper();
+                to.LockoutEnd = to.LockoutEnd;
+                to.LockoutEnabled = to.LockoutEnabled;
+                to.EmailConfirmed = to.EmailConfirmed;
+                to.ConcurrencyStamp = to.ConcurrencyStamp;
+                to.AccessFailedCount = to.AccessFailedCount;
+            });
         }
     }
 }

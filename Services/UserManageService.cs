@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using System;
@@ -14,15 +15,17 @@ namespace University.Services
     {
         private static Logger logger;
         private readonly ApplicationDbContext applicationDbContext;
-        private PagingModel pagingModel;
+        private readonly UserManager<ApplicationUserEntity> userManager;
         private readonly IMapper mapper;
+        private PagingModel pagingModel;
         private SortingService sortingService;
 
-        public UserManageService(ApplicationDbContext applicationDbContext, IMapper mapper)
+        public UserManageService(ApplicationDbContext applicationDbContext, IMapper mapper, UserManager<ApplicationUserEntity> userManager)
         {
-            this.sortingService = new SortingService();
+            this.userManager = userManager;
             this.applicationDbContext = applicationDbContext;
             this.mapper = mapper;
+            sortingService = new SortingService();
             logger = LogManager.GetCurrentClassLogger();
         }
         public async Task<PagingUsersModel> GetUsersAsync(PagingUsersParameters pagingUsersParametrs)
@@ -45,12 +48,12 @@ namespace University.Services
 
                 var pagedUsers = usersDto.Select(user => new UserDtoModel()
                 {
+                    Id = user.Id,
                     Name = user.Name,
                     LastName = user.LastName,
                     Age = user.Age,
                     Email = user.Email,
                     RegisteredDate = user.RegisteredDate,
-                    StudyDate = user.StudyDate
                 }).Skip((pagingUsersParametrs.PageNumber - 1) * pagingUsersParametrs.PageSize).Take(pagingUsersParametrs.PageSize);
 
                 pagingModel = new PagingModel(totalUsers, pagingUsersParametrs.PageNumber);
@@ -64,13 +67,23 @@ namespace University.Services
             }
         }
 
-        public async Task<UserDtoModel> EditUserAsync(UserDtoModel userForChange)
+        public async Task<ApplicationUserEntity> EditUserAsync(UserDtoModel userForChange)
         {
-            var changedUserEntity = applicationDbContext.Entry(userForChange).State = EntityState.Modified;
+            try
+            {
+                var userIdentity = await userManager.FindByIdAsync(userForChange.Id);
+                var changedUserIdentity = mapper.Map(userForChange, userIdentity);
 
-            await applicationDbContext.SaveChangesAsync();
+                await userManager.UpdateAsync(changedUserIdentity);
+                await applicationDbContext.SaveChangesAsync();
 
-            return userForChange;
+                return changedUserIdentity;
+            }
+            catch (Exception exception)
+            {
+                logger.Error(exception);
+                throw;
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ import { UserManageService } from '../../services/user-manage.service';
 import { UserListService } from '../../services/user-list.service';
 import { IUserList } from '../../interfaces/userListInterfaces';
 import { EditUserDto } from '../../models/user';
+import { NotificationService } from '../../services/notification.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { EditUserDto } from '../../models/user';
 export class AdminDashboardComponent implements OnInit {
 
   pageOfUsers: IUserList;
-  editId: string;
+  editId: string = "";
   editName: string = "";
   editLastName: string = "";
   editAge: number = 0;
@@ -42,6 +43,7 @@ export class AdminDashboardComponent implements OnInit {
     private userListService: UserListService,
     private userManageService: UserManageService,
     private activatedRoute: ActivatedRoute,
+    private notificationService: NotificationService,
     private router: Router
   ) { }
 
@@ -58,7 +60,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   showModal(userEditData: any): void {
-    this.editId = userEditData.Id;
+    this.editId = userEditData.id;
     this.editName = userEditData.name;
     this.editLastName = userEditData.lastName;
     this.editAge = userEditData.age;
@@ -67,11 +69,12 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   handleOk() {
-    this.userManageService.putUserData({ name: this.editName, lastName: this.editLastName, age: this.editAge, email: this.editEmail })
+    this.userManageService.putUserData({ id: this.editId, name: this.editName, lastName: this.editLastName, age: this.editAge, email: this.editEmail })
       .subscribe(
         requestData => {
-          this.totalUsers = requestData.pagesModel.totalUsers;
-          this.pageOfUsers = requestData.users;
+          this.notificationService.createNotification(2, 'Saved');
+          this.getPageOfUsers();
+          this.hideModal();
         },
         error => {
           console.log(error);

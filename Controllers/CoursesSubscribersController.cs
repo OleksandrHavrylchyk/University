@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using University.Interfaces;
 using University.Migrations;
 using University.Models;
-using University.Services;
 
 namespace University.Controllers
 {
@@ -28,7 +28,7 @@ namespace University.Controllers
 
         [HttpPost("subscribe-course")]
         [Authorize]
-        public async Task<ActionResult> SubscribeOnCourse([FromQuery(Name = "courseId")]int courseId)
+        public async Task<ActionResult> SubscribeOnCourse(SubscribeOnCourseViewModel subscribeOnCourse)
         {
             var userEntity = await userManager.FindByNameAsync(User.Identity.Name);
 
@@ -37,10 +37,10 @@ namespace University.Controllers
                 return BadRequest("You are already enrolled in the course");
             }
 
-            var coursesSubscribersEntity = await courseSubscribersService.SubscribeOnCourse(userEntity, courseId);
+            var coursesSubscribersEntity = await courseSubscribersService.SubscribeOnCourseAsync(userEntity, subscribeOnCourse.CourseId, subscribeOnCourse.Studydate);
             if(coursesSubscribersEntity == null)
             {
-                return BadRequest();
+                return BadRequest("Failed to enroll in the course");
             }
 
             return CreatedAtAction("Subscribed", coursesSubscribersEntity);

@@ -12,6 +12,7 @@ namespace University.Migrations.EntityConfigurations
         public UsersConfiguration()
         {
             hasher = new PasswordHasher<ApplicationUserEntity>();
+            currentTime = DateTime.UtcNow;
         }
         public void Configure(EntityTypeBuilder<ApplicationUserEntity> builder)
         {
@@ -24,7 +25,8 @@ namespace University.Migrations.EntityConfigurations
                 NormalizedEmail = "ADMINISTRATOR@TEST_UNIVERSITY.COM",
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "Zxcv_1234"),
-                SecurityStamp = string.Empty
+                SecurityStamp = string.Empty,
+                RegisteredDate = currentTime
             },
             new ApplicationUserEntity
             {
@@ -33,7 +35,6 @@ namespace University.Migrations.EntityConfigurations
                 LastName = "Smith",
                 Age = 19,
                 RegisteredDate = currentTime,
-                StudyDate = currentTime,
                 NormalizedUserName = "STUDENT1",
                 Email = "student1@test_university.com",
                 NormalizedEmail = "STUDENT1@TEST_UNIVERSITY.COM",
@@ -48,7 +49,6 @@ namespace University.Migrations.EntityConfigurations
                 LastName = "Jones",
                 Age = 19,
                 RegisteredDate = currentTime,
-                StudyDate = currentTime,
                 NormalizedUserName = "STUDENT2",
                 Email = "student2@test_university.com",
                 NormalizedEmail = "STUDENT2@TEST_UNIVERSITY.COM",
@@ -63,7 +63,6 @@ namespace University.Migrations.EntityConfigurations
                 LastName = "Johnson",
                 Age = 23,
                 RegisteredDate = currentTime,
-                StudyDate = currentTime,
                 NormalizedUserName = "STUDENT3",
                 Email = "student3@test_university.com",
                 NormalizedEmail = "STUDENT3@TEST_UNIVERSITY.COM",
@@ -78,7 +77,6 @@ namespace University.Migrations.EntityConfigurations
                 LastName = "Lee",
                 Age = 18,
                 RegisteredDate = currentTime,
-                StudyDate = currentTime,
                 NormalizedUserName = "STUDENT4",
                 Email = "student4@test_university.com",
                 NormalizedEmail = "STUDENT4@TEST_UNIVERSITY.COM",
@@ -93,7 +91,6 @@ namespace University.Migrations.EntityConfigurations
                 LastName = "Brown",
                 Age = 22,
                 RegisteredDate = currentTime,
-                StudyDate = currentTime,
                 NormalizedUserName = "STUDENT5",
                 Email = "student5@test_university.com",
                 NormalizedEmail = "STUDENT5@TEST_UNIVERSITY.COM",
@@ -108,7 +105,6 @@ namespace University.Migrations.EntityConfigurations
                 LastName = "Williams",
                 Age = 19,
                 RegisteredDate = currentTime,
-                StudyDate = currentTime,
                 NormalizedUserName = "STUDENT6",
                 Email = "student6@test_university.com",
                 NormalizedEmail = "STUDENT6@TEST_UNIVERSITY.COM",
@@ -123,7 +119,6 @@ namespace University.Migrations.EntityConfigurations
                 LastName = "Rodriguez",
                 Age = 21,
                 RegisteredDate = currentTime,
-                StudyDate = currentTime,
                 NormalizedUserName = "STUDENT7",
                 Email = "student7@test_university.com",
                 NormalizedEmail = "STUDENT7@TEST_UNIVERSITY.COM",
@@ -138,7 +133,6 @@ namespace University.Migrations.EntityConfigurations
                 LastName = "Garcia",
                 Age = 22,
                 RegisteredDate = currentTime,
-                StudyDate = currentTime,
                 NormalizedUserName = "STUDENT8",
                 Email = "student8@test_university.com",
                 NormalizedEmail = "STUDENT8@TEST_UNIVERSITY.COM",
@@ -153,7 +147,6 @@ namespace University.Migrations.EntityConfigurations
                 LastName = "Gonzalez",
                 Age = 20,
                 RegisteredDate = currentTime,
-                StudyDate = currentTime,
                 NormalizedUserName = "STUDENT9",
                 Email = "student9@test_university.com",
                 NormalizedEmail = "STUDENT9@TEST_UNIVERSITY.COM",
@@ -168,7 +161,6 @@ namespace University.Migrations.EntityConfigurations
                 LastName = "Lopez",
                 Age = 18,
                 RegisteredDate = currentTime,
-                StudyDate = currentTime,
                 NormalizedUserName = "STUDENT10",
                 Email = "student10@test_university.com",
                 NormalizedEmail = "STUDENT1@TEST_UNIVERSITY.COM",

@@ -13,14 +13,12 @@ namespace University.Controllers
     [Route("api/")]
     [ApiController]
     public class RegistrationController : ControllerBase
-    {
-        public List<ResponseErrorModel> errorResponse;
-        
+    {    
         private readonly ApplicationDbContext context;
         private readonly UserManager<ApplicationUserEntity> userManager;
         private readonly IMapper mapper;
-        private readonly IConfiguration applicationConfiguration;
         private readonly EmailValidatorService emailValidatorService;
+        private readonly EmailSenderService emailService;
 
         public RegistrationController(UserManager<ApplicationUserEntity> userManager,
                             IMapper mapper,
@@ -30,9 +28,8 @@ namespace University.Controllers
             this.context = context;
             this.userManager = userManager;
             this.mapper = mapper;
-            this.applicationConfiguration = applicationConfiguration;
             this.emailValidatorService = new EmailValidatorService();
-            errorResponse = new List<ResponseErrorModel>();
+            emailService = new EmailSenderService(applicationConfiguration);
         }
 
         [HttpPost("registration")]
@@ -45,12 +42,7 @@ namespace University.Controllers
 
             if (!emailValidatorService.ValidateEmail(registerUserData.Email))
             {
-                errorResponse.Add(new ResponseErrorModel
-                {
-                    Code = (int)ErrorCodes.InvalidEmail,
-                    Description = "Please provide valid email "
-                });
-                return BadRequest(errorResponse);
+                return BadRequest("Invalid email");
             }
 
             var userIdentity = mapper.Map<ApplicationUserEntity>(registerUserData);
@@ -80,8 +72,6 @@ namespace University.Controllers
                     "EmailConfirmation",
                     new { userId = userForConfirmation.Id, code = confirmationToken },
                     protocol: HttpContext.Request.Scheme);
-
-            EmailSenderService emailService = new EmailSenderService(applicationConfiguration);
 
             await emailService.SendEmailAsync(userForConfirmation.Email, "Confirm your account",
                         $"Confirm registration by clicking on the link: <a href='{callbackUrl}'>{callbackUrl}</a>");

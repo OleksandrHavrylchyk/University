@@ -5,7 +5,6 @@ using University.Models;
 using University.Interfaces;
 using University.Migrations;
 using System.Linq;
-using System;
 
 namespace University.Controllers
 {
@@ -16,7 +15,7 @@ namespace University.Controllers
         private readonly UserManager<ApplicationUserEntity> userManager;
         private readonly IAuthentificationService authentificationService;
         private readonly ApplicationDbContext entityContext;
-        private bool isSubscribedOncourses;
+        private readonly AuthorizedUserModel authorizedUserModel;
 
 
         public LoginController(UserManager<ApplicationUserEntity> userManager, IAuthentificationService authentificationService,
@@ -25,25 +24,26 @@ namespace University.Controllers
             this.userManager = userManager;
             this.authentificationService = authentificationService;
             this.entityContext = entityContext;
-            isSubscribedOncourses = false;
+            authorizedUserModel = new AuthorizedUserModel();
         }
         [HttpPost("login")]
         public async Task<ActionResult> LoginUser(LoginModel loginUser)
         {
             if (!await authentificationService.ValidateUser(loginUser))
             {
-                return Unauthorized();
+                return Unauthorized("User is not authorized");
             }
 
             var user = await userManager.FindByNameAsync(loginUser.UserName);
-            if(entityContext.CourseSubscribers.Where(user => user.UserId.Contains(user.UserId)).ToList().Count > 0)
+            var token = await authentificationService.GenerateToken(loginUser);
+            authorizedUserModel.Token = token;
+
+            if (entityContext.CourseSubscribers.Where(user => user.UserId.Contains(user.UserId)).ToList().Count > 0)
             {
-                isSubscribedOncourses = true;
+                authorizedUserModel.IsSubscribedOncourses = true;
             }
 
-            var token = await authentificationService.GenerateToken(loginUser);
-
-            return Ok(new { Token = token, isSubscribedOnCourses = isSubscribedOncourses });
+            return Ok(authorizedUserModel);
         }
     }
 }
