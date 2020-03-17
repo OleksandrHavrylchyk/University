@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using University.Interfaces;
@@ -40,14 +41,14 @@ namespace University.Controllers
             var coursesSubscribersEntity = await courseSubscribersService.SubscribeOnCourseAsync(
                 userEntity,
                 subscribeOnCourse.CourseId,
-                subscribeOnCourse.StudyDate);
+                DateTime.ParseExact(subscribeOnCourse.StudyDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture));
 
             if(coursesSubscribersEntity == null)
             {
                 return BadRequest("Failed to enroll in the course");
             }
 
-            return CreatedAtAction("Subscribed", coursesSubscribersEntity);
+            return CreatedAtAction("Subscribed", coursesSubscribersEntity.Course);
         }
     }
 }

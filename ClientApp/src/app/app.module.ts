@@ -18,6 +18,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -29,6 +30,7 @@ import { CourseCardComponent } from './components/course-card/course-card.compon
 import { LoginComponent } from './components/login/login.component';
 import { SearchCoursesComponent } from './components/search-courses/search-courses.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { StartDatePickerComponent } from './components/start-date-picker/start-date-picker.component';
 import { appRoutes } from './route.routing';
 import { environment } from '../environments/environment';
 
@@ -47,7 +49,8 @@ export function tokenGetter() {
     LoginComponent,
     CourseCardComponent,
     SearchCoursesComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    StartDatePickerComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -68,6 +71,7 @@ export function tokenGetter() {
     NzSelectModule,
     NzInputModule,
     NzModalModule,
+    NzDatePickerModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

@@ -1,23 +1,24 @@
 <div nz-row>
   <div nz-col>
-    <img src="../assets/img/home_picture.jpg">
+    <div class="home-picture"></div>
     <div class="picture-text">Choose course, start study, and other</div>
   </div>
 </div>
 <div class="home-courses-container">
   <div class="container">
     <div nz-row>
-      <div class="home-sections-title">Courses about to begin</div>
+      <div class="home-sections-title">New courses</div>
       <div *ngFor="let course of homeCourses">
         <div nz-col nzLg="8">
-          <div>
+          <div class="d-flex justify-content-center">
             <course-card [courseInfo]="course"></course-card>
           </div>
           <div class="d-flex justify-content-center mt-2">
             <button id="subscribeHomeButton" class="rounded-pill gray-button"
-                    nz-button nzSize=large (click)="subscribeCourse(course.id)">
+                    nz-button nzSize=large (click)="specifyDate(course.id)">
               Subscribe
             </button>
+            <start-date-picker [(displayModal)]="displaySubscribeModal" [courseId]="subscribedCourseId"></start-date-picker>
           </div>
         </div>
       </div>

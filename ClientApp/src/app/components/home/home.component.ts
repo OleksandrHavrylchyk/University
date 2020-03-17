@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CoursesService } from '../../services/courses.service';
-import { CoursesSubscribersService } from '../../services/courses-subscribers.service';
 import { NotificationService } from '../../services/notification.service';
 import { AuthentificationService } from '../../services/authentification.service';
 import { CoursesList } from '../../interfaces/courseListInterfaces';
@@ -15,11 +14,12 @@ import { CoursesList } from '../../interfaces/courseListInterfaces';
 export class HomeComponent implements OnInit {
 
   homeCourses: CoursesList;
+  displaySubscribeModal: boolean = false;
+  subscribedCourseId: number;
 
   constructor(
     private router: Router,
     private courseService: CoursesService,
-    private coursesSubscribersService: CoursesSubscribersService,
     private notificationService: NotificationService,
     private authentificationService: AuthentificationService,
   ) { }
@@ -46,19 +46,13 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/courses']);
   }
 
-  subscribeCourse(id: number) {
-    this.coursesSubscribersService.postCourseSubscriber(id)
-      .subscribe(
-        data => {
-          this.notificationService.createNotification(2, 'You registered on course', 'success', 'Success');
-        },
-        error => {
-          if (!this.authentificationService.isAuthentificated()) {
-            this.notificationService.createNotification(2, 'You have sing in to subscribe on course', 'warning', 'Warning');
-          }
-          else {
-            this.notificationService.createNotification(2, error.error, 'warning', 'Warning');
-          }
-        });
+  specifyDate(courseId: number) {
+    if (this.authentificationService.isAuthentificated()) {
+      this.displaySubscribeModal = true;
+      this.subscribedCourseId = courseId;
+    }
+    else {
+      this.notificationService.createNotification(2, 'You have sing in to subscribe on course', 'warning', 'Warning');
+    }
   }
 }

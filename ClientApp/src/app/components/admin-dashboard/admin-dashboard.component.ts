@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserManageService } from '../../services/user-manage.service';
 import { UserListService } from '../../services/user-list.service';
 import { IUserList } from '../../interfaces/userListInterfaces';
-import { EditUserDto } from '../../models/user';
 import { NotificationService } from '../../services/notification.service';
 
 

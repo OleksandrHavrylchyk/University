@@ -65,6 +65,7 @@
     <None Remove="ClientApp\src\app\components\login\login.component.ts" />
     <None Remove="ClientApp\src\app\components\search-courses\search-courses.component.ts" />
     <None Remove="ClientApp\src\app\components\send-activation\send-activation.component.ts" />
+    <None Remove="ClientApp\src\app\components\start-date-picker\start-date-picker.component.ts" />
     <None Remove="ClientApp\src\app\guards\admin.guard.ts" />
     <None Remove="ClientApp\src\app\guards\authentification.guard.ts" />
     <None Remove="ClientApp\src\app\interfaces\courseListInterfaces.ts" />
@@ -91,6 +92,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\components\Layout\header\header.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\search-courses\search-courses.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\send-activation\send-activation.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\start-date-picker\start-date-picker.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\guards\admin.guard.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\guards\authentification.guard.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\courseListInterfaces.ts" />

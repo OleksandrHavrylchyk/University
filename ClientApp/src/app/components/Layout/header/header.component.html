@@ -9,7 +9,7 @@
           <div class="collapse navbar-collapse bg-secondary" [ngClass]="{ 'show': isExpanded }">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item mx-0 mx-lg-1">
-                <a id="coursesHeaderLink" class="nav-link py-3 px-0 px-lg-3 rounded links" [routerLink]="['/courses']">Courses</a>
+                <a id="coursesHeaderLink" class="nav-link py-3 px-0 px-lg-3 rounded links" [routerLink]="['/courses']" (click)="collapse()">Courses</a>
               </li>
               <li class="nav-item mx-0 mx-lg-1">
                 <a id="aboutHeaderLink" class="nav-link py-3 px-0 px-lg-3 rounded links" href="#">About</a>

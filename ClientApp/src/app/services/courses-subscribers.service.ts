@@ -17,8 +17,8 @@ export class CoursesSubscribersService {
     private authentificationService: AuthentificationService,
   ) { }
 
-  postCourseSubscriber(courseId: number) {
+  postCourseSubscriber(courseId: number, studyDate: string) {
     var requestHeader = this.authentificationService.getAuthorizationHeader();
-    return this.http.post<any>(this.baseUrl + 'subscribe-course', { courseId: courseId }, { headers: requestHeader })
+    return this.http.post<any>(this.baseUrl + 'subscribe-course', { courseId: courseId, studyDate: studyDate }, { headers: requestHeader })
   }
 }
