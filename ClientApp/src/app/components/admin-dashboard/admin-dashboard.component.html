@@ -58,8 +58,8 @@
             <td [nzAlign]="'center'">{{ userData.lastName }}</td>
             <td [nzAlign]="'center'">{{ userData.age }}</td>
             <td [nzAlign]="'center'">{{ userData.email }}</td>
-            <td [nzAlign]="'center'">{{ userData.registeredDate | date}}</td>
-            <td [nzAlign]="'center'">{{ userData.studyDate | date}}</td>
+            <td [nzAlign]="'center'">{{ userData.registeredDate | date }}</td>
+            <td [nzAlign]="'center'">{{ userData.studyDate | date:'medium' }}</td>
           </tr>
         </tbody>
       </nz-table>

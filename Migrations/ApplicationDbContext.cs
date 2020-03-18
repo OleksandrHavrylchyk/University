@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using University.Migrations.EntityConfigurations;
+using University.Models;
 
 namespace University.Migrations
 {
@@ -16,7 +17,6 @@ namespace University.Migrations
 
         public DbSet<CourseEntity> Courses { get; set; }
         public DbSet<CourseSubscribersEntity> CourseSubscribers { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

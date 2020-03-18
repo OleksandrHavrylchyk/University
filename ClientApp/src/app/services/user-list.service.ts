@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
+import { AuthentificationService } from './authentification.service';
 
 
 @Injectable({
@@ -14,6 +15,7 @@ export class UserListService {
 
   constructor(
     private http: HttpClient,
+    private authentificationService: AuthentificationService,
   ) { }
 
   getPageOfUsers(pageNumber: string, pageSize: string, searchExpression: string, sortName: string, sortOrder: string) {
@@ -29,7 +31,7 @@ export class UserListService {
     if (searchExpression) {
       this.params['searchExpression'] = searchExpression;
     }
-
-    return this.http.get<any>(this.baseUrl + 'get-users/', { params: this.params })
+    var requestHeader = this.authentificationService.getAuthorizationHeader();
+    return this.http.get<any>(this.baseUrl + 'get-users/', { params: this.params , headers: requestHeader })
   }
 }

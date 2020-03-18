@@ -20,7 +20,7 @@ namespace University.Controllers
         }
 
         [HttpGet("get-users")]
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> GetUsersAsync([FromQuery]PagingUsersParameters userParameters)
         {
             var getPaginatedUsers = await userManageService.GetUsersAsync(userParameters);
@@ -34,7 +34,7 @@ namespace University.Controllers
         }
 
         [HttpPut("update-user")]
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> UpdateUser(UserDtoModel editedUser)
         {
             var updatedUser = await userManageService.EditUserAsync(editedUser);

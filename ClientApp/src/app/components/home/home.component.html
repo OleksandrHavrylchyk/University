@@ -9,7 +9,7 @@
     <div nz-row>
       <div class="home-sections-title">New courses</div>
       <div *ngFor="let course of homeCourses">
-        <div nz-col nzLg="8">
+        <div nz-col nzLg="8" class="mb-3">
           <div class="d-flex justify-content-center">
             <course-card [courseInfo]="course"></course-card>
           </div>

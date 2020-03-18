@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace University.Models
 {
@@ -13,6 +10,6 @@ namespace University.Models
         public int Age { get; set; }
         public string Email { get; set; }
         public DateTime RegisteredDate { get; set; }
-        public DateTime StudyDate { get; set; }
+        public DateTime? StudyDate { get; set; }
     }
 }

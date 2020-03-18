@@ -45,8 +45,9 @@ namespace University.Services
                 };
 
                 var totalUsers = await usersDto.CountAsync();
-
-                var pagedUsers = usersDto.Select(user => new UserDtoModel()
+               
+                var pagedUsers = usersDto.Select
+                    (user => new UserDtoModel()
                 {
                     Id = user.Id,
                     Name = user.Name,
@@ -54,6 +55,10 @@ namespace University.Services
                     Age = user.Age,
                     Email = user.Email,
                     RegisteredDate = user.RegisteredDate,
+                    StudyDate = applicationDbContext.CourseSubscribers.Select(coursesSubscribers => new { coursesSubscribers.StudyDate, coursesSubscribers.UserId })
+                                                                      .Where(coursesSubscribers => coursesSubscribers.UserId == user.Id)
+                                                                      .FirstOrDefault()
+                                                                      .StudyDate
                 }).Skip((pagingUsersParametrs.PageNumber - 1) * pagingUsersParametrs.PageSize).Take(pagingUsersParametrs.PageSize);
 
                 pagingModel = new PagingModel(totalUsers, pagingUsersParametrs.PageNumber);

@@ -36,7 +36,7 @@ namespace University.Services
                 databaseContext.CourseSubscribers.Add(coursesSubscribersEntity);
                 await databaseContext.SaveChangesAsync();
 
-                reminderService.ScheduleRemindEmails(coursesSubscribersEntity.User, coursesSubscribersEntity);
+                reminderService.ScheduleRemindEmails(coursesSubscribersEntity, studyDate);
 
                 return coursesSubscribersEntity;
             }

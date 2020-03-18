@@ -56,6 +56,10 @@
     <Compile Remove="Migrations\Migrations\20200305141123_SeedingCourses.Designer.cs" />
     <Compile Remove="Migrations\Migrations\20200311080027_AdminSeeding.cs" />
     <Compile Remove="Migrations\Migrations\20200311080027_AdminSeeding.Designer.cs" />
+    <Compile Remove="Migrations\Migrations\20200318114849_AddedViewForUserList.cs" />
+    <Compile Remove="Migrations\Migrations\20200318114849_AddedViewForUserList.Designer.cs" />
+    <Compile Remove="Migrations\Migrations\20200318133503_FixError.cs" />
+    <Compile Remove="Migrations\Migrations\20200318133503_FixError.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
