@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { environment } from '../../environments/environment';
-import { AuthentificationUser } from '../models/user';
+import { AuthentificationUser, FacebookAuthUser } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -27,13 +27,19 @@ export class AuthentificationService {
   login(user: AuthentificationUser) {
     return this.http.post(this.baseUrl + 'login/', user).pipe(
       map((response: any) => {
-        const res = response;
-        if (user) {
-          sessionStorage.setItem('token', res.token);
-          return res;
+          sessionStorage.setItem('token', response.token);
+          return response;
         }
-      }
       ))
+  }
+
+  facebookLogin(user: FacebookAuthUser) {
+    return this.http.post(this.baseUrl + 'facebook-login/', user).pipe(
+      map((response: any) => {
+        sessionStorage.setItem('token', response.token);
+        return response;
+      }
+    ))
   }
 
   isAuthentificated() {

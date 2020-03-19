@@ -11,3 +11,10 @@ export class EditUserDto {
   age: number = 0;
   email: string = "";
 }
+
+export class FacebookAuthUser {
+  name: string;
+  lastName: string;
+  email: string;
+  token: string;
+}

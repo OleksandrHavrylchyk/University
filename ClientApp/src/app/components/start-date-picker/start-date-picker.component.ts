@@ -62,9 +62,11 @@ export class StartDatePickerComponent implements OnInit {
         if (!this.authentificationService.isAuthentificated()) {
           this.notificationService.createNotification(2, 'You have sing in to subscribe on course', 'warning', 'Warning');
         }
+        else if (error.status == 400) {
+          this.notificationService.createNotification(2, error.error, 'warning', "Warning" );
+        }
         else {
           console.log(error);
-          this.notificationService.createNotification(2, "Error", 'error', 'Error');
         }
       });
   }

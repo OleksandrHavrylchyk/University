@@ -17,4 +17,10 @@ var EditUserDto = /** @class */ (function () {
     return EditUserDto;
 }());
 exports.EditUserDto = EditUserDto;
+var FacebookAuthUser = /** @class */ (function () {
+    function FacebookAuthUser() {
+    }
+    return FacebookAuthUser;
+}());
+exports.FacebookAuthUser = FacebookAuthUser;
 //# sourceMappingURL=user.js.map

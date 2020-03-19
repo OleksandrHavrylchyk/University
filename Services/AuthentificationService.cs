@@ -42,11 +42,11 @@ namespace University.Services
             }
         }
 
-        public async Task<string> GenerateToken(LoginModel userForAuth)
+        public async Task<string> GenerateToken(string email)
         {
             try
             {
-                var user = await userManager.FindByNameAsync(userForAuth.UserName);
+                var user = await userManager.FindByEmailAsync(email);
                 var signingCredentials = GetSigningCredentials();
                 var claims = await GetClaims(user);
                 var tokenOptions = GenerateTokenOptions(signingCredentials, claims);

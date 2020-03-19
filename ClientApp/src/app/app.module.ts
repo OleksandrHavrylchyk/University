@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -36,6 +37,17 @@ import { environment } from '../environments/environment';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
+}
+
+const config = new AuthServiceConfig([
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('2814753781954441')
+  }
+]);
+
+export function provideConfig() {
+  return config;
 }
 
 @NgModule({
@@ -72,6 +84,7 @@ export function tokenGetter() {
     NzInputModule,
     NzModalModule,
     NzDatePickerModule,
+    SocialLoginModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -81,9 +94,12 @@ export function tokenGetter() {
     }),
     RouterModule.forRoot(appRoutes)
   ],
-  /*providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
-  ],*/
+  providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

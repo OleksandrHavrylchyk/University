@@ -9,6 +9,12 @@ namespace University.Models
         {
             CreateMap<RegistrationModel, ApplicationUserEntity>();
             CreateMap<ApplicationUserEntity, RegistrationModel>();
+            CreateMap<FacebookLoginModel, ApplicationUserEntity>().BeforeMap((from, to) =>
+            {
+                to.Name = from.Name;
+                to.LastName = from.LastName;
+                to.Email = from.Email;
+            });
             CreateMap<SubscribeUserModel, CourseSubscribersEntity>();
             CreateMap<UserDtoModel, ApplicationUserEntity>().BeforeMap((from, to) =>
             {
