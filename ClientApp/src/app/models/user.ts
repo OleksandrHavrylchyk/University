@@ -13,6 +13,7 @@ export class EditUserDto {
 }
 
 export class FacebookAuthUser {
+  userName: string;
   name: string;
   lastName: string;
   email: string;

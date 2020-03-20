@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using University.Models;
 using University.Interfaces;
 using NLog;
+using System.Security.Cryptography;
 
 namespace University.Services
 {
@@ -58,6 +59,39 @@ namespace University.Services
                 logger.Error(exception);
                 throw;
             }
+        }
+        public string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                return Convert.ToBase64String(randomNumber);
+            }
+        }
+
+        public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+        {
+            var jwtSettings = configuration.GetSection("JwtSettings");
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtSettings.GetSection("validIssuer").Value,
+                ValidAudience = jwtSettings.GetSection("validAudience").Value,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt:Key"])),
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken securityToken;
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
+            var jwtSecurityToken = securityToken as JwtSecurityToken;
+            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                throw new SecurityTokenException("Invalid token");
+
+            return principal;
         }
 
         private SigningCredentials GetSigningCredentials()

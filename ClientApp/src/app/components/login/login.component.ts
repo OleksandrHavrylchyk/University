@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   messageOnLoginError: string;
   userFacebookData = new FacebookAuthUser();
+  currentDate = new Date().getTime();
   errorOnLogin = false;
 
   constructor(
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
 
   loginWithFB() {
     this.authServiceFacebook.signIn(FacebookLoginProvider.PROVIDER_ID).then((response) => {
+      this.userFacebookData.userName = response.firstName + response.lastName + this.currentDate;
       this.userFacebookData.email = response.email;
       this.userFacebookData.name = response.firstName;
       this.userFacebookData.lastName = response.lastName;
