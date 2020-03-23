@@ -1,10 +1,8 @@
 ﻿namespace University.Models
 {
-    public class AuthorizedUserModel
+    public class RefreshTokenModel
     {
         public string Token { get; set; }
-
         public string RefreshToken { get; set; }
-        public bool IsSubscribedOncourses { get; set; } = false;
     }
 }

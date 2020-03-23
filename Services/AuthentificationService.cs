@@ -89,7 +89,9 @@ namespace University.Services
             var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
             var jwtSecurityToken = securityToken as JwtSecurityToken;
             if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+            {
                 throw new SecurityTokenException("Invalid token");
+            }
 
             return principal;
         }
@@ -105,7 +107,8 @@ namespace University.Services
         private async Task<List<Claim>> GetClaims(ApplicationUserEntity user)
         {
             var claims = new List<Claim>{
-                new Claim(ClaimTypes.Name, user.UserName)};
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email)};
             var roles = await userManager.GetRolesAsync(user);
 
             foreach (var role in roles)

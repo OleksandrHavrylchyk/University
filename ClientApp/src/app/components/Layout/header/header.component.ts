@@ -14,11 +14,12 @@ export class HeaderComponent implements OnInit{
   constructor(
     private authService: AuthentificationService,
     private notificationService: NotificationService,
+    private authentificationService: AuthentificationService
   ) {}
 
   logout() {
     this.notificationService.createNotification(2, "Good Bye", 'success', 'Success')
-    sessionStorage.removeItem("token");
+    this.authentificationService.logout();
   }
 
   collapse() {

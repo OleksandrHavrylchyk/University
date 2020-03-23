@@ -19,3 +19,8 @@ export class FacebookAuthUser {
   email: string;
   token: string;
 }
+
+export class RefreshTokenModel {
+  token: string;
+  refreshToken: string;
+}

@@ -72,6 +72,7 @@
     <None Remove="ClientApp\src\app\components\start-date-picker\start-date-picker.component.ts" />
     <None Remove="ClientApp\src\app\guards\admin.guard.ts" />
     <None Remove="ClientApp\src\app\guards\authentification.guard.ts" />
+    <None Remove="ClientApp\src\app\helpers\refresh-token.interceptor.ts" />
     <None Remove="ClientApp\src\app\interfaces\courseListInterfaces.ts" />
     <None Remove="ClientApp\src\app\interfaces\userListInterfaces.ts" />
     <None Remove="ClientApp\src\app\route.routing.ts" />
@@ -99,6 +100,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\components\start-date-picker\start-date-picker.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\guards\admin.guard.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\guards\authentification.guard.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\helpers\refresh-token.interceptor.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\courseListInterfaces.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\interfaces\userListInterfaces.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\route.routing.ts" />

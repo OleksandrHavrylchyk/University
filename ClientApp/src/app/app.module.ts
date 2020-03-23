@@ -34,9 +34,10 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { StartDatePickerComponent } from './components/start-date-picker/start-date-picker.component';
 import { appRoutes } from './route.routing';
 import { environment } from '../environments/environment';
+import { RefreshTokenInterceptor } from './helpers/refresh-token.interceptor';
 
 export function tokenGetter() {
-  return sessionStorage.getItem('token');
+  return localStorage.getItem('token');
 }
 
 const config = new AuthServiceConfig([
@@ -98,7 +99,12 @@ export function provideConfig() {
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RefreshTokenInterceptor,
+      multi: true 
+    },
   ],
   bootstrap: [AppComponent]
 })

@@ -2,13 +2,13 @@
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
 using University.Models;
 using University.Interfaces;
 using University.Migrations;
 using System.Linq;
 using AutoMapper;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace University.Controllers
 {
@@ -43,9 +43,13 @@ namespace University.Controllers
             }
 
             var user = await userManager.FindByNameAsync(loginUser.UserName);
+            var refreshToken = authentificationService.GenerateRefreshToken();
 
             authorizedUserModel.Token = await authentificationService.GenerateToken(user.Email);
-            authorizedUserModel.RefreshToken = authentificationService.GenerateRefreshToken();
+            authorizedUserModel.RefreshToken = refreshToken;
+
+            await userManager.RemoveAuthenticationTokenAsync(user, "UniversityApp", "RefreshToken");
+            await userManager.SetAuthenticationTokenAsync(user, "UniversityApp", "RefreshToken", refreshToken);
 
             if (entityContext.CourseSubscribers.Where(user => user.UserId.Contains(user.UserId)).ToList().Count > 0)
             {
@@ -79,9 +83,13 @@ namespace University.Controllers
             }
 
             var user = await userManager.FindByEmailAsync(facebookUser.Email);
+            var refreshToken = authentificationService.GenerateRefreshToken();
 
-            authorizedUserModel.RefreshToken = authentificationService.GenerateRefreshToken();
-            authorizedUserModel.Token = await authentificationService.GenerateToken(user.Email);
+            authorizedUserModel.RefreshToken = await authentificationService.GenerateToken(user.Email);
+            authorizedUserModel.Token = refreshToken;
+
+            await userManager.RemoveAuthenticationTokenAsync(user, "UniversityApp", "RefreshToken");
+            await userManager.SetAuthenticationTokenAsync(user, "UniversityApp", "RefreshToken", refreshToken);
 
             if (entityContext.CourseSubscribers.Where(user => user.UserId.Contains(user.UserId)).ToList().Count > 0)
             {
@@ -90,20 +98,23 @@ namespace University.Controllers
 
             return Ok(authorizedUserModel);
         }
-        [HttpPost]
-        public IActionResult Refresh(string token, string refreshToken)
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> RefreshToken(RefreshTokenModel refreshTokenModel)
         {
-            /*var principal = authentificationService.GetPrincipalFromExpiredToken(token);
-            var username = principal.Identity.;
+            var principal = authentificationService.GetPrincipalFromExpiredToken(refreshTokenModel.Token);
+            var userEmail = principal.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email).Value;
+            var userIdentity = await userManager.FindByEmailAsync(userEmail);
 
-            var newJwtToken = GenerateToken(principal.Claims);
-            var newRefreshToken = GenerateRefreshToken();
+            var newJwtToken = await authentificationService.GenerateToken(userEmail);
+            var newRefreshToken = authentificationService.GenerateRefreshToken();
 
-            return new ObjectResult(new
-            {
-                token = newJwtToken,
-                refreshToken = newRefreshToken
-            });*/
+            await userManager.RemoveAuthenticationTokenAsync(userIdentity, "UniversityApp", "RefreshToken");
+            await userManager.SetAuthenticationTokenAsync(userIdentity, "UniversityApp", "RefreshToken", refreshTokenModel.RefreshToken);
+
+            return Ok(new AuthorizedUserModel {
+                Token = newJwtToken,
+                RefreshToken = newRefreshToken
+            });
         }
     }
 }

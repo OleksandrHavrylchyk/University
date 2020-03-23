@@ -23,4 +23,10 @@ var FacebookAuthUser = /** @class */ (function () {
     return FacebookAuthUser;
 }());
 exports.FacebookAuthUser = FacebookAuthUser;
+var RefreshTokenModel = /** @class */ (function () {
+    function RefreshTokenModel() {
+    }
+    return RefreshTokenModel;
+}());
+exports.RefreshTokenModel = RefreshTokenModel;
 //# sourceMappingURL=user.js.map
