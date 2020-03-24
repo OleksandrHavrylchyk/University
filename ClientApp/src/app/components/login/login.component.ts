@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           },
           error => {
             this.errorOnLogin = true;
-            this.messageOnLoginError = "Invalid email or user name";
+            this.messageOnLoginError = error.error;
           });
     });
   }

@@ -26,7 +26,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/Layout/header/header.component';
 import { FooterComponent } from './components/Layout/footer/footer.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { SendActivation } from './components/send-activation/send-activation.component';
+import { SendActivationComponent } from './components/send-activation/send-activation.component';
 import { CourseCardComponent } from './components/course-card/course-card.component';
 import { LoginComponent } from './components/login/login.component';
 import { SearchCoursesComponent } from './components/search-courses/search-courses.component';
@@ -58,7 +58,7 @@ export function provideConfig() {
     FooterComponent,
     HomeComponent,
     RegistrationComponent,
-    SendActivation,
+    SendActivationComponent,
     LoginComponent,
     CourseCardComponent,
     SearchCoursesComponent,

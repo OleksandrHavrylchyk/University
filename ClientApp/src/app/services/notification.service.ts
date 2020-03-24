@@ -12,7 +12,7 @@ export class NotificationService {
     private notification: NzNotificationService,
   ) { }
 
-  createNotification(secondDuration: number ,message: string, notificationType: string, titleMessage: string): void {
+  createNotification(secondDuration: number, message: string, notificationType: string, titleMessage: string): void {
     this.notification.config({
       nzPlacement: 'bottomRight'
     });
@@ -20,7 +20,7 @@ export class NotificationService {
       notificationType,
       titleMessage,
       message,
-      { nzDuration: secondDuration*1000 },
+      { nzDuration: secondDuration * 1000 },
     );
   }
 }

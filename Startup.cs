@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using University.Migrations;
@@ -20,6 +18,7 @@ using University.Interfaces;
 using University.Services;
 using Hangfire;
 using Hangfire.SqlServer;
+using University.DatabaseEntities;
 
 namespace University
 {
@@ -56,10 +55,11 @@ namespace University
 
             services.AddHangfireServer();
 
-            services.AddScoped<IAuthentificationService, AuthentificationService>();
+            services.AddScoped<IAuthentificationService, Services.AuthenticationService>();
             services.AddScoped<ICoursesService, CoursesService>();
             services.AddScoped<IUserManageService, UserManageService>();
             services.AddScoped<ICourseSubscribersService, CourseSubscribersService>();
+            services.AddScoped<IFacebookAuthenticationService, FacebookAuthenticationService>(); 
 
             var mappingConfig = new MapperConfiguration(mapping =>
             {
@@ -141,6 +141,8 @@ namespace University
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            app.UseMiddleware<ErrorLoggingMiddleware>();
 
             app.UseHangfireDashboard();
 

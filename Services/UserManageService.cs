@@ -13,41 +13,38 @@ namespace University.Services
 {
     public class UserManageService : IUserManageService
     {
-        private static Logger logger;
         private readonly ApplicationDbContext applicationDbContext;
         private readonly UserManager<ApplicationUserEntity> userManager;
         private readonly IMapper mapper;
         private PagingModel pagingModel;
-        private SortingService sortingService;
+        private UserSortingService sortingService;
 
         public UserManageService(ApplicationDbContext applicationDbContext, IMapper mapper, UserManager<ApplicationUserEntity> userManager)
         {
             this.userManager = userManager;
             this.applicationDbContext = applicationDbContext;
             this.mapper = mapper;
-            sortingService = new SortingService();
-            logger = LogManager.GetCurrentClassLogger();
+            sortingService = new UserSortingService();
         }
         public async Task<PagingUsersModel> GetUsersAsync(PagingUsersParameters pagingUsersParametrs)
         {
-            try
+            IQueryable<ApplicationUserEntity> usersDto = applicationDbContext.Users.OrderBy(order => order.RegisteredDate);
+
+            if (!String.IsNullOrWhiteSpace(pagingUsersParametrs.OrderBy))
             {
-                IQueryable<ApplicationUserEntity> usersDto = applicationDbContext.Users.OrderBy(order => order.RegisteredDate);
+                usersDto = sortingService.Sort(usersDto, pagingUsersParametrs.OrderBy);
+            }
 
-                if (!String.IsNullOrWhiteSpace(pagingUsersParametrs.OrderBy))
-                {
-                    usersDto = sortingService.Sort(usersDto, pagingUsersParametrs.OrderBy);
-                }
+            if (!String.IsNullOrWhiteSpace(pagingUsersParametrs.SearchExpression))
+            {
+                usersDto = usersDto.Where(user => user.Name.Contains(pagingUsersParametrs.SearchExpression)
+                || user.LastName.Contains(pagingUsersParametrs.SearchExpression));
+            };
 
-                if (!String.IsNullOrWhiteSpace(pagingUsersParametrs.SearchExpression))
-                {
-                    usersDto = usersDto.Where(user => user.Name.Contains(pagingUsersParametrs.SearchExpression));
-                };
+            var totalUsers = await usersDto.CountAsync();
 
-                var totalUsers = await usersDto.CountAsync();
-               
-                var pagedUsers = usersDto.Select
-                    (user => new UserDtoModel()
+            var pagedUsers = usersDto.Select
+                (user => new UserDtoModel()
                 {
                     Id = user.Id,
                     Name = user.Name,
@@ -56,39 +53,25 @@ namespace University.Services
                     Email = user.Email,
                     RegisteredDate = user.RegisteredDate,
                     StudyDate = applicationDbContext.CourseSubscribers.Select(coursesSubscribers => new { coursesSubscribers.StudyDate, coursesSubscribers.UserId })
-                                                                      .Where(coursesSubscribers => coursesSubscribers.UserId == user.Id)
-                                                                      .FirstOrDefault()
-                                                                      .StudyDate
+                                                                  .Where(coursesSubscribers => coursesSubscribers.UserId == user.Id)
+                                                                  .FirstOrDefault()
+                                                                  .StudyDate
                 }).Skip((pagingUsersParametrs.PageNumber - 1) * pagingUsersParametrs.PageSize).Take(pagingUsersParametrs.PageSize);
 
-                pagingModel = new PagingModel(totalUsers, pagingUsersParametrs.PageNumber);
+            pagingModel = new PagingModel(totalUsers, pagingUsersParametrs.PageNumber);
 
-                return (new PagingUsersModel { PagesModel = pagingModel, Users = pagedUsers });
-            }
-            catch (Exception exception)
-            {
-                logger.Error(exception);
-                throw;
-            }
+            return (new PagingUsersModel { PagesModel = pagingModel, Users = pagedUsers });
         }
 
         public async Task<ApplicationUserEntity> EditUserAsync(UserDtoModel userForChange)
         {
-            try
-            {
-                var userIdentity = await userManager.FindByIdAsync(userForChange.Id);
-                var changedUserIdentity = mapper.Map(userForChange, userIdentity);
+            var userIdentity = await userManager.FindByIdAsync(userForChange.Id);
+            var changedUserIdentity = mapper.Map(userForChange, userIdentity);
 
-                await userManager.UpdateAsync(changedUserIdentity);
-                await applicationDbContext.SaveChangesAsync();
+            await userManager.UpdateAsync(changedUserIdentity);
+            await applicationDbContext.SaveChangesAsync();
 
-                return changedUserIdentity;
-            }
-            catch (Exception exception)
-            {
-                logger.Error(exception);
-                throw;
-            }
+            return changedUserIdentity;
         }
     }
 }

@@ -14,51 +14,47 @@ using System.Security.Cryptography;
 
 namespace University.Services
 {
-    public class AuthentificationService : IAuthentificationService
+    public class AuthenticationService : IAuthentificationService
     {
-        private static Logger logger;
-
+        private readonly AuthorizedUserModel authorizedUserModel;
         private readonly UserManager<ApplicationUserEntity> userManager;
         private readonly IConfiguration configuration;
         private ApplicationUserEntity user;
 
-        public AuthentificationService(UserManager<ApplicationUserEntity> userManager, IConfiguration configuration)
+        public AuthenticationService(UserManager<ApplicationUserEntity> userManager, IConfiguration configuration)
         {
             this.userManager = userManager;
             this.configuration = configuration;
-            logger = LogManager.GetCurrentClassLogger();
+            authorizedUserModel = new AuthorizedUserModel();
+        }
+
+        public async Task<AuthorizedUserModel> LoginUser(ApplicationUserEntity userForLogin)
+        {
+            var refreshToken = GenerateRefreshToken();
+
+            authorizedUserModel.Token = await GenerateToken(userForLogin.Email);
+            authorizedUserModel.RefreshToken = refreshToken;
+
+            await userManager.RemoveAuthenticationTokenAsync(userForLogin, "UniversityApp", "RefreshToken");
+            await userManager.SetAuthenticationTokenAsync(userForLogin, "UniversityApp", "RefreshToken", refreshToken);
+
+            return authorizedUserModel;
         }
 
         public async Task<bool> ValidateUser(LoginModel userForAuth)
         {
-            try
-            {
-                user = await userManager.FindByNameAsync(userForAuth.UserName);
-                return (user != null && await userManager.CheckPasswordAsync(user, userForAuth.Password));
-            }
-            catch (Exception exception)
-            {
-                logger.Error(exception);
-                throw;
-            }
+            user = await userManager.FindByNameAsync(userForAuth.UserName);
+            return (user != null && await userManager.CheckPasswordAsync(user, userForAuth.Password));
         }
 
         public async Task<string> GenerateToken(string email)
         {
-            try
-            {
-                var user = await userManager.FindByEmailAsync(email);
-                var signingCredentials = GetSigningCredentials();
-                var claims = await GetClaims(user);
-                var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
+            var user = await userManager.FindByEmailAsync(email);
+            var signingCredentials = GetSigningCredentials();
+            var claims = await GetClaims(user);
+            var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
 
-                return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-            }
-            catch (Exception exception)
-            {
-                logger.Error(exception);
-                throw;
-            }
+            return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }
         public string GenerateRefreshToken()
         {

@@ -20,7 +20,7 @@
   </div>
   <div nz-row>
     <div nz-col>
-      <nz-table #tableOfUsers [nzData]="pageOfUsers" [nzFrontPagination]="false" [nzBordered]="true"
+      <nz-table #tableOfUsers [nzData]="pageOfUsers" [nzFrontPagination]="false"
                 [nzScroll]="{ x: '1300px', y: '600px' }" [nzNoResult]="'No results'">
         <thead>
           <tr>
@@ -88,25 +88,25 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="5">Name</nz-form-label>
         <nz-form-control [nzSpan]="12">
-          <input nz-input [(ngModel)]="editName" [ngModelOptions]="{standalone: true}"/>
+          <input nz-input [(ngModel)]="editUser.name" [ngModelOptions]="{standalone: true}"/>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSpan]="5">LastName</nz-form-label>
         <nz-form-control [nzSpan]="12">
-          <input nz-input [(ngModel)]="editLastName" [ngModelOptions]="{standalone: true}"/>
+          <input nz-input [(ngModel)]="editUser.lastName" [ngModelOptions]="{standalone: true}"/>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSpan]="5">Age</nz-form-label>
         <nz-form-control [nzSpan]="12">
-          <input nz-input [(ngModel)]="editAge" [ngModelOptions]="{standalone: true}"/>
+          <input nz-input [(ngModel)]="editUser.age" [ngModelOptions]="{standalone: true}"/>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSpan]="5">Email</nz-form-label>
         <nz-form-control [nzSpan]="12">
-          <input nz-input [(ngModel)]="editEmail" [ngModelOptions]="{standalone: true}"/>
+          <input nz-input [(ngModel)]="editUser.email" [ngModelOptions]="{standalone: true}"/>
         </nz-form-control>
       </nz-form-item>
     </form>

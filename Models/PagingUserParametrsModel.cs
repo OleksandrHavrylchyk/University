@@ -7,7 +7,7 @@ namespace University.Models
 {
     public abstract class PagingUserParametrsModel
     {
-        const int maxPageSize = 50;
+        const int maxPageSize = 15;
         public int PageNumber { get; set; } = 1;
         private int pageSize = 10;
         public int PageSize

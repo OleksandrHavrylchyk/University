@@ -9,7 +9,6 @@ namespace University.Services
 {
     public class EmailSenderService
     {
-        private static Logger logger;
         public IConfiguration applicationConfiguration;
 
         private static string emailHost;
@@ -17,7 +16,6 @@ namespace University.Services
 
         public EmailSenderService(IConfiguration applicationConfiguration)
         {
-            logger = LogManager.GetCurrentClassLogger();
             this.applicationConfiguration = applicationConfiguration;
             emailHost = applicationConfiguration.GetValue<string>(
                 "ApplicationEmail:Email");
@@ -26,31 +24,23 @@ namespace University.Services
         }
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            try
+            var emailMessage = new MimeMessage();
+
+            emailMessage.From.Add(new MailboxAddress("UNIVERSITY", emailHost));
+            emailMessage.To.Add(new MailboxAddress("", email));
+            emailMessage.Subject = subject;
+            emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
-                var emailMessage = new MimeMessage();
+                Text = message
+            };
 
-                emailMessage.From.Add(new MailboxAddress("UNIVERSITY", emailHost));
-                emailMessage.To.Add(new MailboxAddress("", email));
-                emailMessage.Subject = subject;
-                emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
-                {
-                    Text = message
-                };
-
-                using (var client = new SmtpClient())
-                {
-                    await client.ConnectAsync("smtp.gmail.com", 465, true);
-                    await client.AuthenticateAsync(emailHost, hostPassword);
-                    await client.SendAsync(emailMessage);
-
-                    await client.DisconnectAsync(true);
-                }
-            }
-            catch (Exception exception)
+            using (var client = new SmtpClient())
             {
-                logger.Error(exception);
-                throw;
+                await client.ConnectAsync("smtp.gmail.com", 465, true);
+                await client.AuthenticateAsync(emailHost, hostPassword);
+                await client.SendAsync(emailMessage);
+
+                await client.DisconnectAsync(true);
             }
         }
     }

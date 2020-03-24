@@ -35,8 +35,13 @@ namespace University.Controllers
 
         [HttpPut("update-user")]
         [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult> UpdateUser(UserDtoModel editedUser)
+        public async Task<ActionResult<ApplicationUserEntity>> UpdateUser(UserDtoModel editedUser)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var updatedUser = await userManageService.EditUserAsync(editedUser);
 
             return CreatedAtAction("Updated", updatedUser);

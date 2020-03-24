@@ -27,10 +27,10 @@ export class AuthentificationService {
   login(user: AuthentificationUser) {
     return this.http.post(this.baseUrl + 'login/', user).pipe(
       map((response: any) => {
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('refreshToken', response.refreshToken);
-          return response;
-        }
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('refreshToken', response.refreshToken);
+        return response;
+      }
       ))
   }
 
@@ -41,7 +41,7 @@ export class AuthentificationService {
         localStorage.setItem('refreshToken', response.refreshToken);
         return response;
       }
-    ))
+      ))
   }
 
   refreshToken(refreshModel: RefreshTokenModel) {

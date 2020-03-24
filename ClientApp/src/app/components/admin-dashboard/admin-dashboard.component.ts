@@ -5,6 +5,7 @@ import { UserManageService } from '../../services/user-manage.service';
 import { UserListService } from '../../services/user-list.service';
 import { IUserList } from '../../interfaces/userListInterfaces';
 import { NotificationService } from '../../services/notification.service';
+import { EditUserDto } from '../../models/user';
 
 
 @Component({
@@ -16,11 +17,7 @@ import { NotificationService } from '../../services/notification.service';
 export class AdminDashboardComponent implements OnInit {
 
   pageOfUsers: IUserList;
-  editId: string = "";
-  editName: string = "";
-  editLastName: string = "";
-  editAge: number = 0;
-  editEmail: string = "";
+  editUser: EditUserDto = new EditUserDto();
   totalUsers: string;
   pageSize: string = "10";
   pageNumber: string = "1";
@@ -58,17 +55,13 @@ export class AdminDashboardComponent implements OnInit {
         });
   }
 
-  showModal(userEditData: any): void {
-    this.editId = userEditData.id;
-    this.editName = userEditData.name;
-    this.editLastName = userEditData.lastName;
-    this.editAge = userEditData.age;
-    this.editEmail = userEditData.email;
+  showModal(userEditData: EditUserDto): void {
+    this.editUser = userEditData;
     this.isModalVisible = true;
   }
 
   handleOk() {
-    this.userManageService.putUserData({ id: this.editId, name: this.editName, lastName: this.editLastName, age: this.editAge, email: this.editEmail })
+    this.userManageService.putUserData(this.editUser)
       .subscribe(
         requestData => {
           this.notificationService.createNotification(2, 'Saved', 'success', 'Success');

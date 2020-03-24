@@ -14,19 +14,11 @@ exports.appRoutes = [
     },
     { path: 'sign-up', component: registration_component_1.RegistrationComponent },
     { path: 'courses', component: search_courses_component_1.SearchCoursesComponent },
-    { path: 'send-activation', component: send_activation_component_1.SendActivation },
+    { path: 'send-activation', component: send_activation_component_1.SendActivationComponent },
     { path: 'sign-in', component: login_component_1.LoginComponent },
     { path: 'admin-dashboard', component: admin_dashboard_component_1.AdminDashboardComponent, canActivate: [admin_guard_1.AdminGuard] },
     { path: 'admin-dashboard/:pageNumber:pageSize', component: admin_dashboard_component_1.AdminDashboardComponent, canActivate: [admin_guard_1.AdminGuard] },
     { path: 'admin-dashboard/:pageNumber:pageSize:search', component: admin_dashboard_component_1.AdminDashboardComponent, canActivate: [admin_guard_1.AdminGuard] },
-    /*{
-      path: '',
-      runGuardsAndResolvers: 'always',
-      canActivate: [AuthGuard],
-      children: [
-      ]
-    },*/
-    // if somebody comes in a random root'
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 //# sourceMappingURL=route.routing.js.map

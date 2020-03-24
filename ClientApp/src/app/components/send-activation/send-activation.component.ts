@@ -9,7 +9,7 @@ import { AuthentificationService } from '../../services/authentification.service
   templateUrl: './send-activation.component.html',
   styleUrls: ['./send-activation.component.css']
 })
-export class SendActivation {
+export class SendActivationComponent {
 
   constructor(
     private authService: AuthentificationService,

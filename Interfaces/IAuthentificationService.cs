@@ -10,5 +10,6 @@ namespace University.Interfaces
         Task<string> GenerateToken(string email);
         string GenerateRefreshToken();
         ClaimsPrincipal GetPrincipalFromExpiredToken(string expiresToken);
+        Task<AuthorizedUserModel> LoginUser(ApplicationUserEntity userForLogin);
     }
 }

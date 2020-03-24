@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 import { CoursesService } from '../../services/courses.service';
 import { CoursesList } from '../../interfaces/courseListInterfaces';
+import { NotificationService } from '../../services/notification.service';
+import { AuthentificationService } from '../../services/authentification.service';
 
 @Component({
   selector: 'search-courses',
@@ -13,17 +14,24 @@ import { CoursesList } from '../../interfaces/courseListInterfaces';
 
 export class SearchCoursesComponent implements OnInit {
 
+  displaySubscribeModal: boolean = false;
+  subscribedCourseId: number;
   allCourses: CoursesList;
+  coursesCount: number;
+  pageNumber: number = 1;
+  pageSize: number = 5;
 
   constructor(
-    private notification: NzNotificationService,
+    private notificationService: NotificationService,
+    private authenticationService: AuthentificationService,
     private courseService: CoursesService,
   ) {}
 
   ngOnInit() {
     this.getAllCourses();
     if (!history.state.isSubscribedOnCourses && history.state.isSubscribedOnCourses !== undefined) {
-      this.createNotification();
+      this.notificationService.createNotification(0, 'You have not yet enrolled in any course, please select a course and subscribe to start studyng',
+        'warning', 'Start your training');
     }
   }
 
@@ -31,6 +39,7 @@ export class SearchCoursesComponent implements OnInit {
     this.courseService.getAllCourses()
       .subscribe(
         requestData => {
+          this.coursesCount = requestData.length
           this.allCourses = requestData;
         },
         error => {
@@ -38,15 +47,17 @@ export class SearchCoursesComponent implements OnInit {
         });
   }
 
-  createNotification(): void {
-    this.notification.config({
-      nzPlacement: 'bottomRight'
-    });
-    this.notification.create(
-      'warning',
-      'Start your training',
-      'You have not yet enrolled in any course, please select a course and subscribe to start studyng',
-      { nzDuration: 0 },
-    );
+  specifyDate(courseId: number) {
+    if (this.authenticationService.isAuthentificated()) {
+      this.displaySubscribeModal = true;
+      this.subscribedCourseId = courseId;
+    }
+    else {
+      this.notificationService.createNotification(2, 'You have sing in to subscribe on course', 'warning', 'Warning');
+    }
+  }
+
+  changePage(pageNumber: number) {
+    this.pageNumber = pageNumber;
   }
 }
