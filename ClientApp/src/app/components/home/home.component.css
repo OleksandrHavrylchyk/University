@@ -1,0 +1,42 @@
+.home-picture {
+  height:100vh;
+  min-height: 450px;
+  background-image: url(/assets/img/home_picture.jpg);
+  background-color: #000;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.picture-text {
+  width: 60%;
+  color: lightgray;
+  font-size: 48px;
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+}
+.home-courses-container {
+  background-color: var(--background-gray-color);
+  margin-top: 40px;
+}
+.home-sections-title {
+  display: flex;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.button-more-courses {
+  padding-top: 40px;
+  padding-bottom: 50px;
+}
+.home-picture {
+  max-width:100%;
+}
+@media screen and (max-width: 425px) {
+  .picture-text {
+    font-size: 32px;
+  }
+}

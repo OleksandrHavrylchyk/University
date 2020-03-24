@@ -1,0 +1,40 @@
+.login-container {
+  background-color: var(--background-gray-color);
+  height: 100%;
+}
+.login-bordered-box {
+  margin-top: 100px;
+  background-color: white;
+  display: table-cell;
+  vertical-align: middle;
+  border-style: solid;
+  border-radius: 50px;
+  border-color: var(--main-gray-color);
+  border-width: 1px;
+  height: 500px;
+  text-align: center;
+}
+.input-login {
+  width: 90%;     
+}
+.university-title {
+  padding-top: 40px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.sing-in-title, .login-form {
+  padding-top: 20px;
+}
+.login-input-labels {
+  text-align: start;
+  padding-left: 25px;
+}
+.sing-in-button-form {
+  width: 160px;
+  height: 40px;
+  font-size: 16px;
+}
+.login-error {
+  width: 90%;
+  margin-left: 5%;
+}

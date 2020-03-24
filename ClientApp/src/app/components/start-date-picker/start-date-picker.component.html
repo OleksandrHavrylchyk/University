@@ -1,0 +1,14 @@
+<nz-modal [(nzVisible)]="displayModal" nzTitle="Specify course start date" (nzOnCancel)="hideModal()"
+          (nzOnOk)="subscribeCourse()" nzOkText="Subscribe" nzOkType="default" nzCancelText="Cancel"
+          [nzBodyStyle]="{ height: modalHeight }" [nzWidth]="350" [(nzOkDisabled)]="!courseStartDate">
+  <div class="p-2">
+    <nz-date-picker nzShowTime
+                    [nzDisabledDate]="disabledDate"
+                    nzFormat="yyyy-MM-dd HH:mm:ss"
+                    nzPlaceHolder="Select Time"
+                    ngModel
+                    (nzOnOpenChange)="changeHeightOnOpen($event)"
+                    (ngModelChange)="onChange($event)"></nz-date-picker>
+  </div>
+  <div *ngIf="courseStartDate" class="p-3">Course will start on {{courseStartDate | date:'dd/MM/yyyy HH:mm:ss'}}</div>
+</nz-modal>

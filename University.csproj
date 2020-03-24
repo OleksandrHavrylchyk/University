@@ -1,0 +1,148 @@
+  <Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="EntityFramework" Version="6.4.0" />
+    <PackageReference Include="FluentValidation" Version="8.6.2" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.9" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.9" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.9" />
+    <PackageReference Include="MailKit" Version="2.5.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
+    <PackageReference Include="NLog" Version="4.6.8" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.21" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\Migrations\20200302083041_UniqueEmail.cs" />
+    <Compile Remove="Migrations\Migrations\20200302083041_UniqueEmail.Designer.cs" />
+    <Compile Remove="Migrations\Migrations\20200302084326_EmailValidatin.cs" />
+    <Compile Remove="Migrations\Migrations\20200302084326_EmailValidatin.Designer.cs" />
+    <Compile Remove="Migrations\Migrations\20200305140448_SeedingCourses.cs" />
+    <Compile Remove="Migrations\Migrations\20200305140448_SeedingCourses.Designer.cs" />
+    <Compile Remove="Migrations\Migrations\20200305140732_SeedingCourses.cs" />
+    <Compile Remove="Migrations\Migrations\20200305140732_SeedingCourses.Designer.cs" />
+    <Compile Remove="Migrations\Migrations\20200305140914_SeedingCourses.cs" />
+    <Compile Remove="Migrations\Migrations\20200305140914_SeedingCourses.Designer.cs" />
+    <Compile Remove="Migrations\Migrations\20200305141123_SeedingCourses.cs" />
+    <Compile Remove="Migrations\Migrations\20200305141123_SeedingCourses.Designer.cs" />
+    <Compile Remove="Migrations\Migrations\20200311080027_AdminSeeding.cs" />
+    <Compile Remove="Migrations\Migrations\20200311080027_AdminSeeding.Designer.cs" />
+    <Compile Remove="Migrations\Migrations\20200318114849_AddedViewForUserList.cs" />
+    <Compile Remove="Migrations\Migrations\20200318114849_AddedViewForUserList.Designer.cs" />
+    <Compile Remove="Migrations\Migrations\20200318133503_FixError.cs" />
+    <Compile Remove="Migrations\Migrations\20200318133503_FixError.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\components\course-card\course-card.component.ts" />
+    <None Remove="ClientApp\src\app\components\Layout\footer\footer.component.ts" />
+    <None Remove="ClientApp\src\app\components\Layout\header\header.component.ts" />
+    <None Remove="ClientApp\src\app\components\login\login.component.ts" />
+    <None Remove="ClientApp\src\app\components\search-courses\search-courses.component.ts" />
+    <None Remove="ClientApp\src\app\components\send-activation\send-activation.component.ts" />
+    <None Remove="ClientApp\src\app\components\start-date-picker\start-date-picker.component.ts" />
+    <None Remove="ClientApp\src\app\guards\admin.guard.ts" />
+    <None Remove="ClientApp\src\app\guards\authentification.guard.ts" />
+    <None Remove="ClientApp\src\app\helpers\refresh-token.interceptor.ts" />
+    <None Remove="ClientApp\src\app\interfaces\courseListInterfaces.ts" />
+    <None Remove="ClientApp\src\app\interfaces\userListInterfaces.ts" />
+    <None Remove="ClientApp\src\app\route.routing.ts" />
+    <None Remove="ClientApp\src\app\models\user.ts" />
+    <None Remove="ClientApp\src\app\services\authentification.service.ts" />
+    <None Remove="ClientApp\src\app\services\courses-subscribers.service.ts" />
+    <None Remove="ClientApp\src\app\services\courses.service.ts" />
+    <None Remove="ClientApp\src\app\services\notification.service.ts" />
+    <None Remove="ClientApp\src\app\services\user-list.service.ts" />
+    <None Remove="ClientApp\src\app\services\user-manage.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ClientApp\wwwroot\favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\components\admin-dashboard\admin-dashboard.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\course-card\course-card.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\login\login.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\Layout\footer\footer.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\Layout\header\header.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\search-courses\search-courses.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\send-activation\send-activation.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\start-date-picker\start-date-picker.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\guards\admin.guard.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\guards\authentification.guard.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\helpers\refresh-token.interceptor.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\courseListInterfaces.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\userListInterfaces.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\route.routing.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\authentification.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\courses-subscribers.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\courses.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\notification.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\user-list.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\user-manage.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\components\registration\" />
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>

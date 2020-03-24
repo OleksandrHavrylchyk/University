@@ -1,0 +1,30 @@
+.send-activate-box {
+  border-color: var(--main-gray-color);
+  height: 100%;
+  padding: 120px 0;
+}
+.activate-message {
+  display: table-cell;
+  vertical-align: middle;
+  border-style: solid;
+  border-radius: 50px;
+  border-color: var(--main-gray-color);
+  border-width: 2px;
+  height: 500px;
+  text-align: center;
+}
+.message-text {
+  font-size: 24px;
+}
+.warning-text {
+  color: var(--main-red-color);
+  font-size: 12px;
+  padding-top: 20px;
+}
+.send-activate-col {
+  display: flex;
+  justify-content: center;
+}
+.send-activation-container {
+  height: 100%;
+}

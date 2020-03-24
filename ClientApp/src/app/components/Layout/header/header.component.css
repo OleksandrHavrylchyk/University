@@ -1,0 +1,33 @@
+#mainNav {
+  height: 60px;
+}
+.links {
+  color: white;
+  margin-left: 5%;
+}
+li {
+  width: 100px;
+}
+.navbar-collapse {
+  padding-left: 20px;
+  margin-left: -16px;
+  margin-right: -16px;
+  padding-right: 5%;
+}
+.brand-link {
+  color: white;
+  margin-left: 5%;
+}
+.links:hover, .brand-link:hover {
+  font-weight: bold;
+}
+.menu {
+  border-width: 2px;
+  font-weight: bold;
+  color: white;
+  border-color: white;
+}
+.menu:active, .menu:focus {
+  border-color: white;
+  color: white;
+}
