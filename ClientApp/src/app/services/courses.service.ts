@@ -14,10 +14,14 @@ export class CoursesService {
   constructor(private http: HttpClient) { }
 
   getNewCourses() {
-    return this.http.get<any>(this.baseUrl + 'new-courses/')
+    return this.http.get<any>(`${this.baseUrl}new-courses/`)
   }
 
   getAllCourses() {
-    return this.http.get<any>(this.baseUrl + 'courses/')
+    return this.http.get<any>(`${this.baseUrl}courses/`)
+  }
+
+  getCourseInfo(courseUrl: string) {
+    return this.http.get<any>(`${this.baseUrl}course/${courseUrl}`)
   }
 }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,6 +12,12 @@ export class CourseCardComponent  {
 
   @Input() courseInfo: any;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
+
+  redirectToCoursePage(courseUrl: string) {
+    this.router.navigate([`/course/${courseUrl}`]);
+  }
 }
 

@@ -12,5 +12,6 @@ namespace University
         public float Duration { get; set; } 
         public DateTime DateAdded { get; set; }
         public string CoverUrl { get; set; }
+        public string CourseUrl { get; set; }
     }
 }

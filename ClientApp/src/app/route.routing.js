@@ -7,6 +7,7 @@ var login_component_1 = require("./components/login/login.component");
 var search_courses_component_1 = require("./components/search-courses/search-courses.component");
 var admin_dashboard_component_1 = require("./components/admin-dashboard/admin-dashboard.component");
 var admin_guard_1 = require("./guards/admin.guard");
+var course_detail_component_1 = require("./components/course-detail/course-detail.component");
 exports.appRoutes = [
     {
         path: '', component: home_component_1.HomeComponent,
@@ -19,6 +20,7 @@ exports.appRoutes = [
     { path: 'admin-dashboard', component: admin_dashboard_component_1.AdminDashboardComponent, canActivate: [admin_guard_1.AdminGuard] },
     { path: 'admin-dashboard/:pageNumber:pageSize', component: admin_dashboard_component_1.AdminDashboardComponent, canActivate: [admin_guard_1.AdminGuard] },
     { path: 'admin-dashboard/:pageNumber:pageSize:search', component: admin_dashboard_component_1.AdminDashboardComponent, canActivate: [admin_guard_1.AdminGuard] },
+    { path: 'course/:courseUrl', component: course_detail_component_1.CourseDetailComponent },
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 //# sourceMappingURL=route.routing.js.map

@@ -1,4 +1,5 @@
-<nz-card style="width:300px; min-height:330px;" [nzCover]="coverTemplate" [nzActions]="[subscribeCourse]">
+<nz-card style="width:300px; min-height:330px;" [nzCover]="coverTemplate" [nzActions]="[subscribeCourse]" nzHoverable
+         (click)="redirectToCoursePage(courseInfo.courseUrl)">
   <nz-card-meta nzTitle="{{courseInfo.courseName}}"
                 [nzDescription]="descriptionTemplate"
                 [nzAvatar]="avatarTemplate"></nz-card-meta>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using University.Interfaces;
 
@@ -33,14 +34,27 @@ namespace University.Controllers
         [HttpGet("courses")]
         public async Task<ActionResult> GetCoursesAsync()
         {
-            var courses = await coursesService.GetCourses();
+            var courses = await coursesService.GetCoursesAsync();
 
-            if (courses == null)
+            if (courses.Count == 0)
             {
                 return BadRequest("No courses");
             }
 
             return Ok(courses);
+        }
+
+        [HttpGet("course/{courseUrl}")]
+        public async Task<ActionResult> GetCourseInfoAsync(string courseUrl)
+        {
+            var course = await coursesService.GetCourseInfoAsync(courseUrl);
+
+            if(course.Count == 0)
+            {
+                return BadRequest("Course does not exist");
+            }
+
+            return Ok(course);
         }
     }
 }

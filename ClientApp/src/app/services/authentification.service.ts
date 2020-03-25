@@ -17,15 +17,15 @@ export class AuthentificationService {
   constructor(private http: HttpClient) { }
 
   register(user: AuthentificationUser) {
-    return this.http.post(this.baseUrl + 'registration/', user);
+    return this.http.post(`${this.baseUrl}registration/`, user);
   }
 
   sendConfirmationEmail(user: AuthentificationUser) {
-    return this.http.post(this.baseUrl + 'send-confirmation/', user);
+    return this.http.post(`${this.baseUrl}send-confirmation/`, user);
   }
 
   login(user: AuthentificationUser) {
-    return this.http.post(this.baseUrl + 'login/', user).pipe(
+    return this.http.post(`${this.baseUrl}login/`, user).pipe(
       map((response: any) => {
         localStorage.setItem('token', response.token);
         localStorage.setItem('refreshToken', response.refreshToken);
@@ -35,7 +35,7 @@ export class AuthentificationService {
   }
 
   facebookLogin(user: FacebookAuthUser) {
-    return this.http.post(this.baseUrl + 'facebook-login/', user).pipe(
+    return this.http.post(`${this.baseUrl}facebook-login/`, user).pipe(
       map((response: any) => {
         localStorage.setItem('token', response.token);
         localStorage.setItem('refreshToken', response.refreshToken);
@@ -45,7 +45,7 @@ export class AuthentificationService {
   }
 
   refreshToken(refreshModel: RefreshTokenModel) {
-    return this.http.post(this.baseUrl + 'refresh-token/', refreshModel).pipe(
+    return this.http.post(`${this.baseUrl}refresh-token/`, refreshModel).pipe(
       map((response: any) => {
         return response;
       }

@@ -8,6 +8,7 @@ import { SearchCoursesComponent } from './components/search-courses/search-cours
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 import { AdminGuard } from './guards/admin.guard';
+import { CourseDetailComponent } from './components/course-detail/course-detail.component';
 
 
 export const appRoutes: Routes = [
@@ -24,5 +25,6 @@ export const appRoutes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AdminGuard]},
   { path: 'admin-dashboard/:pageNumber:pageSize', component: AdminDashboardComponent, canActivate: [AdminGuard] },
   { path: 'admin-dashboard/:pageNumber:pageSize:search', component: AdminDashboardComponent, canActivate: [AdminGuard] },
+  { path: 'course/:courseUrl', component: CourseDetailComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

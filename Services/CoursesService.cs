@@ -11,21 +11,28 @@ namespace University.Services
 {
     public class CoursesService : ICoursesService
     {
-        private readonly ApplicationDbContext context;
-        public CoursesService(ApplicationDbContext context)
+        private readonly ApplicationDbContext applicationDbContext;
+        public CoursesService(ApplicationDbContext applicationDbContext)
         {
-            this.context = context;
+            this.applicationDbContext = applicationDbContext;
         }
+
         public async Task<List<CourseEntity>> GetNewCoursesAsync()
         {
-            IQueryable<CourseEntity> coursesAboutToBegin = context.Courses.OrderBy(order => order.DateAdded).Take(3);
+            IQueryable<CourseEntity> coursesAboutToBegin = applicationDbContext.Courses.OrderBy(order => order.DateAdded).Take(3);
             var coursesList = await coursesAboutToBegin.ToListAsync();
 
             return coursesList;
         }
-        public async Task<List<CourseEntity>> GetCourses()
+
+        public async Task<List<CourseEntity>> GetCoursesAsync()
         {
-            return await context.Courses.ToListAsync();
+            return await applicationDbContext.Courses.ToListAsync();
+        }
+
+        public async Task<List<CourseEntity>> GetCourseInfoAsync(string courseUrl)
+        {
+            return await applicationDbContext.Courses.Where(course => course.CourseUrl == (courseUrl)).ToListAsync();
         }
     }
 }

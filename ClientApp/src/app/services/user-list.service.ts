@@ -32,6 +32,6 @@ export class UserListService {
       this.params['searchExpression'] = searchExpression;
     }
     var requestHeader = this.authentificationService.getAuthorizationHeader();
-    return this.http.get<any>(this.baseUrl + 'get-users/', { params: this.params, headers: requestHeader })
+    return this.http.get<any>(`${this.baseUrl}get-users/`, { params: this.params, headers: requestHeader })
   }
 }

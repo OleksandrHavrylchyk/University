@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { IconDefinition } from '@ant-design/icons-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,7 +13,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid'
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzIconModule, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS } from 'ng-zorro-antd/icon';
+import { FacebookOutline } from '@ant-design/icons-angular/icons';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
@@ -32,6 +34,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SearchCoursesComponent } from './components/search-courses/search-courses.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { StartDatePickerComponent } from './components/start-date-picker/start-date-picker.component';
+import { CourseDetailComponent } from './components/course-detail/course-detail.component';
 import { appRoutes } from './route.routing';
 import { environment } from '../environments/environment';
 import { RefreshTokenInterceptor } from './helpers/refresh-token.interceptor';
@@ -46,6 +49,8 @@ const config = new AuthServiceConfig([
     provider: new FacebookLoginProvider('2814753781954441')
   }
 ]);
+
+const icons: IconDefinition[] = [FacebookOutline];
 
 export function provideConfig() {
   return config;
@@ -63,7 +68,8 @@ export function provideConfig() {
     CourseCardComponent,
     SearchCoursesComponent,
     AdminDashboardComponent,
-    StartDatePickerComponent
+    StartDatePickerComponent,
+    CourseDetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -96,6 +102,8 @@ export function provideConfig() {
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
+    { provide: NZ_ICON_DEFAULT_TWOTONE_COLOR, useValue: '#00ff00' },
+    { provide: NZ_ICONS, useValue: icons },
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig
