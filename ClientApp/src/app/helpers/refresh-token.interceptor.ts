@@ -19,7 +19,7 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
       var token = localStorage.getItem('token');
       var refreshToken = localStorage.getItem('refreshToken');
 
-      if (token && new Date().getTime() > (this.jwtHelper.getTokenExpirationDate(token).getTime() - 60000) && !this.jwtHelper.isTokenExpired(token)) {
+      if (token && new Date().getTime() > (this.jwtHelper.getTokenExpirationDate(token).getTime() - 120000) && !this.jwtHelper.isTokenExpired(token)) {
         this.isTokenRefreshed = true;
         this.authenticationService.refreshToken({ token, refreshToken }).subscribe(response => {
           localStorage.setItem('token', response.token);

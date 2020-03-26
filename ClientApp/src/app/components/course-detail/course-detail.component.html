@@ -1,5 +1,48 @@
-<div>{{courseData.courseName}}</div>
-<div>{{courseData.duration}}</div>
-<div>{{courseData.description}}</div>
-<div>{{courseData.dateAdded}}</div>
-<div>{{courseData.coverUrl}}</div>
+<div class="course-detail-container">
+  <div nz-row class="course-background-picture d-flex justify-content-center">
+    <div nz-col class="course-title-block">
+      <div nz-row>
+        <div class="course-title" nz-col nzXs="24" nzMd="12" nzXl="16">
+          <div class="d-flex justify-content-center">
+            {{courseData.courseName}}
+          </div>
+          <div class="d-flex justify-content-center pt-4">
+            <button id="subscribeHomeButton" class="rounded-pill gray-button"
+                    nz-button nzSize=large (click)="specifyDate(courseData.id)">
+              Subscribe on course
+            </button>
+            <div class="d-flex justify-content-center mt-2">
+              <start-date-picker [(displayModal)]="displaySubscribeModal" [courseId]="subscribedCourseId"></start-date-picker>
+            </div>
+          </div>
+          <div class="number-of-subscribers">{{numberOfSubscribers}}<span style="font-weight: 500"> already registered</span></div>
+        </div>
+        <div nz-col nzXs="24" nzMd="12" nzXl="8">
+          <div class="course-image" [ngStyle]="{'background-image': courseData.coverUrl ? 'url(' + courseData.coverUrl + ')' : 'white'}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="course-description-block">
+    <div nz-row>
+      <div nz-col class="course-description">
+        <div class="course-topic">About this course</div>
+        {{courseData.description}}
+      </div>
+    </div>
+  </div>
+  <div nz-row>
+    <div nz-col class="course-description">
+      <div class="course-topic">Number of lessons</div>
+      {{courseData.duration}}
+    </div>
+  </div>
+  <div class="course-description-block">
+    <div nz-row>
+      <div nz-col class="course-description course-date-added">
+        <div class="course-topic">Date added</div>
+        {{courseData.dateAdded | date}}
+      </div>
+    </div>
+  </div>
+</div>

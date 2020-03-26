@@ -1,9 +1,9 @@
-﻿using NLog;
-using System;
+﻿using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Reflection;
 using System.Text;
+using University.Models;
 
 namespace University.Services
 {
@@ -14,7 +14,7 @@ namespace University.Services
         {
             orderQueryBuilder = new StringBuilder();
         }
-        public IQueryable<ApplicationUserEntity> Sort(IQueryable<ApplicationUserEntity> objectsForSort, string orderByQueryString)
+        public IQueryable<UserDtoModel> Sort(IQueryable<UserDtoModel> objectsForSort, string orderByQueryString)
         {
             var orderParam = orderByQueryString.Trim().Split(',')[1];
             var orderName = orderByQueryString.Trim().Split(',')[0];

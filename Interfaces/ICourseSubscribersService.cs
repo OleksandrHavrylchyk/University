@@ -8,5 +8,6 @@ namespace University.Interfaces
     public interface ICourseSubscribersService
     {
         Task<CourseSubscribersEntity> SubscribeOnCourseAsync(ApplicationUserEntity userEntity, int courseId, DateTime studyDate);
+        int GetNumberCourseSubscribers(int courseId);
     }
 }

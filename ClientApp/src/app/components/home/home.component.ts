@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 
 import { CoursesService } from '../../services/courses.service';
 import { NotificationService } from '../../services/notification.service';
-import { AuthentificationService } from '../../services/authentification.service';
 import { CoursesList } from '../../interfaces/courseListInterfaces';
 
 @Component({
@@ -14,14 +13,11 @@ import { CoursesList } from '../../interfaces/courseListInterfaces';
 export class HomeComponent implements OnInit {
 
   homeCourses: CoursesList;
-  displaySubscribeModal: boolean = false;
-  subscribedCourseId: number;
 
   constructor(
     private router: Router,
     private courseService: CoursesService,
     private notificationService: NotificationService,
-    private authentificationService: AuthentificationService,
   ) { }
 
   ngOnInit() {
@@ -44,15 +40,5 @@ export class HomeComponent implements OnInit {
 
   routeCourses() {
     this.router.navigate(['/courses']);
-  }
-
-  specifyDate(courseId: number) {
-    if (this.authentificationService.isAuthentificated()) {
-      this.displaySubscribeModal = true;
-      this.subscribedCourseId = courseId;
-    }
-    else {
-      this.notificationService.createNotification(2, 'You have sing in to subscribe on course', 'warning', 'Warning');
-    }
   }
 }

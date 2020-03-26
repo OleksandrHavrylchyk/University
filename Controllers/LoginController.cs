@@ -86,8 +86,13 @@ namespace University.Controllers
             var newJwtToken = await authenticationService.GenerateToken(userEmail);
             var newRefreshToken = authenticationService.GenerateRefreshToken();
 
+            if (refreshTokenModel.RefreshToken != userManager.GetAuthenticationTokenAsync(userIdentity, "UniversityApp", "RefreshToken").Result)
+            {
+                return BadRequest("Invalid refresh token");
+            }
+
             await userManager.RemoveAuthenticationTokenAsync(userIdentity, "UniversityApp", "RefreshToken");
-            await userManager.SetAuthenticationTokenAsync(userIdentity, "UniversityApp", "RefreshToken", refreshTokenModel.RefreshToken);
+            await userManager.SetAuthenticationTokenAsync(userIdentity, "UniversityApp", "RefreshToken", newRefreshToken);
 
             return Ok(new AuthorizedUserModel {
                 Token = newJwtToken,

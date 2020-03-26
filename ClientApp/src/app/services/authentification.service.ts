@@ -53,10 +53,7 @@ export class AuthentificationService {
   }
 
   isAuthentificated() {
-    if (this.getTokenPayload()) {
-      return true;
-    }
-    return false;
+    return !this.jwtHelper.isTokenExpired(localStorage.getItem('token'));
   }
 
   getAuthorizationHeader() {
