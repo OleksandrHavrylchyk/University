@@ -99,7 +99,7 @@ export class AdminDashboardComponent implements OnInit {
           this.hideModal();
         },
         error => {
-          console.log(error);
+          this.notificationService.createNotification(4, error.error[0].errorMessage, 'warning', 'Validation error')
         });
   }
 

@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
+using University.DatabaseEntities.Validators;
 using University.Interfaces;
 using University.Models;
 
@@ -13,10 +14,12 @@ namespace University.Controllers
     public class UserManageController : ControllerBase
     {
         private readonly IUserManageService userManageService;
+        private readonly UserDtoValidator userDtoValidator;
 
         public UserManageController(IUserManageService userManageService)
         {
             this.userManageService = userManageService;
+            userDtoValidator = new UserDtoValidator();
         }
 
         [HttpGet("get-users")]
@@ -37,14 +40,16 @@ namespace University.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<ApplicationUserEntity>> UpdateUser(UserDtoModel editedUser)
         {
-            if (!ModelState.IsValid)
+            ValidationResult validationResult = userDtoValidator.Validate(editedUser);
+
+            if (!validationResult.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(validationResult.Errors);
             }
 
             var updatedUser = await userManageService.EditUserAsync(editedUser);
 
-            return CreatedAtAction("Updated", updatedUser);
+            return CreatedAtAction("Updated", editedUser);
         }
     }
 }

@@ -45,7 +45,7 @@ namespace University.Controllers
             }
 
             var authorizedUser = authenticationService.LoginUser(user).Result;
-            if (entityContext.CourseSubscribers.Where(user => user.UserId.Contains(user.UserId)).ToList().Count > 0)
+            if (entityContext.CourseSubscribers.Where(courseSubscribers => courseSubscribers.UserId.Contains(user.Id)).ToList().Count > 0)
             {
                 authorizedUser.IsSubscribedOncourses = true;
             }
