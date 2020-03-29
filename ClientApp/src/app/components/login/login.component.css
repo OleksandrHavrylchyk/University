@@ -38,3 +38,9 @@
   width: 90%;
   margin-left: 5%;
 }
+.facebook-login-icon {
+  font-size: 32px;
+}
+.facebook-login-icon:hover {
+  cursor: pointer;
+}

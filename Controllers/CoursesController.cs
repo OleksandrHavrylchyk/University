@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using University.Interfaces;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace University.Controllers
 {
@@ -24,7 +24,7 @@ namespace University.Controllers
 
             if (coursesAboutToBegin == null)
             {
-                return BadRequest("No new courses");
+                return NoContent();
             }
 
             return Ok(coursesAboutToBegin);
@@ -33,14 +33,36 @@ namespace University.Controllers
         [HttpGet("courses")]
         public async Task<ActionResult> GetCoursesAsync()
         {
-            var courses = await coursesService.GetCourses();
+            var courses = await coursesService.GetCoursesAsync();
 
-            if (courses == null)
+            if (courses.Count == 0)
             {
-                return BadRequest("No courses");
+                return NoContent();
             }
 
             return Ok(courses);
+        }
+
+        [HttpGet("course/{courseUrl}")]
+        public async Task<ActionResult> GetCourseInfoAsync(string courseUrl)
+        {
+            var course = await coursesService.GetCourseInfoAsync(courseUrl);
+
+            if (course.Count == 0)
+            {
+                return BadRequest("Course does not exist");
+            }
+
+            return Ok(course);
+        }
+
+        [HttpGet("admin-dasboard-courses")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult> GetAdminDashboardCoursesAsync()
+        {
+            var adminDashboardCourses = await coursesService.GetAdminDashboardCoursesAsync();
+
+            return Ok(adminDashboardCourses);
         }
     }
 }

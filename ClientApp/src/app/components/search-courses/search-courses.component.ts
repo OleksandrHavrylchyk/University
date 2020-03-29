@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../services/courses.service';
 import { CoursesList } from '../../interfaces/courseListInterfaces';
 import { NotificationService } from '../../services/notification.service';
-import { AuthentificationService } from '../../services/authentification.service';
 
 @Component({
   selector: 'search-courses',
@@ -14,8 +13,6 @@ import { AuthentificationService } from '../../services/authentification.service
 
 export class SearchCoursesComponent implements OnInit {
 
-  displaySubscribeModal: boolean = false;
-  subscribedCourseId: number;
   allCourses: CoursesList;
   coursesCount: number;
   pageNumber: number = 1;
@@ -23,7 +20,6 @@ export class SearchCoursesComponent implements OnInit {
 
   constructor(
     private notificationService: NotificationService,
-    private authenticationService: AuthentificationService,
     private courseService: CoursesService,
   ) {}
 
@@ -45,16 +41,6 @@ export class SearchCoursesComponent implements OnInit {
         error => {
           console.log(error);
         });
-  }
-
-  specifyDate(courseId: number) {
-    if (this.authenticationService.isAuthentificated()) {
-      this.displaySubscribeModal = true;
-      this.subscribedCourseId = courseId;
-    }
-    else {
-      this.notificationService.createNotification(2, 'You have sing in to subscribe on course', 'warning', 'Warning');
-    }
   }
 
   changePage(pageNumber: number) {

@@ -45,7 +45,7 @@ namespace University.Controllers
             }
 
             var authorizedUser = authenticationService.LoginUser(user).Result;
-            if (entityContext.CourseSubscribers.Where(user => user.UserId.Contains(user.UserId)).ToList().Count > 0)
+            if (entityContext.CourseSubscribers.Where(courseSubscribers => courseSubscribers.UserId.Contains(user.Id)).ToList().Count > 0)
             {
                 authorizedUser.IsSubscribedOncourses = true;
             }
@@ -86,8 +86,13 @@ namespace University.Controllers
             var newJwtToken = await authenticationService.GenerateToken(userEmail);
             var newRefreshToken = authenticationService.GenerateRefreshToken();
 
+            if (refreshTokenModel.RefreshToken != userManager.GetAuthenticationTokenAsync(userIdentity, "UniversityApp", "RefreshToken").Result)
+            {
+                return BadRequest("Invalid refresh token");
+            }
+
             await userManager.RemoveAuthenticationTokenAsync(userIdentity, "UniversityApp", "RefreshToken");
-            await userManager.SetAuthenticationTokenAsync(userIdentity, "UniversityApp", "RefreshToken", refreshTokenModel.RefreshToken);
+            await userManager.SetAuthenticationTokenAsync(userIdentity, "UniversityApp", "RefreshToken", newRefreshToken);
 
             return Ok(new AuthorizedUserModel {
                 Token = newJwtToken,

@@ -52,7 +52,13 @@ export class StartDatePickerComponent implements OnInit {
   }
 
   subscribeCourse() {
-    this.coursesSubscribersService.postCourseSubscriber(this.courseId, this.datePipe.transform(this.courseStartDate, 'dd/MM/yyyy HH:mm:ss'))
+    this.coursesSubscribersService.postCourseSubscriber(this.courseId, this.datePipe.transform(new Date(this.courseStartDate.getUTCFullYear(),
+        this.courseStartDate.getUTCMonth(),
+        this.courseStartDate.getUTCDate(),
+        this.courseStartDate.getUTCHours(),
+        this.courseStartDate.getUTCMinutes(),
+        this.courseStartDate.getUTCSeconds()
+        ), 'dd/MM/yyyy HH:mm:ss'))
       .subscribe(
       data => {
           this.notificationService.createNotification(2, 'You registered on course', 'success', 'Success');

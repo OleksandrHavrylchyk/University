@@ -2,6 +2,7 @@
   height: 60px;
 }
 .links {
+  text-align: center;
   color: white;
   margin-left: 5%;
 }
@@ -30,4 +31,9 @@ li {
 .menu:active, .menu:focus {
   border-color: white;
   color: white;
+}
+@media screen and (max-width: 768px){
+  .links {
+    text-align: start;
+  }
 }

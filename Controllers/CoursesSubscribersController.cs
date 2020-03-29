@@ -43,12 +43,18 @@ namespace University.Controllers
                 subscribeOnCourse.CourseId,
                 DateTime.ParseExact(subscribeOnCourse.StudyDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture));
 
-            if(coursesSubscribersEntity == null)
+            if (coursesSubscribersEntity == null)
             {
                 return BadRequest("Failed to enroll in the course");
             }
 
             return CreatedAtAction("Subscribed", coursesSubscribersEntity.Course);
+        }
+
+        [HttpGet("course-subscribers/{courseId}")]
+        public ActionResult GetCourseSubscribers(int courseId)
+        {
+            return Ok(new { numberOfSubscribers = courseSubscribersService.GetNumberCourseSubscribers(courseId) });
         }
     }
 }

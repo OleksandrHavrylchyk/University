@@ -1,4 +1,5 @@
-<nz-card style="width:300px; min-height:330px;" [nzCover]="coverTemplate" [nzActions]="[subscribeCourse]">
+<nz-card style="width:300px; min-height:330px;" [nzCover]="coverTemplate" [nzActions]="[subscribeCourse]" nzHoverable
+         (click)="redirectToCoursePage(courseInfo.courseUrl)">
   <nz-card-meta nzTitle="{{courseInfo.courseName}}"
                 [nzDescription]="descriptionTemplate"
                 [nzAvatar]="avatarTemplate"></nz-card-meta>
@@ -11,7 +12,7 @@
 </ng-template>
 <ng-template #descriptionTemplate>
   <div>
-    {{courseInfo.description}} <br />
+    <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{courseInfo.description}}</p> <br />
     Number of lessons: {{courseInfo.duration}}<br />
     Added Date: {{courseInfo.dateAdded | date}} <br />
   </div>

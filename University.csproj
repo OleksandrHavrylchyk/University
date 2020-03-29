@@ -64,6 +64,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\components\course-card\course-card.component.ts" />
+    <None Remove="ClientApp\src\app\components\course-detail\course-detail.component.ts" />
     <None Remove="ClientApp\src\app\components\Layout\footer\footer.component.ts" />
     <None Remove="ClientApp\src\app\components\Layout\header\header.component.ts" />
     <None Remove="ClientApp\src\app\components\login\login.component.ts" />
@@ -92,6 +93,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\components\admin-dashboard\admin-dashboard.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\course-card\course-card.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\course-detail\course-detail.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\login\login.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\Layout\footer\footer.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\Layout\header\header.component.ts" />

@@ -1,24 +1,45 @@
-.admin-dashboard-container {
-    height: 100%;
+.admin-dashboard-course-card{
+  margin-bottom: 30px;
+}
+.course-description-adminboard {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.course-image {
+  height: 150px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.subscribers-title {
+  padding-left: 22px;
+  cursor: pointer;
+}
+.dropdown-field {
+  font-weight: 500;
+  color: var(--main-gray-color);
 }
 .dashboard-pagination {
-    text-align: center;
-    padding-top: 40px;
+  text-align: center;
+  padding-top: 40px;
 }
 #page-size-select {
-    width: 150px;
+  width: 150px;
 }
 .page-size-container {
-    padding-top: 40px;
-    padding-left: 10px;
+  padding-top: 40px;
+  padding-left: 10px;
 }
 .dashboard-title-container {
   font-size: 28px;
   font-weight: bold;
   height: 80px;
 }
+.admin-tabs {
+  margin-top: 40px;
+}
 .dashboard-title {
-  margin-top: 20px; 
+  margin-top: 20px;
 }
 #search-input {
   margin-bottom: 20px;
@@ -31,4 +52,8 @@
 }
 #edit-action {
   cursor: pointer;
+}
+.gridStyle  {
+  width: 25%;
+  text-align: center;
 }

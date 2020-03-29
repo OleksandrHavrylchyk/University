@@ -20,6 +20,6 @@ export class UserManageService {
 
   putUserData(userData: EditUserDto) {
     var requestHeader = this.authentificationService.getAuthorizationHeader();
-    return this.http.put<any>(this.baseUrl + 'update-user', userData, { headers: requestHeader })
+    return this.http.put<any>(`${this.baseUrl}update-user`, userData, { headers: requestHeader })
   }
 }

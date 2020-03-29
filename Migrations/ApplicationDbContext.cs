@@ -17,8 +17,14 @@ namespace University.Migrations
 
         public DbSet<CourseEntity> Courses { get; set; }
         public DbSet<CourseSubscribersEntity> CourseSubscribers { get; set; }
+        public DbSet<UserDtoModel> UserListView { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<UserDtoModel>((userList =>
+            {
+                userList.HasNoKey();
+                userList.ToView("DashboardUserList_View");
+            }));
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new CoursesConfiguration());

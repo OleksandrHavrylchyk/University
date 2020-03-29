@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using NLog;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using University.Interfaces;
 using University.Migrations;
@@ -38,6 +39,11 @@ namespace University.Services
             reminderService.ScheduleRemindEmails(coursesSubscribersEntity, studyDate);
 
             return coursesSubscribersEntity;
+        }
+
+        public int GetNumberCourseSubscribers(int courseId)
+        {
+            return databaseContext.CourseSubscribers.Where(courseSubscribers => courseSubscribers.CourseID == courseId).Count();
         }
     }
 }
