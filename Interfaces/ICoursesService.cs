@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using University.Models;
 
 namespace University.Interfaces
 {
@@ -9,5 +9,6 @@ namespace University.Interfaces
         Task<List<CourseEntity>> GetNewCoursesAsync();
         Task<List<CourseEntity>> GetCoursesAsync();
         Task<List<CourseEntity>> GetCourseInfoAsync(string courseUrl);
+        Task<List<AdminDashboardCoursesModel>> GetAdminDashboardCoursesAsync();
     }
 }

@@ -43,21 +43,6 @@ namespace University.Services
 
             var totalUsers = await pagedUsers.CountAsync();
 
-            /*var pagedUsers = usersDto.Select
-                (user => new UserDtoModel()
-                {
-                    Id = user.Id,
-                    Name = user.Name,
-                    LastName = user.LastName,
-                    Age = user.Age,
-                    Email = user.Email,
-                    RegisteredDate = user.RegisteredDate,
-                    StudyDate = applicationDbContext.CourseSubscribers.Select(coursesSubscribers => new { coursesSubscribers.StudyDate, coursesSubscribers.UserId })
-                                                                  .Where(coursesSubscribers => coursesSubscribers.UserId == user.Id)
-                                                                  .FirstOrDefault()
-                                                                  .StudyDate
-                }).Skip((pagingUsersParametrs.PageNumber - 1) * pagingUsersParametrs.PageSize).Take(pagingUsersParametrs.PageSize);*/
-
             pagedUsers = pagedUsers.Skip((pagingUsersParametrs.PageNumber - 1) * pagingUsersParametrs.PageSize).Take(pagingUsersParametrs.PageSize);
 
             pagingModel = new PagingModel(totalUsers, pagingUsersParametrs.PageNumber);

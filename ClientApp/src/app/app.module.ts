@@ -8,6 +8,8 @@ import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'ang
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -92,6 +94,8 @@ export function provideConfig() {
     NzModalModule,
     NzDatePickerModule,
     SocialLoginModule,
+    NzTabsModule,
+    NzDropDownModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

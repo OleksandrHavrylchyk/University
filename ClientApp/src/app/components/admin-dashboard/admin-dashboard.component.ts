@@ -5,6 +5,7 @@ import { UserManageService } from '../../services/user-manage.service';
 import { UserListService } from '../../services/user-list.service';
 import { IUserList } from '../../interfaces/userListInterfaces';
 import { NotificationService } from '../../services/notification.service';
+import { CoursesService } from '../../services/courses.service';
 import { EditUserDto } from '../../models/user';
 
 
@@ -17,6 +18,8 @@ import { EditUserDto } from '../../models/user';
 export class AdminDashboardComponent implements OnInit {
 
   pageOfUsers: IUserList;
+  currentTab: string = 'users';
+  coursesInformation: any;
   editUser: EditUserDto = new EditUserDto();
   totalUsers: string;
   pageSize: string = "10";
@@ -40,6 +43,7 @@ export class AdminDashboardComponent implements OnInit {
     private userManageService: UserManageService,
     private activatedRoute: ActivatedRoute,
     private notificationService: NotificationService,
+    private coursesService: CoursesService,
     private router: Router
   ) { }
 
@@ -53,6 +57,32 @@ export class AdminDashboardComponent implements OnInit {
         error => {
           console.log(error);
         });
+  }
+
+  getHeightStyle() {
+    if (this.currentTab == 'courses') {
+      return { height: 'unset'};
+    }
+    return { height: '115%' };
+  }
+
+  changeTab(tabName: string) {
+    this.currentTab = tabName;
+  }
+
+  getListOfSubscribers(courseData: any) {
+    return courseData.courseSubscribers;
+  }
+
+  getCoursesInformation() {
+    this.coursesService.getAdminDashboardCourses().subscribe(
+      requestData => {
+        this.coursesInformation = requestData;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   showModal(userEditData: EditUserDto): void {
@@ -125,6 +155,7 @@ export class AdminDashboardComponent implements OnInit {
         this.getPageOfUsers();
       }
     })
+    this.getCoursesInformation();
     this.getPageOfUsers();
   }
 }

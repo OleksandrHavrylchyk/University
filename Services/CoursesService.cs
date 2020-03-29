@@ -6,6 +6,7 @@ using University.Interfaces;
 using University.Migrations;
 using NLog;
 using System;
+using University.Models;
 
 namespace University.Services
 {
@@ -33,6 +34,30 @@ namespace University.Services
         public async Task<List<CourseEntity>> GetCourseInfoAsync(string courseUrl)
         {
             return await applicationDbContext.Courses.Where(course => course.CourseUrl == (courseUrl)).ToListAsync();
+        }
+
+        public async Task<List<AdminDashboardCoursesModel>> GetAdminDashboardCoursesAsync()
+        {
+            var adminDashboardCourses = await applicationDbContext.Courses.Select(course => new AdminDashboardCoursesModel()
+            {
+                CourseData = course,
+                CourseSubscribers = applicationDbContext.CourseSubscribers.Where(courseSubscribers => courseSubscribers.CourseID == course.ID)
+                .Select(courseSubscribers => new UserDtoModel()
+                { 
+                    Id = courseSubscribers.User.Id,
+                    LastName = courseSubscribers.User.LastName,
+                    Name = courseSubscribers.User.Name,
+                    Email = courseSubscribers.User.Email,
+                    RegisteredDate = courseSubscribers.User.RegisteredDate,
+                    Age = courseSubscribers.User.Age,
+                    StudyDate = applicationDbContext.CourseSubscribers.Select(coursesSubscriber => new { coursesSubscriber.StudyDate, coursesSubscriber.UserId })
+                                                                  .Where(coursesSubscriber => coursesSubscriber.UserId == courseSubscribers.UserId)
+                                                                  .FirstOrDefault()
+                                                                  .StudyDate
+                }).ToList()
+            }).ToListAsync();
+
+            return adminDashboardCourses;
         }
     }
 }

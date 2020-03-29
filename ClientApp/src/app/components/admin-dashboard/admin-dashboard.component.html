@@ -1,114 +1,148 @@
-<div class="container admin-dashboard-container">
-  <div nz-row>
-    <div nz-col class="d-flex justify-content-center">
-      <div class="dashboard-title-container">
-        <div class="dashboard-title">University Students</div>
+<div class="container" [ngStyle]="getHeightStyle()">
+  <nz-tabset [nzTabPosition]="top" [nzType]="'card'" class="admin-tabs">
+    <nz-tab [nzTitle]="'Users'" (nzSelect)="changeTab('users')">
+      <div nz-row>
+        <div nz-col class="d-flex justify-content-center">
+          <div class="dashboard-title-container">
+            <div class="dashboard-title">University Students</div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div nz-row>
-    <div nz-col>
-      <div id="search-input">
-        <nz-input-group [nzSuffix]="suffixIconSearch">
-          <input id="searchDashboardInput" [(ngModel)]="searchField" type="text" nz-input placeholder="Search student" />
-        </nz-input-group>
-        <ng-template #suffixIconSearch>
-          <button id="searchDashboardButton" class="search-button" nz-button (click)="searchByField()" nzSearch><i nz-icon nzType="search"></i></button>
-        </ng-template>
+      <div nz-row>
+        <div nz-col>
+          <div id="search-input">
+            <nz-input-group [nzSuffix]="suffixIconSearch">
+              <input id="searchDashboardInput" [(ngModel)]="searchField" type="text" nz-input placeholder="Search student" />
+            </nz-input-group>
+            <ng-template #suffixIconSearch>
+              <button id="searchDashboardButton" class="search-button" nz-button (click)="searchByField()" nzSearch><i nz-icon nzType="search"></i></button>
+            </ng-template>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div nz-row>
-    <div nz-col>
-      <nz-table #tableOfUsers [nzData]="pageOfUsers" [nzFrontPagination]="false"
-                [nzScroll]="{ x: '1300px', y: '600px' }" [nzNoResult]="'No results'">
-        <thead>
-          <tr>
-            <th [nzAlign]="'center'">Actions</th>
-            <th [nzAlign]="'center'" nzWidth="15%"
-                nzShowSort
-                [(nzSort)]="mapOfSort.name"
-                (nzSortChange)="sort('name', $event)">Name</th>
-            <th [nzAlign]="'center'" nzWidth="15%"
-                nzShowSort
-                [(nzSort)]="mapOfSort.lastName"
-                (nzSortChange)="sort('lastName', $event)">Last Name</th>
-            <th [nzAlign]="'center'" nzWidth="10%"
-                nzShowSort
-                [(nzSort)]="mapOfSort.age"
-                (nzSortChange)="sort('age', $event)">Age</th>
-            <th [nzAlign]="'center'" nzWidth="25%"
-                nzShowSort
-                [(nzSort)]="mapOfSort.email"
-                (nzSortChange)="sort('email', $event)">Email</th>
-            <th [nzAlign]="'center'" nzWidth="15%"
-                nzShowSort
-                [(nzSort)]="mapOfSort.registeredDate"
-                (nzSortChange)="sort('registeredDate', $event)">Registered Date</th>
-            <th [nzAlign]="'center'" nzWidth="15%"
-                nzShowSort
-                [(nzSort)]="mapOfSort.studyDate"
-                (nzSortChange)="sort('studyDate', $event)">Study Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let userData of tableOfUsers.data">
-            <td [nzAlign]="'center'"><i id="edit-action" (click)="showModal(userData)" nz-icon nzType="edit" nzTheme="outline"></i></td>
-            <td [nzAlign]="'center'">{{ userData.name }}</td>
-            <td [nzAlign]="'center'">{{ userData.lastName }}</td>
-            <td [nzAlign]="'center'">{{ userData.age }}</td>
-            <td [nzAlign]="'center'">{{ userData.email }}</td>
-            <td [nzAlign]="'center'">{{ userData.registeredDate | date }}</td>
-            <td [nzAlign]="'center'">{{ userData.studyDate | date:'medium' }}</td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </div>
-  </div>
-  <div nz-row class="pt-2">
-    <div nz-col class="d-flex justify-content-center">
-      <div class="dashboard-pagination">
-        <nz-pagination id="dashboardPagination" [nzPageIndex]="pageNumber"
-                       [nzTotal]="totalUsers" [nzPageSize]="pageSize" (nzPageIndexChange)="changeNumberPage($event)"></nz-pagination>
+      <div nz-row>
+        <div nz-col>
+          <nz-table #tableOfUsers [nzData]="pageOfUsers" [nzFrontPagination]="false"
+                    [nzScroll]="{ x: '1300px', y: '600px' }" [nzNoResult]="'No results'">
+            <thead>
+              <tr>
+                <th [nzAlign]="'center'">Actions</th>
+                <th [nzAlign]="'center'" nzWidth="15%"
+                    nzShowSort
+                    [(nzSort)]="mapOfSort.name"
+                    (nzSortChange)="sort('name', $event)">Name</th>
+                <th [nzAlign]="'center'" nzWidth="15%"
+                    nzShowSort
+                    [(nzSort)]="mapOfSort.lastName"
+                    (nzSortChange)="sort('lastName', $event)">Last Name</th>
+                <th [nzAlign]="'center'" nzWidth="10%"
+                    nzShowSort
+                    [(nzSort)]="mapOfSort.age"
+                    (nzSortChange)="sort('age', $event)">Age</th>
+                <th [nzAlign]="'center'" nzWidth="25%"
+                    nzShowSort
+                    [(nzSort)]="mapOfSort.email"
+                    (nzSortChange)="sort('email', $event)">Email</th>
+                <th [nzAlign]="'center'" nzWidth="15%"
+                    nzShowSort
+                    [(nzSort)]="mapOfSort.registeredDate"
+                    (nzSortChange)="sort('registeredDate', $event)">Registered Date</th>
+                <th [nzAlign]="'center'" nzWidth="15%"
+                    nzShowSort
+                    [(nzSort)]="mapOfSort.studyDate"
+                    (nzSortChange)="sort('studyDate', $event)">Study Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let userData of tableOfUsers.data">
+                <td [nzAlign]="'center'"><i id="edit-action" (click)="showModal(userData)" nz-icon nzType="edit" nzTheme="outline"></i></td>
+                <td [nzAlign]="'center'">{{ userData.name }}</td>
+                <td [nzAlign]="'center'">{{ userData.lastName }}</td>
+                <td [nzAlign]="'center'">{{ userData.age }}</td>
+                <td [nzAlign]="'center'">{{ userData.email }}</td>
+                <td [nzAlign]="'center'">{{ userData.registeredDate | date }}</td>
+                <td [nzAlign]="'center'">{{ userData.studyDate | date:'medium' }}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </div>
       </div>
-      <div class="page-size-container">
-        <nz-select id="pageSizeSelect" nzShowSearch nzAllowClear
-                   nzPlaceHolder="Select a page size" [ngModel]="pageSize"
-                   (ngModelChange)="changePageSize($event)">
-          <nz-option nzLabel="5/page" nzValue="5"></nz-option>
-          <nz-option nzLabel="10/page" nzValue="10"></nz-option>
-          <nz-option nzLabel="15/page" nzValue="15"></nz-option>
-        </nz-select>
+      <div nz-row class="pt-2">
+        <div nz-col class="d-flex justify-content-center">
+          <div class="dashboard-pagination">
+            <nz-pagination id="dashboardPagination" [nzPageIndex]="pageNumber"
+                           [nzTotal]="totalUsers" [nzPageSize]="pageSize" (nzPageIndexChange)="changeNumberPage($event)"></nz-pagination>
+          </div>
+          <div class="page-size-container">
+            <nz-select id="pageSizeSelect" nzShowSearch nzAllowClear
+                       nzPlaceHolder="Select a page size" [ngModel]="pageSize"
+                       (ngModelChange)="changePageSize($event)">
+              <nz-option nzLabel="5/page" nzValue="5"></nz-option>
+              <nz-option nzLabel="10/page" nzValue="10"></nz-option>
+              <nz-option nzLabel="15/page" nzValue="15"></nz-option>
+            </nz-select>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <nz-modal [(nzVisible)]="isModalVisible" nzTitle="Edit User" (nzOnCancel)="hideModal()"
-            (nzOnOk)="handleOk()" nzOkText="Edit" nzOkType="default" nzCancelText="Cancel">
-    <form nz-form>
-      <nz-form-item>
-        <nz-form-label [nzSpan]="5">Name</nz-form-label>
-        <nz-form-control [nzSpan]="12">
-          <input nz-input [(ngModel)]="editUser.name" [ngModelOptions]="{standalone: true}"/>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label [nzSpan]="5">LastName</nz-form-label>
-        <nz-form-control [nzSpan]="12">
-          <input nz-input [(ngModel)]="editUser.lastName" [ngModelOptions]="{standalone: true}"/>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label [nzSpan]="5">Age</nz-form-label>
-        <nz-form-control [nzSpan]="12">
-          <input nz-input [(ngModel)]="editUser.age" [ngModelOptions]="{standalone: true}"/>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label [nzSpan]="5">Email</nz-form-label>
-        <nz-form-control [nzSpan]="12">
-          <input nz-input [(ngModel)]="editUser.email" [ngModelOptions]="{standalone: true}"/>
-        </nz-form-control>
-      </nz-form-item>
-    </form>
-  </nz-modal>
+      <nz-modal [(nzVisible)]="isModalVisible" nzTitle="Edit User" (nzOnCancel)="hideModal()"
+                (nzOnOk)="handleOk()" nzOkText="Edit" nzOkType="default" nzCancelText="Cancel">
+        <form nz-form>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="5">Name</nz-form-label>
+            <nz-form-control [nzSpan]="12">
+              <input nz-input [(ngModel)]="editUser.name" [ngModelOptions]="{standalone: true}" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="5">LastName</nz-form-label>
+            <nz-form-control [nzSpan]="12">
+              <input nz-input [(ngModel)]="editUser.lastName" [ngModelOptions]="{standalone: true}" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="5">Age</nz-form-label>
+            <nz-form-control [nzSpan]="12">
+              <input nz-input [(ngModel)]="editUser.age" [ngModelOptions]="{standalone: true}" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="5">Email</nz-form-label>
+            <nz-form-control [nzSpan]="12">
+              <input nz-input [(ngModel)]="editUser.email" [ngModelOptions]="{standalone: true}" />
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+      </nz-modal>
+    </nz-tab>
+    <nz-tab [nzTitle]="'Courses'" (nzSelect)="changeTab('courses')">
+      <div nz-row>
+        <div nz-col class="d-flex justify-content-center">
+          <div class="dashboard-title-container">
+            <div class="dashboard-title">University Courses</div>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let course of coursesInformation" class="admin-dashboard-course-card" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+        <nz-card nzTitle="{{course.courseData.courseName}}">
+          <div nz-card-grid style="width: 40%; height: 200px;">
+            <div class="course-image" [ngStyle]="{'background-image': course.courseData.coverUrl ? 'url(' + course.courseData.coverUrl + ')' : 'white'}"></div>
+          </div>
+          <div nz-card-grid style="width: 60%; height: 200px;">
+            <p class="course-description-adminboard">Description: {{course.courseData.description}}</p> <br />
+            <p class="course-description-adminboard">Number of lessons: {{course.courseData.duration}}</p> <br />
+            <p class="course-description-adminboard">Date added: {{course.courseData.dateAdded | date}}</p>
+          </div>
+          <div class="subscribers-title">Subscribers <i nz-icon style="font-size: 16px;" nzType="down"></i></div>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu>
+              <li *ngFor="let subscriber of course.courseSubscribers" nz-menu-item>
+                <div><span class="dropdown-field">name/last name: </span>{{subscriber.name}}  {{subscriber.lastName}} <span  class="dropdown-field">age: </span>{{subscriber.age}}
+                <span  class="dropdown-field">email: </span>{{subscriber.email}} <span  class="dropdown-field">study date: </span>{{subscriber.studyDate | date:'medium'}}</div>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </nz-card>
+      </div>
+    </nz-tab>
+  </nz-tabset>
 </div>
