@@ -36,7 +36,7 @@ export class StartDatePickerComponent implements OnInit {
   }
 
   disabledDate = (selected: Date): boolean => {
-    return differenceInCalendarDays(selected, this.currentDay) < 0;
+    return differenceInCalendarDays(selected, this.currentDay) <= 0;
   };
 
   changeHeightOnOpen(isOpen: any) {

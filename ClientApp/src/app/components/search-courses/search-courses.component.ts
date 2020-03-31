@@ -16,7 +16,7 @@ export class SearchCoursesComponent implements OnInit {
   allCourses: CoursesList;
   coursesCount: number;
   pageNumber: number = 1;
-  pageSize: number = 5;
+  pageSize: number = 6;
 
   constructor(
     private notificationService: NotificationService,

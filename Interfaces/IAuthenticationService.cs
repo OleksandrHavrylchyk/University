@@ -4,7 +4,7 @@ using University.Models;
 
 namespace University.Interfaces
 {
-    public interface IAuthentificationService
+    public interface IAuthenticationService
     {
         Task<bool> ValidateUser(LoginModel userForLogin);
         Task<string> GenerateToken(string email);
