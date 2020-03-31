@@ -13,12 +13,12 @@ namespace University.Services
     {
         private readonly HttpClient httpClient;
         private readonly IMapper mapper;
-        private readonly IAuthentificationService authentificationService;
+        private readonly IAuthenticationService authentificationService;
         private readonly ApplicationDbContext entityContext;
         private readonly UserManager<ApplicationUserEntity> userManager;
         private readonly AuthorizedUserModel authorizedUserModel;
         public FacebookAuthenticationService(IMapper mapper, ApplicationDbContext entityContext, UserManager<ApplicationUserEntity> userManager,
-            IAuthentificationService authentificationService)
+            IAuthenticationService authentificationService)
         {
             this.authentificationService = authentificationService;
             this.userManager = userManager;

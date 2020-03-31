@@ -3,7 +3,7 @@ using NLog;
 using System;
 using System.Threading.Tasks;
 
-namespace University.DatabaseEntities
+namespace University
 {
     public class ErrorLoggingMiddleware
     {

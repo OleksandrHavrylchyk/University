@@ -31,6 +31,7 @@
               <small id="userNameHelp" class="form-text text-muted">Choose name for your account  </small>
               <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
                 <div *ngIf="f.userName.errors.required">User name is required</div>
+                <div *ngIf="f.userName.errors.pattern">User name can only contain alphanumeric characters</div>
               </div>
             </div>
           </div>

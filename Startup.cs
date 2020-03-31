@@ -18,7 +18,6 @@ using University.Interfaces;
 using University.Services;
 using Hangfire;
 using Hangfire.SqlServer;
-using University.DatabaseEntities;
 
 namespace University
 {
@@ -55,7 +54,7 @@ namespace University
 
             services.AddHangfireServer();
 
-            services.AddScoped<IAuthentificationService, Services.AuthenticationService>();
+            services.AddScoped<Interfaces.IAuthenticationService, Services.AuthenticationService>();
             services.AddScoped<ICoursesService, CoursesService>();
             services.AddScoped<IUserManageService, UserManageService>();
             services.AddScoped<ICourseSubscribersService, CourseSubscribersService>();

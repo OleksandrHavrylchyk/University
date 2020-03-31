@@ -15,12 +15,12 @@ namespace University.Controllers
     public class LoginController : ControllerBase
     {
         private readonly UserManager<ApplicationUserEntity> userManager;
-        private readonly IAuthentificationService authenticationService;
+        private readonly IAuthenticationService authenticationService;
         private readonly IFacebookAuthenticationService facebookAuthenticationService;
         private readonly ApplicationDbContext entityContext;
         private readonly AuthorizedUserModel authorizedUserModel;
 
-        public LoginController(UserManager<ApplicationUserEntity> userManager, IAuthentificationService authentificationService,
+        public LoginController(UserManager<ApplicationUserEntity> userManager, IAuthenticationService authentificationService,
                                 ApplicationDbContext entityContext, IFacebookAuthenticationService facebookAuthenticationService)
         {
             this.facebookAuthenticationService = facebookAuthenticationService;

@@ -14,7 +14,7 @@ using System.Security.Cryptography;
 
 namespace University.Services
 {
-    public class AuthenticationService : IAuthentificationService
+    public class AuthenticationService : IAuthenticationService
     {
         private readonly AuthorizedUserModel authorizedUserModel;
         private readonly UserManager<ApplicationUserEntity> userManager;
